@@ -11,6 +11,7 @@ import {
   Container,
   Span,
 } from "./RegisterStyles";
+import { myApi } from "../../api/api";
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -31,16 +32,16 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    axios
-      .post("http://127.0.0.1:8000/api/register", formData)
-      .then((response) => {
-        console.log("Usuário Cadastrado com sucesso", formData);
+    try {
+      const response = myApi.post("/register", formData);
+      if (response) {
+        console.log("Usuário cadastrado com sucesso", response);
+        alert("Usuário cadastrado com sucesso");
         navigate("../Login");
-      })
-      .catch((error) => {
-        console.log("Erro ao cadastrar usuário", error);
-      });
+      }
+    } catch (error) {
+      console.error("Erro ao fazer cadastro", error);
+    }
   };
 
   return (

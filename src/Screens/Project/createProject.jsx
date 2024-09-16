@@ -29,7 +29,7 @@ const createProject = () => {
 
     try {
       await axios
-        .post("http://127.0.0.1:8000/project/create", formData, {
+        .post("http://localhost:8000/api/registerProject", formData, {
           headers: {
             Authorization: `Bearer ${token}`,
           },

@@ -16,6 +16,7 @@ import axios from "axios";
 import { TokenContext } from "../../assets/Context/TokenContext.jsx";
 import { UserContext } from "../../assets/Context/UserContext.jsx";
 import img from "../../Img/icon_dark.png";
+import { myApi } from "../../api/api.js";
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -38,15 +39,19 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post(
-        "http://127.0.0.1:8000/api/login",
-        formData
-      );
-      console.log("Token:", response.data.token);
-      console.log("user:", response.data.user);
-      saveUser(response.data.user);
-      saveToken(response.data.token);
-      navigate("../");
+      const response = await myApi.post("/login", formData);
+      if (response) {
+        console.log("Token:", response.data.token);
+        console.log("user:", response.data.user);
+        saveUser(response.data.user);
+        saveToken(response.data.token);
+
+        alert("Login efetuado com sucesso");
+        const timer = setTimeout(() => {
+          clearTimeout(timer);
+          navigate("../");
+        }, 1000);
+      }
     } catch (error) {
       console.error("Erro ao fazer login", error);
     }
