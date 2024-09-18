@@ -6,9 +6,10 @@ const Home = () => {
   const [data, setData] = useState([]);
 
   try {
-    const response = myApi.get("showAllProject").then((response) => {
+    const response = myApi.get("/showAllProject");
+    if (response) {
       setData(response.data);
-    });
+    }
   } catch (error) {
     console.error("Erro ao buscar projetos", error);
   }

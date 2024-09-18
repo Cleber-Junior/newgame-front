@@ -3,6 +3,7 @@ import axios from "axios";
 import { TokenContext } from "../../assets/Context/TokenContext";
 import { UserContext } from "../../assets/Context/UserContext";
 import { Link, useNavigate } from "react-router-dom";
+import { myApi } from "../../api/api";
 
 const createProject = () => {
   const { token } = useContext(TokenContext);
@@ -28,16 +29,18 @@ const createProject = () => {
     e.preventDefault();
 
     try {
-      await axios
-        .post("http://localhost:8000/api/registerProject", formData, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
-        .then((response) => {
-          console.log("Projeto criado com sucesso", response);
-          navigation("/");
-        });
+      const response = await myApi.post("/createProject", formData);
+      if (response) {
+        console.log("Projeto criado com sucesso", response);
+        alert("Projeto criado com sucesso");
+        navigation("../");
+
+        alert("Projeto Criado com Sucesso");
+        const timer = setTimeout(() => {
+          clearTimeout(timer);
+          navigate("../");
+        }, 1000);
+      }
     } catch (error) {
       console.error("Erro ao criar projeto", error);
     }
