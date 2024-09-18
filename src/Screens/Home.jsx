@@ -3,10 +3,10 @@ import React, { useState } from "react";
 import { myApi } from "../api/api";
 
 const Home = () => {
-  const [data, setData] = useState({});
+  const [data, setData] = useState([]);
 
   try {
-    myApi.get("showAllProject").then((response) => {
+    const response = myApi.get("showAllProject").then((response) => {
       setData(response.data);
     });
   } catch (error) {
@@ -16,7 +16,7 @@ const Home = () => {
   return (
     <div>
       <h1>Projetos</h1>
-      <div>
+      <div style={{ background: "grey", width: "10%" }}>
         {data.map((project) => (
           <div key={project.id}>
             <h2>{project.name}</h2>
