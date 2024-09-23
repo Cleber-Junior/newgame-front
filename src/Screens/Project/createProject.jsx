@@ -29,16 +29,19 @@ const createProject = () => {
     e.preventDefault();
 
     try {
-      const response = await myApi.post("/createProject", formData);
+      const response = await myApi.post("/registerProject", formData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       if (response) {
         console.log("Projeto criado com sucesso", response);
         alert("Projeto criado com sucesso");
         navigation("../");
 
-        alert("Projeto Criado com Sucesso");
         const timer = setTimeout(() => {
           clearTimeout(timer);
-          navigate("../");
+          navigation("../");
         }, 1000);
       }
     } catch (error) {

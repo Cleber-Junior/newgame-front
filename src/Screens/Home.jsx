@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
+import { UserContext } from "../assets/Context/UserContext";
 import { myApi } from "../api/api";
 
 const Home = () => {
   const [data, setData] = useState([]);
-
+  const { user } = React.useContext(UserContext);
+  console.log(user);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -32,6 +34,7 @@ const Home = () => {
           ))
         )}
       </div>
+      {user && <p>Olá, {user.name}</p>}
     </div>
   );
 };

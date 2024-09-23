@@ -18,7 +18,8 @@ export const Botoes = styled.span`
   color: #fff;
   margin-right: 10px;
   padding: 5px;
-  transition: background-color 0.3s ease, color 0.3s ease; /* Adiciona a transição */
+  transition: background-color 0.3s ease, color 0.3s ease;
+  cursor: pointer;
   &:hover {
     background-color: #b9b9b9;
     color: #000;

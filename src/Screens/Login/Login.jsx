@@ -12,7 +12,6 @@ import {
   Logar,
   Span,
 } from "./LoginStyles.jsx";
-import axios from "axios";
 import { TokenContext } from "../../assets/Context/TokenContext.jsx";
 import { UserContext } from "../../assets/Context/UserContext.jsx";
 import img from "../../Img/icon_dark.png";
