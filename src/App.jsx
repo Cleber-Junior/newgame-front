@@ -8,7 +8,6 @@ import EditProject from "./Screens/Project/editProject";
 import { TokenStorage } from "./assets/Context/TokenContext";
 import Header from "./components/Header";
 import Background from "./components/Background";
-import "./assets/fonts.css";
 import ProtectRoute from "./assets/Context/protectRoute";
 import { UserStorage } from "./assets/Context/UserContext";
 
