@@ -50,24 +50,19 @@ const Header = () => {
       <UserDivision>
         {token ? (
           <>
-            <Link style={{ textDecoration: "none" }} to="/user/profile">
-              <Botoes>
-                <Img src={img} alt="Profile" onClick={toggleDropDown} />
-                {dropDown && (
-                  <DropDownMenu>
-                    <DropDownItem>
-                      <Link
-                        style={{ textDecoration: "none" }}
-                        to="/user/profile"
-                      >
-                        Perfil
-                      </Link>
-                    </DropDownItem>
-                    <DropDownItem onClick={handleLogout}>Sair</DropDownItem>
-                  </DropDownMenu>
-                )}
-              </Botoes>
-            </Link>
+            <Botoes>
+              <Img src={img} alt="Profile" onClick={toggleDropDown} />
+              {dropDown && (
+                <DropDownMenu>
+                  <DropDownItem>
+                    <Link style={{ textDecoration: "none" }} to="/user/profile">
+                      Perfil
+                    </Link>
+                  </DropDownItem>
+                  <DropDownItem onClick={handleLogout}>Sair</DropDownItem>
+                </DropDownMenu>
+              )}
+            </Botoes>
           </>
         ) : (
           <>

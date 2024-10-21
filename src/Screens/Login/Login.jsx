@@ -44,8 +44,9 @@ const Login = () => {
         console.log("user:", response.data.user);
         saveUser(response.data.user);
         saveToken(response.data.token);
+        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("user", JSON.stringify(response.data.user));
 
-        alert("Login efetuado com sucesso");
         const timer = setTimeout(() => {
           clearTimeout(timer);
           navigate("../");

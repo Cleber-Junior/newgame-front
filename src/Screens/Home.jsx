@@ -1,32 +1,36 @@
 import React, { useEffect, useState } from "react";
 import { UserContext } from "../assets/Context/UserContext";
 import { myApi } from "../api/api";
+import { TokenContext } from "../assets/Context/TokenContext";
 
 const Home = () => {
-  const [data, setData] = useState([]);
-  const { user } = React.useContext(UserContext);
+  const [projects, setProjects] = useState([]);
+  const { user, saveUser } = React.useContext(UserContext);
+  const { token, saveToken } = React.useContext(TokenContext);
+
   console.log(user);
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await myApi.get("/showAllProject");
-        setData(response.data);
+        const response = await myApi.get("/projects");
+        setProjects(response.data.data);
+        console.log(response.data);
       } catch (error) {
         console.error("Erro ao buscar projetos", error);
       }
     };
-
     fetchData();
   }, []);
+
 
   return (
     <div>
       <h1>Projetos</h1>
       <div style={{ background: "grey", width: "10%" }}>
-        {data.length === 0 ? (
+        {!projects ? (
           <p>Nenhum projeto cadastrado no sistema</p>
         ) : (
-          data.map((project) => (
+          projects.map((project) => (
             <div key={project.id}>
               <h2>{project.name}</h2>
               <p>{project.description}</p>

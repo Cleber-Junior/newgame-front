@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const HeaderContainer = styled.div`
-  font-family: "New Amsterdam";
+  font-family: "Geo";
   letter-spacing: 5px;
   display: flex;
   justify-content: space-between;
@@ -95,6 +95,9 @@ export const DropDownMenu = styled.div`
 `;
 
 export const DropDownItem = styled.div`
+  font-size: 1.1rem;
+  margin-right: 30px;
+  letter-spacing: 0;
   padding: 10px 15px;
   background-color: #fff;
   color: #000;

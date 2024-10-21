@@ -14,6 +14,7 @@ import {
 import { myApi } from "../../api/api";
 
 const Register = () => {
+  const [message, setMessage] = useState("");
   const [formData, setFormData] = useState({
     name: "",
     username: "",
@@ -33,11 +34,14 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = myApi.post("/register", formData);
-      if (response) {
-        console.log("Usuário cadastrado com sucesso", response);
-        alert("Usuário cadastrado com sucesso");
-        navigate("../Login");
+      const response = await myApi.post("/register", formData);
+      if (response.status === 201) {
+        console.log("Usuário cadastrado com sucesso", response.data);
+        setMessage(response.data.msg);
+        const Timer = setTimeout(() => {
+          navigate("../Login");
+          clearTimeout(Timer);
+        }, 3000);
       }
     } catch (error) {
       console.error("Erro ao fazer cadastro", error);
@@ -48,6 +52,7 @@ const Register = () => {
     <Screen>
       <Container>
         <h1>Cadastro</h1>
+        {message && <p style={{ color: "green" }}>{message}</p>}
         <Divform onSubmit={handleSubmit}>
           <DivsignUp>
             <Label htmlFor="name">Name:</Label>

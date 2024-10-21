@@ -1,5 +1,4 @@
 import React, { useContext, useState } from "react";
-import axios from "axios";
 import { TokenContext } from "../../assets/Context/TokenContext";
 import { UserContext } from "../../assets/Context/UserContext";
 import { Link, useNavigate } from "react-router-dom";
@@ -15,6 +14,7 @@ const createProject = () => {
     description: "",
     meta_value: "",
     end_date: "",
+    status: false,
     id_creator: user.id,
   });
 
@@ -29,7 +29,7 @@ const createProject = () => {
     e.preventDefault();
 
     try {
-      const response = await myApi.post("/registerProject", formData, {
+      const response = await myApi.post("/createProject", formData, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

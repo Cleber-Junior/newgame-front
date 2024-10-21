@@ -12,7 +12,6 @@ export const Container = styled.div`
   align-items: center;
   padding: 10px;
   margin: 0 auto;
-  width: 25%;
   border: 5px solid black;
   border-radius: 10px;
   background-color: #fff;
