@@ -1,17 +1,5 @@
 import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import {
-  Screen,
-  Container,
-  Divlogo,
-  Logo,
-  Divform,
-  Label,
-  Input,
-  Divsign,
-  Logar,
-  Span,
-} from "./LoginStyles.jsx";
 import { TokenContext } from "../../assets/Context/TokenContext.jsx";
 import { UserContext } from "../../assets/Context/UserContext.jsx";
 import img from "../../Img/icon_dark.png";
@@ -58,43 +46,58 @@ const Login = () => {
   };
 
   return (
-    <Screen>
-      <Container>
-        <Divlogo>
-          <Logo className="img" src={img} alt="Logo New Game" />
+    <div className="flex justify-center items-center mt-12">
+      <div className="flex flex-col items-center p-6 mx-auto w-[400px] border-4 border-black rounded-lg bg-white">
+        <div className="text-center text-2xl text-green-600">
+          <img className="w-[140px] h-[120px]" src={img} alt="Logo New Game" />
           <h2>New Game</h2>
-        </Divlogo>
-        <Divform onSubmit={handleSubmit}>
-          <Divsign>
-            <Label>Email</Label>
-            <Input
+        </div>
+
+        <form
+          onSubmit={handleSubmit}
+          className="w-full flex flex-col items-center mb-2"
+        >
+          <div className="my-2 w-full">
+            <label className="block text-lg">Email</label>
+            <input
               type="text"
-              size={"40"}
               name="email"
               value={formData.email}
               onChange={handleChange}
+              className="w-full p-1 mb-4 bg-green-100 border border-green-600 rounded-md"
             />
-          </Divsign>
-          <Divsign>
-            <Label>Senha</Label>
-            <Input
+          </div>
+
+          <div className="my-2 w-full">
+            <label className="block text-lg">Senha</label>
+            <input
               type="password"
-              size={"40"}
               name="password"
               value={formData.password}
               onChange={handleChange}
+              className="w-full p-1 mb-4 bg-green-100 border border-green-600 rounded-md"
             />
-          </Divsign>
-          <Logar type="submit">Logar</Logar>
-        </Divform>
+          </div>
+
+          <button
+            type="submit"
+            className="font-geo text-xl w-3/4 h-10 bg-green-600 text-white rounded-md mt-4 mb-2 hover:bg-green-800"
+          >
+            Logar
+          </button>
+        </form>
+
         <p>
           Ainda não tem uma conta?{" "}
-          <Link style={{ textDecoration: "none" }} to="../Register">
-            <Span>Cadastre-se</Span>
+          <Link
+            to="../Register"
+            className="text-green-600 hover:text-green-800"
+          >
+            Cadastre-se
           </Link>
         </p>
-      </Container>
-    </Screen>
+      </div>
+    </div>
   );
 };
 

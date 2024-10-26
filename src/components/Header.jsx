@@ -2,18 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { UserContext } from "../assets/Context/UserContext";
 import { TokenContext } from "../assets/Context/TokenContext";
-import {
-  HeaderContainer,
-  LogoDivision,
-  SearchDivision,
-  UserDivision,
-  DropDownMenu,
-  DropDownItem,
-  Input,
-  Botoes,
-  Img,
-  Logo,
-} from "../assets/css/HeaderStyle";
 import img from "../assets/img/icon_placeholder.jpg";
 import logo_header from "../Img/Logo_Header.svg";
 
@@ -34,48 +22,69 @@ const Header = () => {
   }
 
   return (
-    <HeaderContainer>
-      <LogoDivision>
-        <Link style={{ textDecoration: "none" }} to="/">
-          <Logo src={logo_header} />
+    <header className="bg-header-bg text-white flex justify-between items-center p-4 text-2xl">
+      <div className="flex items-center space-x-4">
+        <Link to="/">
+          <img src={logo_header} alt="Logo" className="w-[225px] h-[57px]" />
         </Link>
-        <Link style={{ textDecoration: "none" }} to="/project/create">
-          <Botoes>Criar Projeto</Botoes>
+        <Link
+          to="/project/create"
+          className="text-white ml-4 hover:text-green-500"
+        >
+          Criar Projeto
         </Link>
-      </LogoDivision>
-      <SearchDivision>
-        {" "}
-        <Input type="text" placeholder="Barra de Pesquisa" />
-      </SearchDivision>
-      <UserDivision>
+      </div>
+
+      <div className="flex flex-1 justify-center">
+        <input
+          type="text"
+          placeholder="Barra de Pesquisa"
+          className="w-3/5 p-2 rounded-lg text-black"
+        />
+      </div>
+
+      <div className="flex items-center space-x-4">
         {token ? (
           <>
-            <Botoes>
-              <Img src={img} alt="Profile" onClick={toggleDropDown} />
+            <div className="relative">
+              <img
+                src={img}
+                alt="Profile"
+                className="w-[50px] h-[50px] rounded-full cursor-pointer"
+                onClick={toggleDropDown}
+              />
               {dropDown && (
-                <DropDownMenu>
-                  <DropDownItem>
-                    <Link style={{ textDecoration: "none" }} to="/user/profile">
+                <div className="absolute top-16 right-0 bg-white shadow-lg rounded-lg">
+                  <div className="hover:bg-gray-200 p-2 cursor-pointer text-black rounded-t-lg">
+                    <Link
+                      to="/user/profile"
+                      className="text-black no-underline"
+                    >
                       Perfil
                     </Link>
-                  </DropDownItem>
-                  <DropDownItem onClick={handleLogout}>Sair</DropDownItem>
-                </DropDownMenu>
+                  </div>
+                  <div
+                    className="hover:bg-gray-200 p-2 cursor-pointer text-black rounded-b-lg"
+                    onClick={handleLogout}
+                  >
+                    Sair
+                  </div>
+                </div>
               )}
-            </Botoes>
+            </div>
           </>
         ) : (
           <>
-            <Link style={{ textDecoration: "none" }} to="/login">
-              <Botoes>Login</Botoes>
+            <Link to="/login" className="hover:text-green-500">
+              Login
             </Link>
-            <Link style={{ textDecoration: "none" }} to="Register">
-              <Botoes>Cadastrar-se</Botoes>
+            <Link to="/register" className="hover:text-green-500">
+              Cadastrar-se
             </Link>
           </>
         )}
-      </UserDivision>
-    </HeaderContainer>
+      </div>
+    </header>
   );
 };
 

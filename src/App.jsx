@@ -12,10 +12,9 @@ import ProtectRoute from "./assets/Context/protectRoute";
 import { UserStorage, UserContext } from "./assets/Context/UserContext";
 import { TokenContext } from "./assets/Context/TokenContext";
 import UserProfile from "./Screens/UserProfile/UserProfile";
+import "./index.css";
 
 const App = () => {
-
-
   return (
     <TokenStorage>
       <UserStorage>

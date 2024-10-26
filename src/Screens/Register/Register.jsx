@@ -49,61 +49,87 @@ const Register = () => {
   };
 
   return (
-    <Screen>
-      <Container>
-        <h1>Cadastro</h1>
-        {message && <p style={{ color: "green" }}>{message}</p>}
-        <Divform onSubmit={handleSubmit}>
-          <DivsignUp>
-            <Label htmlFor="name">Name:</Label>
-            <Input
+    <div className="flex justify-center items-center mt-12">
+      <div className="flex flex-col items-center p-6 mx-auto w-[400px] border-4 border-black rounded-lg bg-white">
+        <h1 className="text-2xl font-bold mb-4">Cadastro</h1>
+        {message && <p className="text-green-600">{message}</p>}
+
+        <form
+          onSubmit={handleSubmit}
+          className="w-full flex flex-col items-center mb-2"
+        >
+          <div className="w-3/4 mb-4">
+            <label htmlFor="name" className="block text-lg">
+              Nome:
+            </label>
+            <input
               type="text"
               name="name"
               value={formData.name}
               onChange={handleChange}
               required
+              className="w-full p-1 bg-green-100 border border-green-600 rounded-md"
             />
-          </DivsignUp>
-          <DivsignUp>
-            <Label htmlFor="username">Username:</Label>
-            <Input
+          </div>
+
+          <div className="w-3/4 mb-4">
+            <label htmlFor="username" className="block text-lg">
+              Username:
+            </label>
+            <input
               type="text"
               name="username"
               value={formData.username}
               onChange={handleChange}
               required
+              className="w-full p-1 bg-green-100 border border-green-600 rounded-md"
             />
-          </DivsignUp>
-          <DivsignUp>
-            <Label htmlFor="email">Email:</Label>
-            <Input
+          </div>
+
+          <div className="w-3/4 mb-4">
+            <label htmlFor="email" className="block text-lg">
+              Email:
+            </label>
+            <input
               type="text"
               name="email"
               value={formData.email}
               onChange={handleChange}
               required
+              className="w-full p-1 bg-green-100 border border-green-600 rounded-md"
             />
-          </DivsignUp>
-          <DivsignUp>
-            <Label htmlFor="password">Senha:</Label>
-            <Input
+          </div>
+
+          <div className="w-3/4 mb-4">
+            <label htmlFor="password" className="block text-lg">
+              Senha:
+            </label>
+            <input
               type="password"
               name="password"
               value={formData.password}
               onChange={handleChange}
               required
+              className="w-full p-1 bg-green-100 border border-green-600 rounded-md"
             />
-          </DivsignUp>
-          <Cadastrar type="Submit"> Cadastrar-se</Cadastrar>
-        </Divform>
+          </div>
+
+          <button
+            type="submit"
+            className="font-geo text-xl w-3/4 h-10 bg-green-600 text-white rounded-md mt-4 mb-2 hover:bg-green-800"
+          >
+            Cadastrar-se
+          </button>
+        </form>
+
         <p>
           Já possui uma conta?{" "}
-          <Link style={{ textDecoration: "none" }} to="../Login">
-            <Span>Entre</Span>
+          <Link to="../Login" className="text-green-600 hover:text-green-800">
+            Entre
           </Link>
         </p>
-      </Container>
-    </Screen>
+      </div>
+    </div>
   );
 };
 

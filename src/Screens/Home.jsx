@@ -8,20 +8,20 @@ const Home = () => {
   const { user, saveUser } = React.useContext(UserContext);
   const { token, saveToken } = React.useContext(TokenContext);
 
-  console.log(user);
+  const fetchData = async () => {
+    try {
+      const response = await myApi.get("/projects");
+      setProjects(response.data.data);
+    } catch (error) {
+      console.error("Erro ao buscar projetos", error);
+    }
+  };
+
+  console.log("projects", projects);
+
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await myApi.get("/projects");
-        setProjects(response.data.data);
-        console.log(response.data);
-      } catch (error) {
-        console.error("Erro ao buscar projetos", error);
-      }
-    };
     fetchData();
   }, []);
-
 
   return (
     <div>

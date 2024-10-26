@@ -37,11 +37,10 @@ const createProject = () => {
       if (response) {
         console.log("Projeto criado com sucesso", response);
         alert("Projeto criado com sucesso");
-        navigation("../");
 
         const timer = setTimeout(() => {
           clearTimeout(timer);
-          navigation("../");
+          navigation("../../");
         }, 1000);
       }
     } catch (error) {
