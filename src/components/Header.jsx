@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { UserContext } from "../assets/Context/UserContext";
 import { TokenContext } from "../assets/Context/TokenContext";
-import img from "../assets/img/icon_placeholder.jpg";
+import HeaderUser from "../components/ProfileMenu/HeaderUser";
 import logo_header from "../Img/Logo_Header.svg";
 
 const Header = () => {
@@ -46,7 +46,8 @@ const Header = () => {
       <div className="flex items-center space-x-4">
         {token ? (
           <>
-            <div className="relative">
+            <HeaderUser dataUser={user}/>
+            {/* <div className="relative">
               <img
                 src={img}
                 alt="Profile"
@@ -71,7 +72,7 @@ const Header = () => {
                   </div>
                 </div>
               )}
-            </div>
+            </div> */}
           </>
         ) : (
           <>

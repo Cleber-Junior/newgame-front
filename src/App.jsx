@@ -13,6 +13,7 @@ import { UserStorage, UserContext } from "./assets/Context/UserContext";
 import { TokenContext } from "./assets/Context/TokenContext";
 import UserProfile from "./Screens/UserProfile/UserProfile";
 import "./index.css";
+import UserProjects from "./Screens/UserProfile/UserProjects";
 
 const App = () => {
   return (
@@ -31,7 +32,7 @@ const App = () => {
                   <ProtectRoute>
                     <Routes>
                       <Route path="create" element={<CreateProject />} />
-                      <Route path=":id" element={<EditProject />} />
+                      <Route path="edit" element={<EditProject />} />
                     </Routes>
                   </ProtectRoute>
                 }
@@ -42,6 +43,7 @@ const App = () => {
                   <ProtectRoute>
                     <Routes>
                       <Route path="profile" element={<UserProfile />} />
+                      <Route path="projects" element={<UserProjects />} />
                     </Routes>
                   </ProtectRoute>
                 }

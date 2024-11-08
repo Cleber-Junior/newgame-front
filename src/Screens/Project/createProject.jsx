@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { TokenContext } from "../../assets/Context/TokenContext";
 import { UserContext } from "../../assets/Context/UserContext";
 import { Link, useNavigate } from "react-router-dom";
@@ -9,24 +9,16 @@ const createProject = () => {
   const { user } = useContext(UserContext);
   const navigation = useNavigate();
 
-  const [formData, setFormData] = useState({
-    name: "",
-    description: "",
-    meta_value: "",
-    end_date: "",
-    status: false,
-    id_creator: user.id,
-  });
-
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    formData.append("id_creator", user.id);
+
+    // for (let [key, value] of formData2.entries()) {
+    //   console.log(key, value);
+    // }
+
+    console.log(formData.forEach((value, key) => console.log(key, value)));
 
     try {
       const response = await myApi.post("/createProject", formData, {
@@ -40,7 +32,7 @@ const createProject = () => {
 
         const timer = setTimeout(() => {
           clearTimeout(timer);
-          navigation("../../");
+          navigation("../edit");
         }, 1000);
       }
     } catch (error) {
@@ -51,42 +43,9 @@ const createProject = () => {
   return (
     <div>
       <h1>Criar Projeto</h1>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} encType="multipart/form-data">
         <label htmlFor="name">Nome do Projeto:</label>
-        <input
-          type="text"
-          placeholder="Nome do Projeto"
-          name="name"
-          value={formData.name}
-          onChange={handleChange}
-        />
-        <br />
-        <label htmlFor="description">Descrição:</label>
-        <textarea
-          name="description"
-          placeholder="Descrição do Projeto"
-          cols="30"
-          rows="10"
-          value={formData.description}
-          onChange={handleChange}
-        ></textarea>
-        <br />
-        <label htmlFor="meta_value">Meta do Projeto:</label>
-        <input
-          type="text"
-          name="meta_value"
-          placeholder="Valor"
-          value={formData.meta_value}
-          onChange={handleChange}
-        />
-        <br />
-        <label htmlFor="end_date">Data Final:</label>
-        <input
-          type="date"
-          name="end_date"
-          value={formData.end_date}
-          onChange={handleChange}
-        />
+        <input type="text" placeholder="Nome do Projeto" name="name" />
         <br />
         <button type="submit">Registrar Projeto </button>
       </form>

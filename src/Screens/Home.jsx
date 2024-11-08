@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { UserContext } from "../assets/Context/UserContext";
 import { myApi } from "../api/api";
 import { TokenContext } from "../assets/Context/TokenContext";
+import Card from "../components/Projects/Card";
 
 const Home = () => {
   const [projects, setProjects] = useState([]);
@@ -17,6 +18,8 @@ const Home = () => {
     }
   };
 
+  const filterProject = projects.filter((project) => project.status === 1);
+
   console.log("projects", projects);
 
   useEffect(() => {
@@ -24,17 +27,14 @@ const Home = () => {
   }, []);
 
   return (
-    <div>
+    <div className="font-outfit">
       <h1>Projetos</h1>
-      <div style={{ background: "grey", width: "10%" }}>
-        {!projects ? (
+      <div className="bg-gray-400 text-black w-24">
+        {!filterProject ? (
           <p>Nenhum projeto cadastrado no sistema</p>
         ) : (
-          projects.map((project) => (
-            <div key={project.id}>
-              <h2>{project.name}</h2>
-              <p>{project.description}</p>
-            </div>
+          filterProject.map((project, index) => (
+            <Card key={index} data={project} />
           ))
         )}
       </div>
