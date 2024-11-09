@@ -5,10 +5,12 @@ export default {
     extend: {
       colors: {
         "header-bg": "#292929",
+        "inside-input": "#D6FFCC",
       },
     },
     fontFamily: {
       outfit: ["Outfit"],
+      geo: ["Geo"],
     },
   },
   plugins: [],

@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { Navigate } from "react-router-dom";
 import { TokenContext } from "../../assets/Context/TokenContext";
 
-const ProtectRoute = ({ children }) => {
+const ProtectContext = ({ children }) => {
   const { token } = useContext(TokenContext);
 
   if (!token) {
@@ -12,4 +12,4 @@ const ProtectRoute = ({ children }) => {
   }
 };
 
-export default ProtectRoute;
+export default ProtectContext;

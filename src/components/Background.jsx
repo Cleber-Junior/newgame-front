@@ -1,8 +1,13 @@
 import React from "react";
-import "../assets/css/BackgroundStyle.css";
+import BackgroundImage from "../assets/img/fundo.jpg";
 
-const Background = ({ children }) => {
-  return <div className="background">{children}</div>;
+export const Background = ({ children }) => {
+  return (
+    <div
+      class="w-full h-full min-h-screen bg-cover bg-center absolute inset-0 -z-10"
+      style={{ backgroundImage: `url(${BackgroundImage})` }}
+    >
+      {children}
+    </div>
+  );
 };
-
-export default Background;

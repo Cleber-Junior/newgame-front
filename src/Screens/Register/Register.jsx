@@ -1,16 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import {
-  DivsignUp,
-  Divform,
-  Cadastrar,
-  Input,
-  Label,
-  Screen,
-  Container,
-  Span,
-} from "./RegisterStyles";
 import { myApi } from "../../api/api";
 
 const Register = () => {
@@ -39,7 +29,7 @@ const Register = () => {
         console.log("Usuário cadastrado com sucesso", response.data);
         setMessage(response.data.msg);
         const Timer = setTimeout(() => {
-          navigate("../Login");
+          navigate("../login");
           clearTimeout(Timer);
         }, 3000);
       }
@@ -49,7 +39,7 @@ const Register = () => {
   };
 
   return (
-    <div className="flex justify-center items-center mt-12">
+    <div className="flex justify-center items-center mt-28 z-auto">
       <div className="flex flex-col items-center p-6 mx-auto w-[400px] border-4 border-black rounded-lg bg-white">
         <h1 className="text-2xl font-bold mb-4">Cadastro</h1>
         {message && <p className="text-green-600">{message}</p>}
@@ -122,9 +112,9 @@ const Register = () => {
           </button>
         </form>
 
-        <p>
+        <p >
           Já possui uma conta?{" "}
-          <Link to="../Login" className="text-green-600 hover:text-green-800">
+          <Link to="../login" className="text-green-600 hover:text-green-800">
             Entre
           </Link>
         </p>

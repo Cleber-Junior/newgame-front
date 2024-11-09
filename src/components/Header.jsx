@@ -9,20 +9,9 @@ const Header = () => {
   const { user, saveUser } = React.useContext(UserContext);
   const { token, saveToken } = React.useContext(TokenContext);
 
-  const [dropDown, setDropDown] = React.useState(false);
-
-  function handleLogout() {
-    localStorage.clear();
-    saveUser(null);
-    saveToken(null);
-  }
-
-  function toggleDropDown() {
-    setDropDown(!dropDown);
-  }
 
   return (
-    <header className="bg-header-bg text-white flex justify-between items-center p-4 text-2xl">
+    <header className="bg-header-bg text-white flex justify-between items-center p-4 text-2xl font-geo">
       <div className="flex items-center space-x-4">
         <Link to="/">
           <img src={logo_header} alt="Logo" className="w-[225px] h-[57px]" />
@@ -46,33 +35,7 @@ const Header = () => {
       <div className="flex items-center space-x-4">
         {token ? (
           <>
-            <HeaderUser dataUser={user}/>
-            {/* <div className="relative">
-              <img
-                src={img}
-                alt="Profile"
-                className="w-[50px] h-[50px] rounded-full cursor-pointer"
-                onClick={toggleDropDown}
-              />
-              {dropDown && (
-                <div className="absolute top-16 right-0 bg-white shadow-lg rounded-lg">
-                  <div className="hover:bg-gray-200 p-2 cursor-pointer text-black rounded-t-lg">
-                    <Link
-                      to="/user/profile"
-                      className="text-black no-underline"
-                    >
-                      Perfil
-                    </Link>
-                  </div>
-                  <div
-                    className="hover:bg-gray-200 p-2 cursor-pointer text-black rounded-b-lg"
-                    onClick={handleLogout}
-                  >
-                    Sair
-                  </div>
-                </div>
-              )}
-            </div> */}
+            <HeaderUser dataUser={user} />
           </>
         ) : (
           <>
