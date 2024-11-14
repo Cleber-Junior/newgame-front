@@ -14,10 +14,6 @@ const createProject = () => {
     const formData = new FormData(e.currentTarget);
     formData.append("id_creator", user.id);
 
-    // for (let [key, value] of formData2.entries()) {
-    //   console.log(key, value);
-    // }
-
     console.log(formData.forEach((value, key) => console.log(key, value)));
 
     try {
@@ -26,14 +22,10 @@ const createProject = () => {
           Authorization: `Bearer ${token}`,
         },
       });
-      if (response) {
+      if (response.status === 201) {
         console.log("Projeto criado com sucesso", response);
         alert("Projeto criado com sucesso");
-
-        const timer = setTimeout(() => {
-          clearTimeout(timer);
-          navigation("../edit");
-        }, 1000);
+        navigation("../../user/projects");
       }
     } catch (error) {
       console.error("Erro ao criar projeto", error);

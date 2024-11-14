@@ -7,10 +7,14 @@ const Card = ({ data }) => {
       <div key={data.id} className="bg-sky-700 w-20">
         <h2>{data.name}</h2>
         <p>{data.description}</p>
-        <Link to={"../../project/edit"} state={{ projectId: data.id }}>
+        <Link
+          to={"../../project/edit/name"}
+          onClick={() => {}}
+          state={{ project: data }}
+        >
           <button className="bg-red-700 ">Editar Projeto</button>
         </Link>
-      </div> 
+      </div>
     </div>
   );
 };

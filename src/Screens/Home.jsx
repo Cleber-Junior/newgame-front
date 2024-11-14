@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { UserContext } from "../assets/Context/UserContext";
 import { myApi } from "../api/api";
 import { TokenContext } from "../assets/Context/TokenContext";
-import Card from "../components/Projects/Card";
+import ShowCard from "../components/Projects/ShowCard";
 
 const Home = () => {
   const [projects, setProjects] = useState([]);
@@ -34,7 +34,7 @@ const Home = () => {
           <p>Nenhum projeto cadastrado no sistema</p>
         ) : (
           filterProject.map((project, index) => (
-            <Card key={index} data={project} />
+            <ShowCard key={index} data={project} />
           ))
         )}
       </div>

@@ -39,7 +39,7 @@ const HeaderUser = ({ dataUser }) => {
     <div onClick={handleClickModal} className="relative">
       <div className="flex items-center space-x-3 cursor-pointer">
         <div className="font-semibold text-white uppercase letter">
-          {user.name}
+          {user.username}
         </div>
         <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-gray-900">
           <img

@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { myApi } from "../../api/api";
 import { UserContext } from "../../assets/Context/UserContext";
 import { TokenContext } from "../../assets/Context/TokenContext";
-import Card from "../../components/Projects/Card";
+import EditCard from "../../components/Projects/EditCard";
 
 const UserProjects = () => {
   const { user } = React.useContext(UserContext);
@@ -31,7 +31,7 @@ const UserProjects = () => {
     <div>
       {userProjects ? (
         userProjects.map((project, index) => (
-          <Card key={index} data={project} />
+          <EditCard key={index} data={project} />
         ))
       ) : (
         <p>Você ainda não possui projetos</p>
