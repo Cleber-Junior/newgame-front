@@ -4,7 +4,7 @@ import { UserContext } from "../../assets/Context/UserContext";
 import { Link, useNavigate } from "react-router-dom";
 import { myApi } from "../../api/api";
 
-const createProject = () => {
+const CreateProject = () => {
   const { token } = useContext(TokenContext);
   const { user } = useContext(UserContext);
   const navigation = useNavigate();
@@ -46,4 +46,4 @@ const createProject = () => {
   );
 };
 
-export default createProject;
+export default CreateProject;
