@@ -18,6 +18,7 @@ import EditFinanceProject from "./Screens/Project/EditionProject/EditFinanceProj
 import EditDescProject from "./Screens/Project/EditionProject/EditDescProject";
 import EditVisualProject from "./Screens/Project/EditionProject/editVisualProject";
 import { FetchProvider } from "./assets/Context/FetchContext";
+import EditRewardProject from "./Screens/Project/EditionProject/EditRewardProject";
 
 const ProjectEditLayout = ({ project, children }) => (
   <div className="flex">
@@ -67,6 +68,10 @@ const App = () => {
                             <Route
                               path="apperance"
                               element={<EditVisualProject />}
+                            />
+                            <Route
+                              path="rewards"
+                              element={<EditRewardProject />}
                             />
                           </Routes>
                         </ProjectEditLayout>

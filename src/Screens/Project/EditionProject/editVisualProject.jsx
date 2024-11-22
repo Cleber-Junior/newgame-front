@@ -82,12 +82,18 @@ const EditVisualProject = () => {
       </p>
 
       <form encType="multipart/form-data" onSubmit={handleSubmit}>
-        <div className="flex h-[550px] w-[1050px] mb-8">
-          <img
-            className="w-full h-full object-cover"
-            src={urlImage}
-            alt="Imagem do Projeto"
-          />
+        <div className="flex h-[550px] w-[1050px] mb-8 border-2 border-gray-300">
+          {urlImage ? (
+            <img
+              className="w-full h-full object-cover"
+              src={urlImage}
+              alt="Imagem do Projeto"
+            />
+          ) : (
+            <>
+              <h1>Nenhuma imagem Selecionada</h1>
+            </>
+          )}
         </div>
 
         <div className="flex justify-between items-center w-full gap-4 mb-8">

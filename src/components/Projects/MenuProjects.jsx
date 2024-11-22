@@ -88,9 +88,13 @@ const MenuProjects = ({ project }) => {
         Aparência
       </Link>
       <Link
-        to=""
+        to="../edit/rewards"
         state={{ project: project }}
-        className="py-3 px-4 mb-1 bg-gray-800 hover:bg-gray-700 transition rounded"
+        className={`py-3 px-4 mb-1 ${
+          location.pathname === "/project/edit/rewards"
+            ? "bg-green-700"
+            : "bg-gray-800"
+        } hover:bg-gray-700 transition rounded`}
       >
         Recompensas
       </Link>

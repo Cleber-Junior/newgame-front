@@ -76,7 +76,7 @@ const EditFinanceProject = () => {
   }
 
   return (
-    <div className="bg-gray-100 min-h-screen flex flex-col items-center pt-8 gap-12">
+    <div className="bg-gray-100 min-h-screen flex flex-col items-center pt-8 gap-6">
       {modal && <Modal message={message} onClose={() => setModal(false)} />}
       <h2 className="text-2xl font-semibold text-center">
         Preencha as informações abaixo
@@ -96,6 +96,7 @@ const EditFinanceProject = () => {
             type="text"
             name="meta_value"
             id="meta_value"
+            placeholder="R$"
             value={formData.meta_value}
             onChange={handleChange}
             className="w-full border-b-2 border-gray-300 py-2 px-4 mb-4 focus:outline-none focus:border-green-500"
