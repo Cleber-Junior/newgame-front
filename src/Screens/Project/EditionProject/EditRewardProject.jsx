@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { TokenContext } from "../../../assets/Context/TokenContext";
 import Loading from "../../../components/Projects/Loading";
 import Modal from "./ModalConfirmation";
+import { Trash2, Pencil } from "lucide-react";
 import { myApi } from "../../../api/api";
 
 const EditRewardProject = () => {
@@ -11,6 +12,7 @@ const EditRewardProject = () => {
   const { token } = React.useContext(TokenContext);
   const [loading, setLoading] = React.useState(true);
   const [modal, setModal] = React.useState(false);
+  const [rewards, setRewards] = React.useState([]);
   const [message, setMessage] = React.useState("");
   const [formData, setFormData] = React.useState({
     name: "",
@@ -18,6 +20,23 @@ const EditRewardProject = () => {
     value: "",
     id_project: project.id,
   });
+
+  const fetchRewards = async () => {
+    try {
+      const response = await myApi.get(`/rewards/project/${project.id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (response.status === 200) {
+        console.log(response);
+        setRewards(response.data.rewards);
+        setLoading(false);
+      }
+    } catch {
+      console.log(error);
+    }
+  };
 
   const handleSubmitReward = async (e) => {
     e.preventDefault();
@@ -33,6 +52,30 @@ const EditRewardProject = () => {
         const data = response.data;
         setMessage(data.msg);
         setModal(true);
+        setFormData({
+          name: "",
+          description: "",
+          value: "",
+          id_project: project.id,
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleDeleteReward = async (id) => {
+    try {
+      const response = await myApi.delete(`/rewards/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (response.status === 200) {
+        console.log(response);
+        const data = response.data;
+        setMessage(data.msg);
+        setModal(true);
       }
     } catch (error) {
       console.log(error);
@@ -44,7 +87,15 @@ const EditRewardProject = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  console.log(formData);
+  useEffect(() => {
+    fetchRewards();
+  }, [modal]);
+
+  if (loading) {
+    return <Loading />;
+  }
+
+  console.log(rewards);
 
   return (
     <div className="bg-gray-100 min-h-screen flex flex-col items-center py-8 px-4 gap-6">
@@ -102,33 +153,44 @@ const EditRewardProject = () => {
             type="submit"
             className="bg-green-500 text-white font-semibold py-2 px-4 rounded-md hover:bg-green-600"
           >
-            Salvar Reconpensa
+            Adicionar Reconpensa
           </button>
         </form>
 
-        {/* Lista de recompensas */}
         <div className="bg-white p-6 rounded-lg shadow-md w-2/5">
           <h3 className="text-lg font-semibold text-green-500 mb-4">
             Recompensas Criadas
           </h3>
-          <ul className="space-y-4">
-            {/* Exemplo de recompensa */}
-            <li className="border-b pb-2">
-              <h4 className="font-semibold">Título da Recompensa</h4>
-              <p className="text-sm text-gray-600">
-                Descrição breve da recompensa.
-              </p>
-              <span className="text-green-500 font-semibold">R$50</span>
-            </li>
-            {/* Outras recompensas seriam renderizadas dinamicamente */}
+          <ul className="space-y-4 max-h-96 overflow-y-auto scrollbar-custom">
+            {rewards.map((reward) => (
+              <li
+                className="flex justify-between items-center border-b pb-2"
+                key={reward.id}
+              >
+                <div>
+                  <h4 className="font-semibold">{reward.name}</h4>
+                  <p className="text-sm text-gray-600">{reward.description}</p>
+                  <span className="text-green-500 font-semibold">
+                    R${reward.value}
+                  </span>
+                </div>
+
+                <div className="flex space-x-3 m-3">
+                  <div className="hover:text-blue-500 transition duration-200 cursor-pointer">
+                    <Pencil size={20} />
+                  </div>
+                  <div className="hover:text-red-500 transition duration-200 cursor-pointer">
+                    <Trash2
+                      size={20}
+                      onClick={() => handleDeleteReward(reward.id)}
+                    />
+                  </div>
+                </div>
+              </li>
+            ))}
           </ul>
         </div>
       </div>
-
-      {/* Botão para criar mais recompensas */}
-      <button className="mt-8 bg-green-500 text-white font-semibold py-2 px-4 rounded-md hover:bg-green-600">
-        + Adicionar mais recompensas
-      </button>
     </div>
   );
 };

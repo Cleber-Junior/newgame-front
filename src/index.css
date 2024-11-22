@@ -23,3 +23,16 @@ html {
   display: flex;
   flex-direction: column;
 }
+
+.scrollbar-custom::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scrollbar-custom::-webkit-scrollbar-thumb {
+  background-color: #22c55e; /* Verde Tailwind (green-500) */
+  border-radius: 4px;
+}
+
+.scrollbar-custom::-webkit-scrollbar-track {
+  background: #e5e7eb; /* Cinza Tailwind (gray-200) */
+}
