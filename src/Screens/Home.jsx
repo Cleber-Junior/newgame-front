@@ -12,7 +12,10 @@ const Home = () => {
   const fetchData = async () => {
     try {
       const response = await myApi.get("/projects");
-      setProjects(response.data.data);
+      if (response.status === 200) {
+        setProjects(response.data.data);
+        console.log(response);
+      }
     } catch (error) {
       console.error("Erro ao buscar projetos", error);
     }
@@ -28,17 +31,20 @@ const Home = () => {
 
   return (
     <div className="font-outfit">
-      <h1>Projetos</h1>
-      <div className="bg-gray-400 text-black w-24">
-        {!filterProject ? (
-          <p>Nenhum projeto cadastrado no sistema</p>
+      <h1 className="text-2xl mt-4 font-semibold text-center">Projetos</h1>
+
+      {/* Grid para exibir os cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {!filterProject || filterProject.length === 0 ? (
+          <p className="col-span-full text-center">
+            Nenhum projeto cadastrado no sistema
+          </p>
         ) : (
           filterProject.map((project, index) => (
             <ShowCard key={index} data={project} />
           ))
         )}
       </div>
-      {user && <p>Olá, {user.name}</p>}
     </div>
   );
 };

@@ -29,6 +29,7 @@ const UserProjects = () => {
 
   return (
     <div>
+      <h1 className="text-2xl mt-4 font-semibold text-center">Projetos Criados</h1>
       {userProjects ? (
         userProjects.map((project, index) => (
           <EditCard key={index} data={project} />

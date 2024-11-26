@@ -1,11 +1,48 @@
 import React, { useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FecthContext } from "../../assets/Context/FetchContext";
+import Modal from "../../Screens/Project/EditionProject/ModalConfirmation";
+import { myApi } from "../../api/api";
+import { TokenContext } from "../../assets/Context/TokenContext";
 
 const MenuProjects = ({ project }) => {
   const location = useLocation();
-  console.log(project);
+  const { token } = React.useContext(TokenContext);
+  const navigate = useNavigate();
   const { projectData, fetchProjectData } = React.useContext(FecthContext);
+  const [message, setMessage] = React.useState("");
+  const [modal, setModal] = React.useState(false);
+
+  const handleSubmit = async () => {
+    console.log(project);
+    const formData = {
+      ...project,
+      status: 1,
+    };
+
+    try {
+      const response = await myApi.post(
+        `finishProject/${project.id}`,
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      if (response.status === 201) {
+        const data = response.data;
+        setMessage(data.msg);
+        setModal(true);
+        const Timer = setTimeout(() => {
+          clearTimeout(Timer);
+          navigate("../../user/projects");
+        }, 3000);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
     if (project.id) {
@@ -17,6 +54,7 @@ const MenuProjects = ({ project }) => {
 
   return (
     <div className="flex flex-col min-h-screen overflow-hidden w-60 bg-header-bg text-white p-4">
+      {modal && <Modal message={message} onClose={() => setModal(false)} />}
       <div className="flex flex-col items-center mb-6">
         {projectData.url ? (
           <>
@@ -105,6 +143,13 @@ const MenuProjects = ({ project }) => {
       >
         Dados e Privacidade
       </Link>
+
+      <button
+        onClick={handleSubmit}
+        className="bg-green-500 text-white font-semibold py-2 px-4 rounded hover:bg-green-600 mt-10"
+      >
+        Finalizar Projeto
+      </button>
     </div>
   );
 };
