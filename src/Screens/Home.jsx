@@ -1,19 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { UserContext } from "../assets/Context/UserContext";
 import { myApi } from "../api/api";
-import { TokenContext } from "../assets/Context/TokenContext";
 import ShowCard from "../components/Projects/ShowCard";
+import Loading from "../components/Projects/Loading";
 
 const Home = () => {
   const [projects, setProjects] = useState([]);
-  const { user, saveUser } = React.useContext(UserContext);
-  const { token, saveToken } = React.useContext(TokenContext);
-
+  const [loading, setLoading] = useState(true);
   const fetchData = async () => {
     try {
       const response = await myApi.get("/projects");
       if (response.status === 200) {
         setProjects(response.data.data);
+        setLoading(false);
         console.log(response);
       }
     } catch (error) {
@@ -28,6 +26,10 @@ const Home = () => {
   useEffect(() => {
     fetchData();
   }, []);
+
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
     <div className="font-outfit">
