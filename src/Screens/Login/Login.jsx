@@ -4,17 +4,15 @@ import { TokenContext } from "../../assets/Context/TokenContext.jsx";
 import { UserContext } from "../../assets/Context/UserContext.jsx";
 import img from "../../Img/icon_dark.png";
 import { myApi } from "../../api/api.js";
-import backgroundImage from "../../assets/img/fundo.jpg";
 
 const Login = () => {
+  const navigate = useNavigate();
+  const { saveToken } = useContext(TokenContext);
+  const { saveUser } = useContext(UserContext);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
-
-  const navigate = useNavigate();
-  const { saveToken } = useContext(TokenContext);
-  const { saveUser } = useContext(UserContext);
 
   const handleChange = (e) => {
     setFormData({
@@ -51,14 +49,14 @@ const Login = () => {
   });
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-200 relative overflow-hidden bg-transparent">
+    <div className="flex items-center justify-center min-h-screen bg-gray-200 relative overflow-hidden bg-transparent bg-fundo ">
       <div className="flex flex-col items-center mb-6">
         <img src={img} alt="Logo" className="w-25 h-24 mb-2" />{" "}
         {/* Substitua com a URL do logo */}
         <h1 className="text-green-600 text-5xl font-geo">New Game</h1>
         <form className="space-y-4" onSubmit={handleSubmit}>
           <div>
-            <label className="block text-gray-700 font-geo">E-mail</label>
+            <label className="block text-white font-geo">E-mail</label>
             <input
               type="text"
               onChange={handleChange}
@@ -67,7 +65,7 @@ const Login = () => {
             />
           </div>
           <div>
-            <label className="block text-gray-700 font-geo">Senha</label>
+            <label className="block text-white font-geo">Senha</label>
             <input
               type="password"
               name="password"
@@ -79,7 +77,7 @@ const Login = () => {
           {/* Botão de Login */}
           <button
             type="submit"
-            className="w-full py-2 mt-4 bg-green-600 text-white rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500"
+            className="font-outfit w-full py-2 mt-4 bg-green-600 text-white rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500"
           >
             Conectar-se
           </button>
@@ -92,13 +90,19 @@ const Login = () => {
           {/* Link para cadastro */}
           <p className="text-center text-gray-600 mt-4 font-outfit">
             Não possui uma conta?{" "}
-            <Link to="../register" className="text-green-600 hover:underline font-bold">
+            <Link
+              to="../register"
+              className="text-green-600 hover:text-green-500 font-bold"
+            >
               Cadastre-se
             </Link>
           </p>
-          <p className="text-center text-gray-600 mt-4">
+          <p className="text-center text-gray-600 mt-4 font-outfit">
             Pagina{" "}
-            <Link to={"../"} className="text-green-600 hover:underline">
+            <Link
+              to={"../"}
+              className="text-green-600 hover:text-green-500 font-bold"
+            >
               Home
             </Link>
           </p>

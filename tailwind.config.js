@@ -12,6 +12,9 @@ export default {
       outfit: ["Outfit"],
       geo: ["Geo"],
     },
+    backgroundImage: {
+      fundo: "url('/src/assets/img/fundo.jpg')",
+    },
   },
   plugins: [],
 };

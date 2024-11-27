@@ -39,17 +39,17 @@ const Register = () => {
   };
 
   return (
-    <div className="flex justify-center items-center mt-28 z-auto">
-      <div className="flex flex-col items-center p-6 mx-auto w-[400px] border-4 border-black rounded-lg bg-white">
-        <h1 className="text-2xl font-bold mb-4">Cadastro</h1>
+    <div className="flex items-center justify-center min-h-screen relative overflow-hidden bg-fundo">
+      <div className="flex flex-col items-center p-6 mx-auto w-[550px]">
+        <h1 className="text-green-600 text-5xl font-geo mb-4">Cadastro</h1>
         {message && <p className="text-green-600">{message}</p>}
 
         <form
           onSubmit={handleSubmit}
-          className="w-full flex flex-col items-center mb-2"
+          className="w-full flex flex-col items-center mb-2 font-geo"
         >
           <div className="w-3/4 mb-4">
-            <label htmlFor="name" className="block text-lg">
+            <label htmlFor="name" className="block text-lg text-white">
               Nome:
             </label>
             <input
@@ -63,7 +63,7 @@ const Register = () => {
           </div>
 
           <div className="w-3/4 mb-4">
-            <label htmlFor="username" className="block text-lg">
+            <label htmlFor="username" className="block text-lg text-white">
               Username:
             </label>
             <input
@@ -77,7 +77,7 @@ const Register = () => {
           </div>
 
           <div className="w-3/4 mb-4">
-            <label htmlFor="email" className="block text-lg">
+            <label htmlFor="email" className="block text-lg text-white">
               Email:
             </label>
             <input
@@ -91,7 +91,7 @@ const Register = () => {
           </div>
 
           <div className="w-3/4 mb-4">
-            <label htmlFor="password" className="block text-lg">
+            <label htmlFor="password" className="block text-lg text-white">
               Senha:
             </label>
             <input
@@ -112,10 +112,22 @@ const Register = () => {
           </button>
         </form>
 
-        <p >
+        <p className="text-center text-gray-600 mt-4 font-outfit">
           Já possui uma conta?{" "}
-          <Link to="../login" className="text-green-600 hover:text-green-800">
+          <Link
+            to="../login"
+            className="text-green-600 hover:text-green-500 font-bold"
+          >
             Entre
+          </Link>
+        </p>
+        <p className="text-center text-gray-600 mt-4 font-outfit">
+          Pagina{" "}
+          <Link
+            to={"../"}
+            className="text-green-600 hover:text-green-500 font-bold"
+          >
+            Home
           </Link>
         </p>
       </div>
