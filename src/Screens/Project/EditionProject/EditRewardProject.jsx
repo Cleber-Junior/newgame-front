@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { TokenContext } from "../../../assets/Context/TokenContext";
 import Loading from "../../../components/Projects/Loading";
-import Modal from "./ModalConfirmation";
+import Modal from "../../../components/Projects/ModalConfirmation";
 import { Trash2, Pencil } from "lucide-react";
 import { myApi } from "../../../api/api";
 

@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 import { TokenContext } from "../../../assets/Context/TokenContext";
 import { myApi } from "../../../api/api";
 import Loading from "../../../components/Projects/Loading";
-import Modal from "./ModalConfirmation";
+import Modal from "../../../components/Projects/ModalConfirmation";
 
 const editNameProject = () => {
   let location = useLocation();

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FecthContext } from "../../assets/Context/FetchContext";
-import Modal from "../../Screens/Project/EditionProject/ModalConfirmation";
+import Modal from "./ModalConfirmation";
 import { myApi } from "../../api/api";
 import { TokenContext } from "../../assets/Context/TokenContext";
 
@@ -54,8 +54,8 @@ const MenuProjects = ({ project }) => {
 
   return (
     <div className="flex flex-col min-h-screen overflow-hidden w-60 bg-header-bg text-white p-4">
-      {modal && <Modal message={message} onClose={() => setModal(false)} />}
       <div className="flex flex-col items-center mb-6">
+        {modal && <Modal message={message} onClose={() => setModal(false)} />}
         {projectData.url ? (
           <>
             <img

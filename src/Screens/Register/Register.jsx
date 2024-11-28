@@ -49,7 +49,7 @@ const Register = () => {
           className="w-full flex flex-col items-center mb-2 font-geo"
         >
           <div className="w-3/4 mb-4">
-            <label htmlFor="name" className="block text-lg text-white">
+            <label htmlFor="name" className="block text-black text-xl">
               Nome:
             </label>
             <input
@@ -58,12 +58,12 @@ const Register = () => {
               value={formData.name}
               onChange={handleChange}
               required
-              className="w-full p-1 bg-green-100 border border-green-600 rounded-md"
+              className="w-96 h-8 px-3 py-4 mb-4 border border-green-500 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 bg-inside-input"
             />
           </div>
 
           <div className="w-3/4 mb-4">
-            <label htmlFor="username" className="block text-lg text-white">
+            <label htmlFor="username" className="block text-black text-xl">
               Username:
             </label>
             <input
@@ -72,12 +72,12 @@ const Register = () => {
               value={formData.username}
               onChange={handleChange}
               required
-              className="w-full p-1 bg-green-100 border border-green-600 rounded-md"
+              className="w-96 h-8 px-3 py-4 mb-4 border border-green-500 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 bg-inside-input"
             />
           </div>
 
           <div className="w-3/4 mb-4">
-            <label htmlFor="email" className="block text-lg text-white">
+            <label htmlFor="email" className="bloc text-black text-xl">
               Email:
             </label>
             <input
@@ -86,12 +86,12 @@ const Register = () => {
               value={formData.email}
               onChange={handleChange}
               required
-              className="w-full p-1 bg-green-100 border border-green-600 rounded-md"
+              className="w-96 h-8 px-3 py-4 mb-4 border border-green-500 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 bg-inside-input"
             />
           </div>
 
           <div className="w-3/4 mb-4">
-            <label htmlFor="password" className="block text-lg text-white">
+            <label htmlFor="password" className="block text-black text-xl">
               Senha:
             </label>
             <input
@@ -100,7 +100,7 @@ const Register = () => {
               value={formData.password}
               onChange={handleChange}
               required
-              className="w-full p-1 bg-green-100 border border-green-600 rounded-md"
+              className="w-96 h-8 px-3 py-4 mb-4 border border-green-500 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 bg-inside-input"
             />
           </div>
 

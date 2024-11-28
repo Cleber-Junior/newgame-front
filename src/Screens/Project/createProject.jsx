@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { TokenContext } from "../../assets/Context/TokenContext";
 import { UserContext } from "../../assets/Context/UserContext";
 import { Link, useNavigate } from "react-router-dom";
-import Modal from "./EditionProject/ModalConfirmation";
+import Modal from "../../components/Projects/ModalConfirmation";
 import { myApi } from "../../api/api";
 
 const CreateProject = () => {

@@ -10,7 +10,7 @@ const Modal = ({ message, onClose }) => {
   return (
     <div className="fixed top-24 right-8 z-50 flex items-center">
       <div
-        className="bg-green-500 border-4 border-green-600 rounded-lg p-4 text-white font-semibold shadow-md
+        className="bg-white border-4 border-green-600 rounded-lg p-4 text-black font-semibold shadow-md
           transform transition-transform duration-500 ease-out translate-x-0"
         style={{
           animation: "slideIn 0.5s forwards, slideOut 0.5s 2.5s forwards",
