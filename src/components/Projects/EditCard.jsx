@@ -1,15 +1,26 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Placeholder from "../../assets/img/placeholder.svg"
+
 
 const Card = ({ data }) => {
   return (
     <div className="bg-white shadow-md rounded-lg p-4 flex flex-col justify-between w-full max-w-xs m-14">
       <div>
-        <img
+        {data.image ? (
+          <img
           src={data.image}
           alt={data.name}
           className="w-full h-48 object-cover rounded-md mb-4"
         />
+        ) : (
+          <img
+          src={Placeholder}
+          alt={data.name}
+          className="w-full h-48 object-cover rounded-md mb-4"
+        />
+        )}
+        
         <h2 className="text-lg font-semibold text-gray-800">{data.name}</h2>
         <p className="text-sm text-gray-600 mb-4">{data.description}</p>
       </div>
