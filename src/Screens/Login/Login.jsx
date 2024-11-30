@@ -4,7 +4,7 @@ import { TokenContext } from "../../assets/Context/TokenContext.jsx";
 import { UserContext } from "../../assets/Context/UserContext.jsx";
 import img from "../../Img/icon_dark.png";
 import { myApi } from "../../api/api.js";
-import Modal from "../../components/Projects/ModalConfirmation.jsx";
+import Modal from "../../components/Projects/Modal/ModalConfirmation.jsx";
 
 const Login = () => {
   const navigate = useNavigate();

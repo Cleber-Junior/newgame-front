@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { TokenContext } from "../../../assets/Context/TokenContext";
 import Loading from "../../../components/Projects/Loading";
-import Modal from "../../../components/Projects/ModalConfirmation";
+import Modal from "../../../components/Projects/Modal/ModalConfirmation";
 import { Trash2, Pencil } from "lucide-react";
 import { myApi } from "../../../api/api";
 import { ProjectContext } from "../../../assets/Context/ProjectContext";

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { myApi } from "../../api/api";
-import Modal from "../../components/Projects/ModalConfirmation";
+import Modal from "../../components/Projects/Modal/ModalConfirmation";
 
 const Register = () => {
   const [message, setMessage] = useState("");
@@ -39,7 +39,6 @@ const Register = () => {
       [e.target.name]: e.target.value,
     });
   };
-  
 
   return (
     <div className="flex items-center justify-center min-h-screen relative overflow-hidden bg-fundo">

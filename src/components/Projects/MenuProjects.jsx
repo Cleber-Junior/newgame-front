@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { TokenContext } from "../../assets/Context/TokenContext";
 import { ProjectContext } from "../../assets/Context/ProjectContext";
 import { myApi } from "../../api/api";
-import Modal from "./ModalConfirmation";
+import Modal from "./Modal/ModalConfirmation";
 
 const MenuProjects = ({ project }) => {
   const location = useLocation();

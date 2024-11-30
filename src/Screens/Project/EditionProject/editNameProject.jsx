@@ -4,7 +4,7 @@ import { TokenContext } from "../../../assets/Context/TokenContext";
 import { ProjectContext } from "../../../assets/Context/ProjectContext";
 import { myApi } from "../../../api/api";
 import Loading from "../../../components/Projects/Loading";
-import Modal from "../../../components/Projects/ModalConfirmation";
+import Modal from "../../../components/Projects/Modal/ModalConfirmation";
 
 const editNameProject = () => {
   let location = useLocation();

@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { TokenContext } from "../../../assets/Context/TokenContext";
 import { myApi } from "../../../api/api";
 import Loading from "../../../components/Projects/Loading";
-import Modal from "../../../components/Projects/ModalConfirmation";
+import Modal from "../../../components/Projects/Modal/ModalConfirmation";
 import { ProjectContext } from "../../../assets/Context/ProjectContext";
 
 const EditFinanceProject = () => {
