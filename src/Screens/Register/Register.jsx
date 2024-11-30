@@ -1,24 +1,17 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { myApi } from "../../api/api";
+import Modal from "../../components/Projects/ModalConfirmation";
 
 const Register = () => {
   const [message, setMessage] = useState("");
+  const [modal, setModal] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     username: "",
     email: "",
     password: "",
   });
-
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
-
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -28,7 +21,9 @@ const Register = () => {
       if (response.status === 201) {
         console.log("Usuário cadastrado com sucesso", response.data);
         setMessage(response.data.msg);
+        setModal(true);
         const Timer = setTimeout(() => {
+          setModal(false);
           navigate("../login");
           clearTimeout(Timer);
         }, 3000);
@@ -38,8 +33,17 @@ const Register = () => {
     }
   };
 
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+  
+
   return (
     <div className="flex items-center justify-center min-h-screen relative overflow-hidden bg-fundo">
+      {modal && <Modal message={message} onClose={() => setModal(false)} />}
       <div className="flex flex-col items-center p-6 mx-auto w-[550px]">
         <h1 className="text-green-600 text-5xl font-geo mb-4">Cadastro</h1>
         {message && <p className="text-green-600">{message}</p>}
