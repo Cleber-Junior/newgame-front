@@ -1,39 +1,23 @@
-import React, { useEffect } from "react";
-import MenuProjects from "../../../components/Projects/MenuProjects";
-import { useLocation } from "react-router-dom";
+import React, { useEffect } from "react"; 
 import { TokenContext } from "../../../assets/Context/TokenContext";
 import { myApi } from "../../../api/api";
 import Loading from "../../../components/Projects/Loading";
 import Modal from "../../../components/Projects/ModalConfirmation";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import { ProjectContext } from "../../../assets/Context/ProjectContext";
 
 const EditDescProject = () => {
-  const location = useLocation();
-  const project = location.state.project;
   const { token } = React.useContext(TokenContext);
-  const [formData, setFormData] = React.useState({});
+  const { projectData, saveProject } = React.useContext(ProjectContext);
+  const [formData, setFormData] = React.useState({
+    description: projectData.description,
+  });
   const [message, setMessage] = React.useState("");
   const [modal, setModal] = React.useState(false);
   const [loading, setLoading] = React.useState(true);
 
-  const fetchProject = async () => {
-    try {
-      const response = await myApi.get(`/projects/${project.id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      if (response.status === 200) {
-        setFormData({
-          description: response.data.project.description,
-        });
-        setLoading(false);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  console.log("Dentro da Desc", projectData);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -44,7 +28,7 @@ const EditDescProject = () => {
 
     try {
       const response = await myApi.post(
-        `/updateProject/${project.id}`,
+        `/updateProject/${projectData.id}`,
         updateForm,
         {
           headers: {
@@ -57,19 +41,17 @@ const EditDescProject = () => {
         const data = response.data;
         setMessage(data.msg);
         setModal(true);
+        saveProject(data.project);
       }
     } catch (error) {
       console.log(error);
     }
   };
 
-  const handleChange = (e) => {
-    e.preventDefault();
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
   useEffect(() => {
-    fetchProject();
+    if (projectData) {
+      setLoading(false);
+    }
   }, []);
 
   if (loading) {

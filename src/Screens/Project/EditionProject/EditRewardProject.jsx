@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
 import { TokenContext } from "../../../assets/Context/TokenContext";
 import Loading from "../../../components/Projects/Loading";
 import Modal from "../../../components/Projects/ModalConfirmation";
 import { Trash2, Pencil } from "lucide-react";
 import { myApi } from "../../../api/api";
+import { ProjectContext } from "../../../assets/Context/ProjectContext";
 
 const EditRewardProject = () => {
-  const location = useLocation();
-  const project = location.state.project;
+  const { projectData } = React.useContext(ProjectContext);
   const { token } = React.useContext(TokenContext);
   const [loading, setLoading] = React.useState(true);
   const [modal, setModal] = React.useState(false);
@@ -18,12 +17,12 @@ const EditRewardProject = () => {
     name: "",
     description: "",
     value: "",
-    id_project: project.id,
+    id_project: projectData.id,
   });
 
   const fetchRewards = async () => {
     try {
-      const response = await myApi.get(`/rewards/project/${project.id}`, {
+      const response = await myApi.get(`/rewards/project/${projectData.id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -33,7 +32,7 @@ const EditRewardProject = () => {
         setRewards(response.data.rewards);
         setLoading(false);
       }
-    } catch {
+    } catch(error) {
       console.log(error);
     }
   };

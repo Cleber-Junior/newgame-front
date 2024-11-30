@@ -16,6 +16,7 @@ const Home = () => {
       }
     } catch (error) {
       console.error("Erro ao buscar projetos", error);
+      setLoading(false);
     }
   };
 

@@ -1,37 +1,21 @@
 import React, { useEffect } from "react";
 import { TokenContext } from "../../../assets/Context/TokenContext";
 import { myApi } from "../../../api/api";
-import { useLocation } from "react-router-dom";
 import Loading from "../../../components/Projects/Loading";
 import Modal from "../../../components/Projects/ModalConfirmation";
+import { ProjectContext } from "../../../assets/Context/ProjectContext";
 
 const EditFinanceProject = () => {
-  const location = useLocation();
-  const project = location.state.project;
+  const { projectData, saveProject } = React.useContext(ProjectContext);
   const { token } = React.useContext(TokenContext);
   const [loading, setLoading] = React.useState(true);
-  const [formData, setFormData] = React.useState({});
+  const [formData, setFormData] = React.useState({
+    meta_value: projectData.meta_value,
+    end_date: projectData.end_date,
+  });
   const [modal, setModal] = React.useState(false);
   const [message, setMessage] = React.useState("");
 
-  const fetchProject = async () => {
-    try {
-      const response = await myApi.get(`/projects/${project.id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      if (response.status === 200) {
-        setFormData({
-          meta_value: response.data.project.meta_value,
-          end_date: response.data.project.end_date,
-        });
-        setLoading(false);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -43,7 +27,7 @@ const EditFinanceProject = () => {
 
     try {
       const response = await myApi.post(
-        `updateProject/${project.id}`,
+        `updateProject/${projectData.id}`,
         updateForm,
         {
           headers: {
@@ -56,6 +40,7 @@ const EditFinanceProject = () => {
         const data = response.data;
         setMessage(data.msg);
         setModal(true);
+        saveProject(data.project);
       }
     } catch (error) {
       console.log(error);
@@ -68,7 +53,9 @@ const EditFinanceProject = () => {
   };
 
   useEffect(() => {
-    fetchProject();
+    if (projectData) {
+      setLoading(false);
+    }
   }, []);
 
   if (loading) {

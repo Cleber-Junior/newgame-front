@@ -1,49 +1,33 @@
 import React, { useEffect } from "react";
-import MenuProjects from "../../../components/Projects/MenuProjects";
-import { useLocation } from "react-router-dom";
 import { TokenContext } from "../../../assets/Context/TokenContext";
+import { ProjectContext } from "../../../assets/Context/ProjectContext";
 import { myApi } from "../../../api/api";
 import Loading from "../../../components/Projects/Loading";
 import Modal from "../../../components/Projects/ModalConfirmation";
 
 const EditVisualProject = () => {
-  const location = useLocation();
-  const project = location.state.project;
+  const { projectData, saveProject } = React.useContext(ProjectContext);
   const { token } = React.useContext(TokenContext);
   const [urlImage, setUrlImage] = React.useState("");
   const [loading, setLoading] = React.useState(true);
-  const [formData, setFormData] = React.useState({});
+  const [formData, setFormData] = React.useState({
+    image: projectData.image,
+  });
   const [message, setMessage] = React.useState("");
   const [modal, setModal] = React.useState(false);
 
-  const fetchProject = async () => {
-    try {
-      const response = await myApi.get(`projects/${project.id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      if (response.status === 200) {
-        // console.log(response.data);
-        setUrlImage(response.data.url);
-        setLoading(false);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  console.log("Dentro da Vis", projectData);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const updateForm = new FormData(e.currentTarget);
+    const updateForm = new FormData();
+    updateForm.append("image", e.target.image.files[0]);
     updateForm.append("_method", "patch");
-
-    updateForm.forEach((value, key) => console.log(key, value));
 
     try {
       const response = await myApi.post(
-        `updateProject/${project.id}`,
+        `/updateProject/${projectData.id}`,
         updateForm,
         {
           headers: {
@@ -53,10 +37,26 @@ const EditVisualProject = () => {
       );
       if (response.status === 200) {
         console.log(response);
-        const data = response.data;
-        setUrlImage(data.url);
-        setMessage(data.msg);
-        setModal(true);
+        setMessage(response.data.msg);
+        setUrlImage(response.data.url);
+        console.group(response.data.project);
+        saveProject(response.data.project);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const fetchImage = async () => {
+    try {
+      const response = await myApi.get(`/project/image/${projectData.id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (response.status === 200) {
+        console.log("response Img link",response);
+        setUrlImage(response.data.url);
       }
     } catch (error) {
       console.log(error);
@@ -64,7 +64,10 @@ const EditVisualProject = () => {
   };
 
   useEffect(() => {
-    fetchProject();
+    if (projectData) {
+      setLoading(false);
+      fetchImage();
+    }
   }, []);
 
   if (loading) {

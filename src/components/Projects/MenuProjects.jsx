@@ -1,29 +1,27 @@
 import React, { useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { FecthContext } from "../../assets/Context/FetchContext";
-import Modal from "./ModalConfirmation";
-import { myApi } from "../../api/api";
 import { TokenContext } from "../../assets/Context/TokenContext";
+import { ProjectContext } from "../../assets/Context/ProjectContext";
+import { myApi } from "../../api/api";
+import Modal from "./ModalConfirmation";
 
 const MenuProjects = ({ project }) => {
   const location = useLocation();
+  const projectLocal = location.state.project;
+  const [urlImage, setUrlImage] = React.useState("");
+  const { projectData, saveProject } = React.useContext(ProjectContext);
   const { token } = React.useContext(TokenContext);
   const navigate = useNavigate();
-  const { projectData, fetchProjectData } = React.useContext(FecthContext);
   const [message, setMessage] = React.useState("");
   const [modal, setModal] = React.useState(false);
 
   const handleSubmit = async () => {
-    console.log(project);
-    const formData = {
-      ...project,
-      status: 1,
-    };
+    console.log("Form Enviado: ", projectData);
 
     try {
       const response = await myApi.post(
-        `finishProject/${project.id}`,
-        formData,
+        `finishProject/${projectData.id}`,
+        projectData,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -44,27 +42,45 @@ const MenuProjects = ({ project }) => {
     }
   };
 
+  const fetchImage = async () => {
+    try {
+      const response = await myApi.get(`/project/image/${projectData.id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (response.status === 200) {
+        console.log("response Img link",response);
+        setUrlImage(response.data.url);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
-    if (project.id) {
-      fetchProjectData(project.id);
+    if (projectLocal) {
+      saveProject(projectLocal);
+      fetchImage();
+      console.log(projectData);
     }
   }, []);
 
-  console.log(projectData);
+  console.log("Dados no projeto a ser enviado", projectData);
 
   return (
     <div className="flex flex-col min-h-screen overflow-hidden w-60 bg-header-bg text-white p-4">
       <div className="flex flex-col items-center mb-6">
         {modal && <Modal message={message} onClose={() => setModal(false)} />}
-        {projectData.url ? (
+        {urlImage ? (
           <>
             <img
-              src={projectData.url} // Substitua pela URL correta da imagem do projeto
+              src={urlImage} // Substitua pela URL correta da imagem do projeto
               alt="Projeto"
               className="w-full h-32 object-cover rounded-md mb-2"
             />
             <h2 className="text-sm font-semibold text-center">
-              {project.name}
+              {projectData.name}
             </h2>
           </>
         ) : (

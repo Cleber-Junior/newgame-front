@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { TokenContext } from "../../../assets/Context/TokenContext";
+import { ProjectContext } from "../../../assets/Context/ProjectContext";
 import { myApi } from "../../../api/api";
 import Loading from "../../../components/Projects/Loading";
 import Modal from "../../../components/Projects/ModalConfirmation";
@@ -8,6 +9,7 @@ import Modal from "../../../components/Projects/ModalConfirmation";
 const editNameProject = () => {
   let location = useLocation();
   let project = location.state.project;
+  const { saveProject } = React.useContext(ProjectContext);
   const { token } = React.useContext(TokenContext);
   const [formData, setFormData] = React.useState({});
   const [message, setMessage] = React.useState("");
@@ -33,10 +35,11 @@ const editNameProject = () => {
         }
       );
       if (response.status === 200) {
-        console.log(response);
+        console.log(response.data);
         const data = response.data;
         setMessage(data.msg);
         setModal(true);
+        saveProject(data.project);
       }
     } catch (error) {
       console.log(error);

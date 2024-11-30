@@ -1,8 +1,6 @@
 import React from "react";
 
 const Card = ({ data }) => {
-  console.log(data);
-
   const calculateDaysLeft = (endDate) => {
     const today = new Date(); // Data atual
     const targetDate = new Date(endDate); // Data final
@@ -12,20 +10,11 @@ const Card = ({ data }) => {
 
   return (
     <div className="bg-white shadow-lg rounded-lg overflow-hidden flex flex-col justify-between h-64 m-14">
-      {/* Área da Imagem */}
-      {data.image ? (
-        <img
-          src={data.image}
-          alt={data.name}
-          className="w-full h-40 object-cover"
-        />
-      ) : (
-        <div className="w-full h-40 flex items-center justify-center bg-gray-200 text-gray-500 text-center">
-          Nenhuma imagem selecionada
-        </div>
-      )}
-
-      {/* Área do Conteúdo */}
+      <img
+        src={data.image}
+        alt={data.name}
+        className="w-full max-h-[9rem] object-cover"
+      />
       <div className="p-4">
         <h2 className="text-base font-bold text-gray-800 mb-2">{data.name}</h2>
         <p className="text-sm text-gray-600 mb-4 line-clamp-2">

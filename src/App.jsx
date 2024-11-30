@@ -1,23 +1,22 @@
 import React from "react";
+import "./index.css";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { TokenStorage } from "./assets/Context/TokenContext";
+import { UserStorage } from "./assets/Context/UserContext";
+import { ProjectStorage } from "./assets/Context/ProjectContext";
 import Home from "./Screens/Home";
 import Login from "./Screens/Login/Login";
 import Register from "./Screens/Register/Register";
 import CreateProject from "./Screens/Project/createProject";
 import EditNameProject from "./Screens/Project/EditionProject/editNameProject";
-import { TokenStorage } from "./assets/Context/TokenContext";
 import ProtectRoute from "./assets/Context/protectContext";
-import { UserStorage } from "./assets/Context/UserContext";
 import UserProfile from "./Screens/UserProfile/UserProfile";
 import UserProjects from "./Screens/UserProfile/UserProjects";
 import Header from "./components/Header";
-// import { Background } from "./components/Background";
 import MenuProjects from "./components/Projects/MenuProjects";
-import "./index.css";
 import EditFinanceProject from "./Screens/Project/EditionProject/EditFinanceProject";
 import EditDescProject from "./Screens/Project/EditionProject/EditDescProject";
 import EditVisualProject from "./Screens/Project/EditionProject/editVisualProject";
-import { FetchProvider } from "./assets/Context/FetchContext";
 import EditRewardProject from "./Screens/Project/EditionProject/EditRewardProject";
 
 const ProjectEditLayout = ({ project, children }) => (
@@ -35,7 +34,7 @@ const App = () => {
   return (
     <TokenStorage>
       <UserStorage>
-        <FetchProvider>
+        <ProjectStorage>
           {!hideHeader && <Header />}
           <Routes>
             <Route>
@@ -93,7 +92,7 @@ const App = () => {
               }
             />
           </Routes>
-        </FetchProvider>
+        </ProjectStorage>
       </UserStorage>
     </TokenStorage>
   );
