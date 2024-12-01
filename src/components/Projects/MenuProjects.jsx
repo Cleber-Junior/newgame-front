@@ -4,10 +4,11 @@ import { TokenContext } from "../../assets/Context/TokenContext";
 import { ProjectContext } from "../../assets/Context/ProjectContext";
 import { myApi } from "../../api/api";
 import Modal from "./Modal/ModalConfirmation";
+import Placeholder from "../../assets/img/placeholder.svg";
 
 const MenuProjects = ({ project }) => {
   const location = useLocation();
-  const projectLocal = location.state.project;
+  const projectLocal = location.state?.project;
   const [urlImage, setUrlImage] = React.useState("");
   const { projectData, saveProject } = React.useContext(ProjectContext);
   const { token } = React.useContext(TokenContext);
@@ -15,13 +16,24 @@ const MenuProjects = ({ project }) => {
   const [message, setMessage] = React.useState("");
   const [modal, setModal] = React.useState(false);
 
+  console.log(projectData);
+
   const handleSubmit = async () => {
     console.log("Form Enviado: ", projectData);
+
+    const currentDate = new Date();
+    const formattedDate = currentDate.toISOString().split("T")[0];
+
+    const updateForm = {
+      ...projectData,
+      status: 1,
+      start_date: formattedDate,
+    };
 
     try {
       const response = await myApi.post(
         `finishProject/${projectData.id}`,
-        projectData,
+        updateForm,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -50,7 +62,7 @@ const MenuProjects = ({ project }) => {
         },
       });
       if (response.status === 200) {
-        console.log("response Img link",response);
+        console.log("response Img link", response);
         setUrlImage(response.data.url);
       }
     } catch (error) {
@@ -62,9 +74,11 @@ const MenuProjects = ({ project }) => {
     if (projectLocal) {
       saveProject(projectLocal);
       fetchImage();
-      console.log(projectData);
+      console.log("useEffect", projectData);
+    } else {
+      console.error("Project data is missing");
     }
-  }, []);
+  }, [projectLocal]);
 
   console.log("Dados no projeto a ser enviado", projectData);
 
@@ -85,7 +99,14 @@ const MenuProjects = ({ project }) => {
           </>
         ) : (
           <>
-            <h1>Nenhuma Imagem Selecionada</h1>
+            <img
+              src={Placeholder} // Substitua pela URL correta da imagem do projeto
+              alt="Projeto"
+              className="w-full h-32 object-cover rounded-md mb-2"
+            />
+            <h2 className="text-sm font-semibold text-center">
+              {projectData.name}
+            </h2>
           </>
         )}
       </div>

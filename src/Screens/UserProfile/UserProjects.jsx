@@ -9,6 +9,7 @@ const UserProjects = () => {
   const { user } = React.useContext(UserContext);
   const { token } = React.useContext(TokenContext);
   const [loading, setLoading] = React.useState(true);
+  const [urlImage, setUrlImage] = React.useState("");
   const [userProjects, setUserProjects] = React.useState([]);
 
   const fetchProjectsUser = async () => {
@@ -18,8 +19,9 @@ const UserProjects = () => {
       },
     });
     if (response.status === 200) {
-      setUserProjects(response.data.projects);
       setLoading(false);
+      setUserProjects(response.data.projects);
+      setUrlImage(response.data.url);
       console.log(response);
     }
   };
@@ -39,7 +41,7 @@ const UserProjects = () => {
       <h1 className="text-2xl mt-4 font-semibold text-center">Projetos Criados</h1>
       {userProjects ? (
         userProjects.map((project, index) => (
-          <EditCard key={index} data={project} />
+          <EditCard key={index} data={project} url={urlImage} />
         ))
       ) : (
         <p>Você ainda não possui projetos</p>

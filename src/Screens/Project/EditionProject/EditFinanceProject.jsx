@@ -16,7 +16,6 @@ const EditFinanceProject = () => {
   const [modal, setModal] = React.useState(false);
   const [message, setMessage] = React.useState("");
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 

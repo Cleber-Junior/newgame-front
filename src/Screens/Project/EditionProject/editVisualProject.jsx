@@ -4,6 +4,7 @@ import { ProjectContext } from "../../../assets/Context/ProjectContext";
 import { myApi } from "../../../api/api";
 import Loading from "../../../components/Projects/Loading";
 import Modal from "../../../components/Projects/Modal/ModalConfirmation";
+import Placeholder from "../../../assets/img/placeholder.svg";
 
 const EditVisualProject = () => {
   const { projectData, saveProject } = React.useContext(ProjectContext);
@@ -94,8 +95,12 @@ const EditVisualProject = () => {
             />
           ) : (
             <>
-              <h1>Nenhuma imagem Selecionada</h1>
-            </>
+            <img
+              src={Placeholder} // Substitua pela URL correta da imagem do projeto
+              alt="Projeto"
+              className="w-full h-full object-cover"
+            />
+          </>
           )}
         </div>
 
