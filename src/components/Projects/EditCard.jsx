@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Placeholder from "../../assets/img/placeholder.svg";
 
 const Card = ({ data, url }) => {
+  console.log(url);
   return (
     <div className="bg-white shadow-md rounded-lg p-4 flex flex-col justify-between w-full max-w-xs m-14">
       <div>

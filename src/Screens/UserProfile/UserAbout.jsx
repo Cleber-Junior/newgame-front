@@ -1,42 +1,18 @@
-import React, { useEffect } from "react";
-import { myApi } from "../../api/api";
+import React from "react";
 import { Link } from "react-router-dom";
+import { myApi } from "../../api/api";
 import { UserContext } from "../../assets/Context/UserContext";
 import { TokenContext } from "../../assets/Context/TokenContext";
-import EditCard from "../../components/Projects/EditCard";
-import Loading from "../../components/Projects/Loading";
 import background from "../../assets/img/profile_background.png";
 
-const UserProjects = () => {
+const UserAbout = () => {
   const { user } = React.useContext(UserContext);
   const { token } = React.useContext(TokenContext);
-  const [loading, setLoading] = React.useState(true);
-  const [urlImage, setUrlImage] = React.useState("");
-  const [userProjects, setUserProjects] = React.useState([]);
 
-  const fetchProjectsUser = async () => {
-    const response = await myApi.get(`user/projects/${user.id}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    if (response.status === 200) {
-      setLoading(false);
-      setUserProjects(response.data.projects);
-      setUrlImage(response.data.url);
-      console.log(response);
-    }
-  };
-
-  useEffect(() => {
-    fetchProjectsUser();
-  }, []);
-
-  console.log(userProjects);
-  console.log(urlImage);
+  console.log("user", user);
 
   return (
-    <div>
+    <div class="min-h-screen bg-gray-100">
       <div class="bg-green-700 h-48 relative">
         <div class="absolute inset-0 bg-gradient-to-r from-green-700 to-green-600 opacity-80">
           <img
@@ -69,7 +45,7 @@ const UserProjects = () => {
         </a>
         <Link
           to={"../projects"}
-          class="text-green-600 border-green-600 font-bold px-4 py-2 border-b-4"
+          class="text-gray-600 hover:text-green-600 px-4 py-2 border-b-4 border-transparent hover:border-green-600"
         >
           Criados
         </Link>
@@ -79,29 +55,26 @@ const UserProjects = () => {
         >
           Perfil Público
         </a>
-        <Link
-          to={"../about"}
-          class="text-gray-600 px-4 py-2 border-b-4 hover:border-green-600 border-transparent hover:text-green-600"
+        <a
+          href="#sobre"
+          class="text-green-600 px-4 py-2 border-b-4 border-green-600 font-bold"
         >
           Sobre
-        </Link>
+        </a>
       </nav>
-      <h1 className="text-2xl mt-4 font-semibold text-center">
-        Projetos Criados
-      </h1>
-      {loading ? (
-        <Loading />
-      ) : userProjects ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {userProjects.map((project, index) => (
-            <EditCard key={index} data={project} url={urlImage} />
-          ))}
-        </div>
-      ) : (
-        <p>Você ainda não possui projetos</p>
-      )}
+
+      <div class="px-8 py-6">
+        <h2 class="text-xl font-bold text-gray-800 mb-4">Descrição</h2>
+        <p class="text-gray-600 leading-7">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer a
+          volutpat augue. Maecenas laoreet, neque at hendrerit lobortis, libero
+          dolor tristique ex, sit amet aliquet felis dolor id neque. Lorem ipsum
+          dolor sit amet, consectetur adipiscing elit. Integer a volutpat augue.
+          Maecenas laoreet, neque at hendrerit lobortis.
+        </p>
+      </div>
     </div>
   );
 };
 
-export default UserProjects;
+export default UserAbout;

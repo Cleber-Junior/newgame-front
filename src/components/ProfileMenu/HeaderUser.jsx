@@ -37,7 +37,7 @@ const HeaderUser = ({ dataUser }) => {
 
   return (
     <div onClick={handleClickModal} className="relative">
-      <div className="flex items-center space-x-3 cursor-pointer">
+      <div className="flex items-center space-x-3 cursor-pointer z-auto">
         <div className="font-semibold text-white uppercase letter">
           {user.username}
         </div>
@@ -53,10 +53,10 @@ const HeaderUser = ({ dataUser }) => {
       {open && (
         <div
           ref={selectRef}
-          className="absolute right-0 mt-2 w-60 px-5 py-3 bg-white text-black rounded-lg shadow border border-transparent"
+          className="absolute right-0 mt-2 w-60 px-5 py-3 bg-white text-black rounded-lg shadow border border-transparent z-50"
         >
           <ul className="space-y-3">
-            <Link to={"./user/profile"}>
+            <Link to={"./user/about"}>
               <li className="font-medium">
                 <a
                   href="#"

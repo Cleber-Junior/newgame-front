@@ -10,7 +10,7 @@ import Register from "./Screens/Register/Register";
 import CreateProject from "./Screens/Project/createProject";
 import EditNameProject from "./Screens/Project/EditionProject/editNameProject";
 import ProtectRoute from "./assets/Context/protectContext";
-import UserProfile from "./Screens/UserProfile/UserProfile";
+import UserAbout from "./Screens/UserProfile/UserAbout";
 import UserProjects from "./Screens/UserProfile/UserProjects";
 import Header from "./components/Header";
 import MenuProjects from "./components/Projects/MenuProjects";
@@ -85,8 +85,9 @@ const App = () => {
               element={
                 <ProtectRoute>
                   <Routes>
-                    <Route path="profile" element={<UserProfile />} />
+                    <Route path="about" element={<UserAbout />} />
                     <Route path="projects" element={<UserProjects />} />
+                    
                   </Routes>
                 </ProtectRoute>
               }
