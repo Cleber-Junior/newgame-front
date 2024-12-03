@@ -12,6 +12,8 @@ import EditNameProject from "./Screens/Project/EditionProject/editNameProject";
 import ProtectRoute from "./assets/Context/protectContext";
 import UserAbout from "./Screens/UserProfile/UserAbout";
 import UserProjects from "./Screens/UserProfile/UserProjects";
+import UserPublicProfile from "./Screens/UserProfile/UserPublicProfile";
+import UserSupported from "./Screens/UserProfile/UserSupported";
 import Header from "./components/Header";
 import MenuProjects from "./components/Projects/MenuProjects";
 import EditFinanceProject from "./Screens/Project/EditionProject/EditFinanceProject";
@@ -90,6 +92,8 @@ const App = () => {
                     <Routes>
                       <Route path="about" element={<UserAbout />} />
                       <Route path="projects" element={<UserProjects />} />
+                      <Route path="public" element={<UserPublicProfile />} />
+                      <Route path="supported" element={<UserSupported />} />
                     </Routes>
                   </ProtectRoute>
                 }
