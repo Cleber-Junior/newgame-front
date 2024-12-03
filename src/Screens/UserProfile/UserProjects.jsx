@@ -6,6 +6,8 @@ import { TokenContext } from "../../assets/Context/TokenContext";
 import EditCard from "../../components/Projects/EditCard";
 import Loading from "../../components/Projects/Loading";
 import background from "../../assets/img/profile_background.png";
+import PlaceholderIcon from "../../assets/img/UserIcon.jpg"
+
 
 const UserProjects = () => {
   const { user } = React.useContext(UserContext);
@@ -47,11 +49,19 @@ const UserProjects = () => {
         </div>
         <div class="relative flex justify-center items-center">
           <div class="absolute top-12">
-            <img
-              src="https://via.placeholder.com/100"
-              alt="Foto do Usuário"
-              class="rounded-full border-4 border-white shadow-lg"
-            />
+            {user.image === null ? (
+              <img
+                src={PlaceholderIcon}
+                alt="Foto do Usuário"
+                class="rounded-full border-4 border-white shadow-lg w-28"
+              />
+            ) : (
+              <img
+                src={user.image}
+                alt="Foto do Usuário"
+                class="rounded-full border-4 border-white shadow-lg"
+              />
+            )}
           </div>
         </div>
       </div>
@@ -92,7 +102,7 @@ const UserProjects = () => {
       {loading ? (
         <Loading />
       ) : userProjects ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
           {userProjects.map((project, index) => (
             <EditCard key={index} data={project} url={urlImage} />
           ))}

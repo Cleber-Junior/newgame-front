@@ -2,12 +2,14 @@ import React, { useEffect, useState } from "react";
 import { UserContext } from "../../assets/Context/UserContext";
 import { TokenContext } from "../../assets/Context/TokenContext";
 import { Link } from "react-router-dom";
+import PlaceholderUser from "../../assets/img/UserIcon.jpg";
 
 const HeaderUser = ({ dataUser }) => {
   const { saveUser } = React.useContext(UserContext);
   const { saveToken } = React.useContext(TokenContext);
   const selectRef = React.useRef();
   const [open, setOpen] = useState(false);
+
 
   const user = dataUser;
   console.log("user", user);
@@ -42,11 +44,20 @@ const HeaderUser = ({ dataUser }) => {
           {user.username}
         </div>
         <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-gray-900">
-          <img
-            src="https://media.istockphoto.com/id/1154370446/pt/foto/funny-raccoon-in-green-sunglasses-showing-a-rock-gesture-isolated-on-white-background.jpg?s=2048x2048&w=is&k=20&c=Ho4ooTrqOEC9AiCp9qmHU4fjqpaxt_AI8gv19foXDr8="
+          {user.image === null ? (
+            <img
+            src={PlaceholderUser}
             alt="User Avatar"
             className="w-full h-full object-cover"
           />
+          ) : (
+            <img
+            src={user.image}
+            alt="User Avatar"
+            className="w-full h-full object-cover"
+          />
+          )}
+          
         </div>
       </div>
 

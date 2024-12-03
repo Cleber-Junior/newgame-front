@@ -34,66 +34,68 @@ const App = () => {
   return (
     <TokenStorage>
       <UserStorage>
-        <ProjectStorage>
-          {!hideHeader && <Header />}
-          <Routes>
-            <Route>
-              <Route path="login" element={<Login />} />
-              <Route path="register" element={<Register />} />
-            </Route>
-          </Routes>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route
-              path="project/*"
-              element={
-                <ProtectRoute>
-                  <Routes>
-                    <Route path="create" element={<CreateProject />} />
-                    <Route
-                      path="edit/*"
-                      element={
-                        <ProjectEditLayout project={location.state?.project}>
-                          <Routes>
-                            <Route path="name" element={<EditNameProject />} />
-                            <Route
-                              path="finance"
-                              element={<EditFinanceProject />}
-                            />
-                            <Route
-                              path="description"
-                              element={<EditDescProject />}
-                            />
-                            <Route
-                              path="apperance"
-                              element={<EditVisualProject />}
-                            />
-                            <Route
-                              path="rewards"
-                              element={<EditRewardProject />}
-                            />
-                          </Routes>
-                        </ProjectEditLayout>
-                      }
-                    />
-                  </Routes>
-                </ProtectRoute>
-              }
-            />
-            <Route
-              path="user/*"
-              element={
-                <ProtectRoute>
-                  <Routes>
-                    <Route path="about" element={<UserAbout />} />
-                    <Route path="projects" element={<UserProjects />} />
-                    
-                  </Routes>
-                </ProtectRoute>
-              }
-            />
-          </Routes>
-        </ProjectStorage>
+          <ProjectStorage>
+            {!hideHeader && <Header />}
+            <Routes>
+              <Route>
+                <Route path="login" element={<Login />} />
+                <Route path="register" element={<Register />} />
+              </Route>
+            </Routes>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route
+                path="project/*"
+                element={
+                  <ProtectRoute>
+                    <Routes>
+                      <Route path="create" element={<CreateProject />} />
+                      <Route
+                        path="edit/*"
+                        element={
+                          <ProjectEditLayout project={location.state?.project}>
+                            <Routes>
+                              <Route
+                                path="name"
+                                element={<EditNameProject />}
+                              />
+                              <Route
+                                path="finance"
+                                element={<EditFinanceProject />}
+                              />
+                              <Route
+                                path="description"
+                                element={<EditDescProject />}
+                              />
+                              <Route
+                                path="apperance"
+                                element={<EditVisualProject />}
+                              />
+                              <Route
+                                path="rewards"
+                                element={<EditRewardProject />}
+                              />
+                            </Routes>
+                          </ProjectEditLayout>
+                        }
+                      />
+                    </Routes>
+                  </ProtectRoute>
+                }
+              />
+              <Route
+                path="user/*"
+                element={
+                  <ProtectRoute>
+                    <Routes>
+                      <Route path="about" element={<UserAbout />} />
+                      <Route path="projects" element={<UserProjects />} />
+                    </Routes>
+                  </ProtectRoute>
+                }
+              />
+            </Routes>
+          </ProjectStorage>
       </UserStorage>
     </TokenStorage>
   );

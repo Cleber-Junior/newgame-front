@@ -16,8 +16,6 @@ const MenuProjects = ({ project }) => {
   const [message, setMessage] = React.useState("");
   const [modal, setModal] = React.useState(false);
 
-  console.log(projectData);
-
   const handleSubmit = async () => {
     console.log("Form Enviado: ", projectData);
 
@@ -80,7 +78,9 @@ const MenuProjects = ({ project }) => {
     }
   }, [projectLocal]);
 
-  console.log("Dados no projeto a ser enviado", projectData);
+  if (!projectData) {
+    <></>;
+  }
 
   return (
     <div className="flex flex-col min-h-screen overflow-hidden w-60 bg-header-bg text-white p-4">

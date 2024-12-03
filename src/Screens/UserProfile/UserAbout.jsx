@@ -4,6 +4,7 @@ import { myApi } from "../../api/api";
 import { UserContext } from "../../assets/Context/UserContext";
 import { TokenContext } from "../../assets/Context/TokenContext";
 import background from "../../assets/img/profile_background.png";
+import PlaceholderIcon from "../../assets/img/UserIcon.jpg"
 
 const UserAbout = () => {
   const { user } = React.useContext(UserContext);
@@ -23,11 +24,20 @@ const UserAbout = () => {
         </div>
         <div class="relative flex justify-center items-center">
           <div class="absolute top-12">
+            {user.image === null ? (
             <img
-              src="https://via.placeholder.com/100"
+            src={PlaceholderIcon}
+            alt="Foto do Usuário"
+            class="rounded-full border-4 border-white shadow-lg w-28"
+          />
+            ) : (
+              <img
+              src={user.image}
               alt="Foto do Usuário"
               class="rounded-full border-4 border-white shadow-lg"
             />
+            )}
+
           </div>
         </div>
       </div>
