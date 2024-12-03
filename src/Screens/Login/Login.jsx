@@ -5,13 +5,16 @@ import { UserContext } from "../../assets/Context/UserContext.jsx";
 import img from "../../Img/icon_dark.png";
 import { myApi } from "../../api/api.js";
 import Modal from "../../components/Projects/Modal/ModalConfirmation.jsx";
+import ErrorModal from "../../components/Projects/Modal/ErrorModal.jsx";
 
 const Login = () => {
   const navigate = useNavigate();
   const { saveToken } = useContext(TokenContext);
   const { saveUser } = useContext(UserContext);
   const [message, setMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   const [modal, setModal] = useState(false);
+  const [errorModal, setErrorModal] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -47,6 +50,8 @@ const Login = () => {
       }
     } catch (error) {
       console.error("Erro ao fazer login", error);
+      setErrorMessage(error.response.data.message);
+      setErrorModal(true);
     }
   };
 
@@ -57,6 +62,12 @@ const Login = () => {
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-200 relative overflow-hidden bg-transparent bg-fundo ">
       {modal && <Modal message={message} onClose={() => setModal(false)} />}
+      {errorModal && (
+        <ErrorModal
+          message={errorMessage}
+          onClose={() => setErrorModal(false)}
+        />
+      )}
       <div className="flex flex-col items-center mb-6 bg-white border-solid border-black p-6 border-2 rounded-lg">
         <img src={img} alt="Logo" className="w-25 h-24 mb-2" />{" "}
         {/* Substitua com a URL do logo */}
@@ -69,9 +80,10 @@ const Login = () => {
               onChange={handleChange}
               name="email"
               placeholder="Digite seu E-mail"
-              className="w-96 h-8 px-3 py-2 border border-green-500 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 bg-inside-input"
+              className="w-96 h-8 px-3 py-2 border border-green-500 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 bg-inside-input font-geo"
             />
           </div>
+
           <div>
             <label className="block text-black font-geo text-xl">Senha:</label>
             <input
@@ -79,7 +91,7 @@ const Login = () => {
               name="password"
               onChange={handleChange}
               placeholder="Digite sua Senha"
-              className="w-96 h-8 px-3 py-4 mb-4 border border-green-500 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 bg-inside-input"
+              className="w-96 h-8 px-3 py-4 border border-green-500 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 bg-inside-input font-geo"
             />
           </div>
 

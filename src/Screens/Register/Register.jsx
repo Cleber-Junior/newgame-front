@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { myApi } from "../../api/api";
 import Modal from "../../components/Projects/Modal/ModalConfirmation";
+import { Timer } from "lucide-react";
 
 const Register = () => {
   const [message, setMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState({});
   const [modal, setModal] = useState(false);
+  const [errorModal, setErrorModal] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     username: "",
@@ -16,6 +19,7 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     try {
       const response = await myApi.post("/register", formData);
       if (response.status === 201) {
@@ -30,6 +34,13 @@ const Register = () => {
       }
     } catch (error) {
       console.error("Erro ao fazer cadastro", error);
+      const errors = error.response.data.errors;
+      setErrorMessage({
+        name: errors.name ? errors.name[0] : "",
+        username: errors.username ? errors.username[0] : "",
+        email: errors.email ? errors.email[0] : "",
+        password: errors.password ? errors.password[0] : "",
+      });
     }
   };
 
@@ -39,6 +50,13 @@ const Register = () => {
       [e.target.name]: e.target.value,
     });
   };
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setErrorMessage({});
+      clearTimeout(timer);
+    }, 4000);
+  });
 
   return (
     <div className="flex items-center justify-center min-h-screen relative overflow-hidden bg-fundo">
@@ -60,9 +78,14 @@ const Register = () => {
               name="name"
               value={formData.name}
               onChange={handleChange}
-              required
-              className="w-96 h-8 px-3 py-4 mb-4 border border-green-500 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 bg-inside-input"
+              placeholder="Digite seu Nome"
+              className="w-96 h-8 px-3 py-4 border border-green-500 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 bg-inside-input"
             />
+            {errorMessage.name && (
+              <p className="text-red-600 text-xs font-outfit">
+                {errorMessage.name}
+              </p>
+            )}
           </div>
 
           <div className="mb-4">
@@ -74,9 +97,14 @@ const Register = () => {
               name="username"
               value={formData.username}
               onChange={handleChange}
-              required
-              className="w-96 h-8 px-3 py-4 mb-4 border border-green-500 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 bg-inside-input"
+              placeholder="Digite seu Username"
+              className="w-96 h-8 px-3 py-4 border border-green-500 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 bg-inside-input"
             />
+            {errorMessage.username && (
+              <p className="text-red-600 text-xs font-outfit">
+                {errorMessage.username}
+              </p>
+            )}
           </div>
 
           <div className=" mb-4">
@@ -88,9 +116,14 @@ const Register = () => {
               name="email"
               value={formData.email}
               onChange={handleChange}
-              required
-              className="w-96 h-8 px-3 py-4 mb-4 border border-green-500 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 bg-inside-input"
+              placeholder="Digite seu E-mail"
+              className="w-96 h-8 px-3 py-4 border border-green-500 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 bg-inside-input"
             />
+            {errorMessage.email && (
+              <p className="text-red-600 text-xs font-outfit">
+                {errorMessage.email}
+              </p>
+            )}
           </div>
 
           <div className=" mb-4">
@@ -102,9 +135,14 @@ const Register = () => {
               name="password"
               value={formData.password}
               onChange={handleChange}
-              required
-              className="w-96 h-8 px-3 py-4 mb-4 border border-green-500 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 bg-inside-input"
+              placeholder="Digite sua Senha"
+              className="w-96 h-8 px-3 py-4 border border-green-500 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 bg-inside-input"
             />
+            {errorMessage.password && (
+              <p className="text-red-600 text-xs font-outfit">
+                {errorMessage.password}
+              </p>
+            )}
           </div>
 
           <button
