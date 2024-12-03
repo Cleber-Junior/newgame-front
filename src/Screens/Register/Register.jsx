@@ -43,7 +43,7 @@ const Register = () => {
   return (
     <div className="flex items-center justify-center min-h-screen relative overflow-hidden bg-fundo">
       {modal && <Modal message={message} onClose={() => setModal(false)} />}
-      <div className="flex flex-col items-center p-6 mx-auto w-[550px]">
+      <div className="flex flex-col items-center p-6 mx-auto w-auto bg-white border-solid border-black border-2 rounded-lg">
         <h1 className="text-green-600 text-5xl font-geo mb-4">Cadastro</h1>
         {message && <p className="text-green-600">{message}</p>}
 
@@ -51,7 +51,7 @@ const Register = () => {
           onSubmit={handleSubmit}
           className="w-full flex flex-col items-center mb-2 font-geo"
         >
-          <div className="w-3/4 mb-4">
+          <div className="mb-4">
             <label htmlFor="name" className="block text-black text-xl">
               Nome:
             </label>
@@ -65,7 +65,7 @@ const Register = () => {
             />
           </div>
 
-          <div className="w-3/4 mb-4">
+          <div className="mb-4">
             <label htmlFor="username" className="block text-black text-xl">
               Username:
             </label>
@@ -79,8 +79,8 @@ const Register = () => {
             />
           </div>
 
-          <div className="w-3/4 mb-4">
-            <label htmlFor="email" className="bloc text-black text-xl">
+          <div className=" mb-4">
+            <label htmlFor="email" className="block text-black text-xl">
               Email:
             </label>
             <input
@@ -93,7 +93,7 @@ const Register = () => {
             />
           </div>
 
-          <div className="w-3/4 mb-4">
+          <div className=" mb-4">
             <label htmlFor="password" className="block text-black text-xl">
               Senha:
             </label>

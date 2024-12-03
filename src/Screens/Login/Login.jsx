@@ -57,7 +57,7 @@ const Login = () => {
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-200 relative overflow-hidden bg-transparent bg-fundo ">
       {modal && <Modal message={message} onClose={() => setModal(false)} />}
-      <div className="flex flex-col items-center mb-6">
+      <div className="flex flex-col items-center mb-6 bg-white border-solid border-black p-6 border-2 rounded-lg">
         <img src={img} alt="Logo" className="w-25 h-24 mb-2" />{" "}
         {/* Substitua com a URL do logo */}
         <h1 className="text-green-600 text-5xl font-geo">New Game</h1>
