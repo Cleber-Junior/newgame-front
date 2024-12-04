@@ -10,7 +10,6 @@ const HeaderUser = ({ dataUser }) => {
   const selectRef = React.useRef();
   const [open, setOpen] = useState(false);
 
-
   const user = dataUser;
   console.log("user", user);
 
@@ -46,18 +45,17 @@ const HeaderUser = ({ dataUser }) => {
         <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-gray-900">
           {user.image === null ? (
             <img
-            src={PlaceholderUser}
-            alt="User Avatar"
-            className="w-full h-full object-cover"
-          />
+              src={PlaceholderUser}
+              alt="User Avatar"
+              className="w-full h-full object-cover"
+            />
           ) : (
             <img
-            src={user.image}
-            alt="User Avatar"
-            className="w-full h-full object-cover"
-          />
+              src={user.image}
+              alt="User Avatar"
+              className="w-full h-full object-cover"
+            />
           )}
-          
         </div>
       </div>
 
@@ -67,13 +65,13 @@ const HeaderUser = ({ dataUser }) => {
           className="absolute right-0 mt-2 w-60 px-5 py-3 bg-white text-black rounded-lg shadow border border-transparent z-50"
         >
           <ul className="space-y-3">
-            <Link to={"./user/about"}>
+            <Link to={"./user/supported"}>
               <li className="font-medium">
                 <a
-                  href="#"
+                  href=""
                   className="flex items-center transition-colors duration-200 border-r-4 border-transparent hover:border-green-500"
                 >
-                  Perfil
+                  Projetos Apoiados
                 </a>
               </li>
             </Link>
@@ -84,6 +82,26 @@ const HeaderUser = ({ dataUser }) => {
                   className="flex items-center transition-colors duration-200 border-r-4 border-transparent hover:border-green-500"
                 >
                   Meus Projetos
+                </a>
+              </li>
+            </Link>
+            <Link to={"./user/about"}>
+              <li className="font-medium">
+                <a
+                  href="#"
+                  className="flex items-center transition-colors duration-200 border-r-4 border-transparent hover:border-green-500"
+                >
+                  Perfil
+                </a>
+              </li>
+            </Link>
+            <Link to={"./user/about"}>
+              <li className="font-medium">
+                <a
+                  href=""
+                  className="flex items-center transition-colors duration-200 border-r-4 border-transparent hover:border-green-500"
+                >
+                  Sobre
                 </a>
               </li>
             </Link>
