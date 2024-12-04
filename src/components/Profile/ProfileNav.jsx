@@ -40,7 +40,7 @@ const ProfileNav = ({ children }) => {
       </div>
 
       <div class="mt-16 text-center">
-        <h1 class="text-2xl font-bold text-gray-800">{user.name}</h1>
+        <h1 class="text-2xl font-bold text-gray-800">{user.username}</h1>
       </div>
 
       <nav class="mt-4 flex justify-center space-x-8 border-b border-gray-300">
