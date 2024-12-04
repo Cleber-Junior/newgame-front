@@ -12,6 +12,7 @@ const UserSupported = () => {
       <h1 className="text-2xl mt-4 font-semibold text-center">
         Projetos Apoiados
       </h1>
+      <p className="text-center mt-5">Você ainda não apoiou nenhum projeto</p>
     </ProfileNav>
   );
 };
