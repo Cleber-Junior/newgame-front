@@ -1,4 +1,6 @@
 import React from "react";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.bubble.css";
 
 const Card = ({ data }) => {
   const calculateDaysLeft = (endDate) => {
@@ -9,7 +11,7 @@ const Card = ({ data }) => {
   };
 
   return (
-    <div className="bg-white shadow-lg rounded-lg overflow-hidden flex flex-col justify-between h-64 m-14">
+    <div className="bg-white shadow-lg rounded-lg overflow-hidden flex flex-col justify-center h-80 m-14">
       <img
         src={data.image}
         alt={data.name}
@@ -17,9 +19,13 @@ const Card = ({ data }) => {
       />
       <div className="p-4">
         <h2 className="text-base font-bold text-gray-800 mb-2">{data.name}</h2>
-        <p className="text-sm text-gray-600 mb-4 line-clamp-2">
-          {data.description}
-        </p>
+        <ReactQuill
+          className="text-sm text-gray-600 mb-4 line-clamp-2"
+          theme="bubble"
+          readOnly={true}
+          value={data.description}
+          style={{ height: "50px" }}
+        />
         <div className="flex items-center justify-between text-sm">
           <span className="text-gray-500">
             {calculateDaysLeft(data.end_date)}{" "}

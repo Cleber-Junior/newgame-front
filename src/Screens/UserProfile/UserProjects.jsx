@@ -41,7 +41,7 @@ const UserProjects = () => {
       </h1>
       {loading ? (
         <Loading />
-      ) : userProjects ? (
+      ) : (
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
           {userProjects.map((project, index) => {
             const imageUrl = urlImage[index];
@@ -54,8 +54,6 @@ const UserProjects = () => {
             );
           })}
         </div>
-      ) : (
-        <p>Você ainda não possui projetos</p>
       )}
     </ProfileNav>
   );
