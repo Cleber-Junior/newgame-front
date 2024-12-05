@@ -68,7 +68,7 @@ const MenuProjects = () => {
 
   useEffect(() => {
       fetchImage();
-  }, []);
+  }, [projectData]);
 
   console.log("ProjectData", projectData);
 
