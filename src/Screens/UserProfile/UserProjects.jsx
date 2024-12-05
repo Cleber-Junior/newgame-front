@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { myApi } from "../../api/api";
-import { Link } from "react-router-dom";
 import { UserContext } from "../../assets/Context/UserContext";
 import { TokenContext } from "../../assets/Context/TokenContext";
 import EditCard from "../../components/Projects/EditCard";
+import Placeholder from "../../assets/img/placeholder.svg";
 import Loading from "../../components/Projects/Loading";
 import ProfileNav from "../../components/Profile/ProfileNav";
 
@@ -28,7 +28,7 @@ const UserProjects = () => {
     }
   };
 
-  console.log(urlImage)
+  console.log(urlImage);
 
   useEffect(() => {
     fetchProjectsUser();
@@ -43,9 +43,16 @@ const UserProjects = () => {
         <Loading />
       ) : userProjects ? (
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
-          {userProjects.map((project, index) => (
-            <EditCard key={index} data={project} url={urlImage} />
-          ))}
+          {userProjects.map((project, index) => {
+            const imageUrl = urlImage[index];
+            return (
+              <EditCard
+                key={index}
+                data={project}
+                url={imageUrl || Placeholder}
+              />
+            );
+          })}
         </div>
       ) : (
         <p>Você ainda não possui projetos</p>

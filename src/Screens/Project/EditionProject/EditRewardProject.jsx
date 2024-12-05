@@ -17,7 +17,6 @@ const EditRewardProject = () => {
     name: "",
     description: "",
     value: "",
-    id_project: projectData.id,
   });
 
   const fetchRewards = async () => {
@@ -32,15 +31,21 @@ const EditRewardProject = () => {
         setRewards(response.data.rewards);
         setLoading(false);
       }
-    } catch(error) {
+    } catch (error) {
       console.log(error);
     }
   };
 
   const handleSubmitReward = async (e) => {
     e.preventDefault();
+
+    const updateForm = {
+      ...formData,
+      id_project: projectData.id,
+    };
+
     try {
-      const response = await myApi.post("/rewards", formData, {
+      const response = await myApi.post("/rewards", updateForm, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -51,12 +56,7 @@ const EditRewardProject = () => {
         const data = response.data;
         setMessage(data.msg);
         setModal(true);
-        setFormData({
-          name: "",
-          description: "",
-          value: "",
-          id_project: project.id,
-        });
+        setFormData({ name: "", description: "", value: "" });
       }
     } catch (error) {
       console.log(error);
@@ -123,6 +123,7 @@ const EditRewardProject = () => {
               placeholder="Título da recompensa"
               className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-green-500"
               onChange={handleChange}
+              value={formData.name}
             />
           </div>
 
@@ -134,6 +135,7 @@ const EditRewardProject = () => {
               placeholder="R$"
               className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-green-500"
               onChange={handleChange}
+              value={formData.value}
             />
           </div>
 
@@ -145,6 +147,7 @@ const EditRewardProject = () => {
               className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-green-500"
               rows="4"
               onChange={handleChange}
+              value={formData.description}
             ></textarea>
           </div>
 
