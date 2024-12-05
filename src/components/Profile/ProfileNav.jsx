@@ -64,16 +64,18 @@ const ProfileNav = ({ children }) => {
         >
           Criados
         </Link>
-        <a
-          href={"../../user/public"}
-          className={`text-gray-600 hover:text-green-600 px-4 py-2 border-b-4 ${
-            isActive("/user/public")
-              ? "border-green-600 text-green-600 font-bold"
-              : "border-transparent"
-          }`}
-        >
-          Perfil Público
-        </a>
+        <Link>
+          <a
+            href={"../../user/public"}
+            className={`text-gray-600 hover:text-green-600 px-4 py-2 border-b-4 ${
+              isActive("/user/public")
+                ? "border-green-600 text-green-600 font-bold"
+                : "border-transparent"
+            }`}
+          >
+            Perfil Público
+          </a>
+        </Link>
         <Link
           to={"../../user/about"}
           className={`text-gray-600 hover:text-green-600 px-4 py-2 border-b-4 ${

@@ -1,14 +1,11 @@
 import React from "react";
 import { UserContext } from "../../assets/Context/UserContext";
-import { TokenContext } from "../../assets/Context/TokenContext";
 import ProfileNav from "../../components/Profile/ProfileNav";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.bubble.css";
 
 const UserAbout = () => {
   const { user } = React.useContext(UserContext);
-  const { token } = React.useContext(TokenContext);
-
   console.log("user", user);
 
   return (
