@@ -1,13 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Placeholder from "../../assets/img/placeholder.svg";
+import {ProjectContext} from "../../assets/Context/ProjectContext";
 
 const Card = ({ data, url }) => {
-  console.log(url);
+  console.log(data);
+
+  const { saveProject } = React.useContext(ProjectContext);
+
   return (
     <div className="bg-white shadow-md rounded-lg p-4 flex flex-col justify-evenly w-full max-w-xs m-14">
       <div>
-        {url === null ? (
+        {url ? (
           <img
             src={url}
             alt={data.name}
@@ -26,8 +30,10 @@ const Card = ({ data, url }) => {
         {data.status !== 1 ? (
           <Link
             to="../../project/edit/name"
-            state={{ project: data }}
             className="mt-auto"
+            onClick={() => {
+              saveProject(data);
+            }}
           >
             <button className="w-full bg-green-500 text-white py-2 rounded-md hover:bg-green-600 transition duration-200">
               Editar Projeto

@@ -1,14 +1,12 @@
 import React, { useEffect } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { TokenContext } from "../../assets/Context/TokenContext";
 import { ProjectContext } from "../../assets/Context/ProjectContext";
 import { myApi } from "../../api/api";
 import Modal from "./Modal/ModalConfirmation";
 import Placeholder from "../../assets/img/placeholder.svg";
 
-const MenuProjects = ({ project }) => {
-  const location = useLocation();
-  const projectLocal = location.state?.project;
+const MenuProjects = () => {
   const [urlImage, setUrlImage] = React.useState("");
   const { projectData, saveProject } = React.useContext(ProjectContext);
   const { token } = React.useContext(TokenContext);
@@ -69,14 +67,10 @@ const MenuProjects = ({ project }) => {
   };
 
   useEffect(() => {
-    if (projectLocal) {
-      saveProject(projectLocal);
       fetchImage();
-      console.log("useEffect", projectData);
-    } else {
-      console.error("Project data is missing");
-    }
-  }, [projectLocal]);
+  }, []);
+
+  console.log("ProjectData", projectData);
 
   if (!projectData) {
     <></>;
@@ -113,7 +107,6 @@ const MenuProjects = ({ project }) => {
 
       <Link
         to="../edit/name"
-        state={{ project: project }}
         className={`py-3 px-4 mb-1 ${
           location.pathname === "/project/edit/name"
             ? "bg-green-700"
@@ -124,7 +117,6 @@ const MenuProjects = ({ project }) => {
       </Link>
       <Link
         to="../edit/finance"
-        state={{ project: project }}
         className={`py-3 px-4 mb-1 ${
           location.pathname === "/project/edit/finance"
             ? "bg-green-700"
@@ -135,7 +127,6 @@ const MenuProjects = ({ project }) => {
       </Link>
       <Link
         to="../edit/description"
-        state={{ project: project }}
         className={`py-3 px-4 mb-1 ${
           location.pathname === "/project/edit/description"
             ? "bg-green-700"
@@ -146,14 +137,12 @@ const MenuProjects = ({ project }) => {
       </Link>
       <Link
         to=""
-        state={{ project: project }}
         className="py-3 px-4 mb-1 bg-gray-800 hover:bg-gray-700 transition rounded"
       >
         Orçamento
       </Link>
       <Link
         to="../edit/apperance"
-        state={{ project: project }}
         className={`py-3 px-4 mb-1 ${
           location.pathname === "/project/edit/apperance"
             ? "bg-green-700"
@@ -164,7 +153,6 @@ const MenuProjects = ({ project }) => {
       </Link>
       <Link
         to="../edit/rewards"
-        state={{ project: project }}
         className={`py-3 px-4 mb-1 ${
           location.pathname === "/project/edit/rewards"
             ? "bg-green-700"
@@ -175,7 +163,6 @@ const MenuProjects = ({ project }) => {
       </Link>
       <Link
         to=""
-        state={{ project: project }}
         className="py-3 px-4 mb-1 bg-gray-800 hover:bg-gray-700 transition rounded"
       >
         Dados e Privacidade

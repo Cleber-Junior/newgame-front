@@ -85,7 +85,7 @@ const HeaderUser = ({ dataUser }) => {
                 </a>
               </li>
             </Link>
-            <Link to={"./user/about"}>
+            <Link to={"./user/public"}>
               <li className="font-medium">
                 <a
                   href="#"

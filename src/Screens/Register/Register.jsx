@@ -63,8 +63,6 @@ const Register = () => {
       {modal && <Modal message={message} onClose={() => setModal(false)} />}
       <div className="flex flex-col items-center p-6 mx-auto w-auto bg-white border-solid border-black border-2 rounded-lg">
         <h1 className="text-green-600 text-5xl font-geo mb-4">Cadastro</h1>
-        {message && <p className="text-green-600">{message}</p>}
-
         <form
           onSubmit={handleSubmit}
           className="w-full flex flex-col items-center mb-2 font-geo"

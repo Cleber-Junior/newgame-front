@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { useLocation } from "react-router-dom";
 import { TokenContext } from "../../../assets/Context/TokenContext";
 import { ProjectContext } from "../../../assets/Context/ProjectContext";
 import { myApi } from "../../../api/api";
@@ -7,9 +6,7 @@ import Loading from "../../../components/Projects/Loading";
 import Modal from "../../../components/Projects/Modal/ModalConfirmation";
 
 const editNameProject = () => {
-  let location = useLocation();
-  let project = location.state.project;
-  const { saveProject } = React.useContext(ProjectContext);
+  const { projectData, saveProject } = React.useContext(ProjectContext);
   const { token } = React.useContext(TokenContext);
   const [formData, setFormData] = React.useState({});
   const [message, setMessage] = React.useState("");
@@ -26,7 +23,7 @@ const editNameProject = () => {
 
     try {
       const response = await myApi.post(
-        `/updateProject/${project.id}`,
+        `/updateProject/${projectData.id}`,
         updateForm,
         {
           headers: {
@@ -48,7 +45,7 @@ const editNameProject = () => {
 
   const fetchProject = async () => {
     try {
-      const response = await myApi.get(`/projects/${project.id}`, {
+      const response = await myApi.get(`/projects/${projectData.id}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },

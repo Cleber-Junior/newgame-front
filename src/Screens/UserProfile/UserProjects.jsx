@@ -28,6 +28,8 @@ const UserProjects = () => {
     }
   };
 
+  console.log(urlImage)
+
   useEffect(() => {
     fetchProjectsUser();
   }, []);
