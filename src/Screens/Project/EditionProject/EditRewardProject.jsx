@@ -155,7 +155,7 @@ const EditRewardProject = () => {
             type="submit"
             className="bg-green-500 text-white font-semibold py-2 px-4 rounded-md hover:bg-green-600"
           >
-            Adicionar Reconpensa
+            Adicionar Recompensa
           </button>
         </form>
 
