@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { ProjectContext } from "../../assets/Context/ProjectContext";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.bubble.css";
 
 const Card = ({ data, url }) => {
   console.log("URL", url);
@@ -16,7 +18,11 @@ const Card = ({ data, url }) => {
           className="w-full h-48 object-cover rounded-md mb-4"
         />
         <h2 className="text-lg font-semibold text-gray-800">{data.name}</h2>
-        <p className="text-sm text-gray-600 mb-4">{data.description}</p>
+        <ReactQuill
+          className="text-sm text-gray-600 mb-4"
+          theme="bubble"
+          value={data.description}
+        />
         {data.status !== 1 ? (
           <Link
             to="../../project/edit/name"
