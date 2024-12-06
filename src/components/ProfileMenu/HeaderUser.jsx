@@ -3,15 +3,15 @@ import { UserContext } from "../../assets/Context/UserContext";
 import { TokenContext } from "../../assets/Context/TokenContext";
 import { Link } from "react-router-dom";
 import PlaceholderUser from "../../assets/img/UserIcon.jpg";
+import VisualHeader from "./VisualHeader";
 
 const HeaderUser = ({ dataUser }) => {
   const { saveUser } = React.useContext(UserContext);
   const { saveToken } = React.useContext(TokenContext);
   const selectRef = React.useRef();
   const [open, setOpen] = useState(false);
-
   const user = dataUser;
-  console.log("user", user);
+
 
   const handleClickModal = () => {
     setOpen(!open);
@@ -38,27 +38,11 @@ const HeaderUser = ({ dataUser }) => {
 
   return (
     <div onClick={handleClickModal} className="relative">
-      <div className="flex items-center space-x-3 cursor-pointer z-auto">
-        <div className="font-semibold text-white uppercase letter">
-          {user.username}
-        </div>
-        <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-gray-900">
-          {user.image === null ? (
-            <img
-              src={PlaceholderUser}
-              alt="User Avatar"
-              className="w-full h-full object-cover"
-            />
-          ) : (
-            <img
-              src={user.image}
-              alt="User Avatar"
-              className="w-full h-full object-cover"
-            />
-          )}
-        </div>
-      </div>
-
+      <VisualHeader
+        userImage={user.image}
+        userUsername={user.username}
+        PlaceholderUser={PlaceholderUser}
+      />
       {open && (
         <div
           ref={selectRef}
