@@ -1,7 +1,5 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { UserContext } from "../../assets/Context/UserContext";
-import { myApi } from "../../api/api";
-import { TokenContext } from "../../assets/Context/TokenContext";
 import ProfileNav from "../../components/Profile/ProfileNav";
 import PlaceholderIcon from "../../assets/img/UserIcon.jpg";
 import ReactQuill from "react-quill";
@@ -9,8 +7,7 @@ import "react-quill/dist/quill.snow.css";
 import Modal from "../../components/Projects/Modal/ModalConfirmation";
 
 const UserPublicProfile = () => {
-  const { user, saveUser } = React.useContext(UserContext);
-  const { token } = React.useContext(TokenContext);
+  const { user, handleSave } = React.useContext(UserContext);
   const [modal, setModal] = React.useState(false);
   const [modalMessage, setModalMessage] = React.useState("");
   const [userData, setUserData] = React.useState({
@@ -19,30 +16,13 @@ const UserPublicProfile = () => {
     about: user.about,
     image: user.image,
   });
-console.log(token)
-  console.log(user);
 
-  const handleSave = async (e) => {
-    e.preventDefault();
-
+  const handleSubmit = async (e) => {
     try {
-      const response = await myApi.post(
-        `/editUser/${user.id}`,
-        userData,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      if (response.status === 200) {
-        console.log(response);
-        const data = response.data;
-        console.log(data.user);
-        saveUser(data.user);
-        setModal(true);
-        setModalMessage(data.msg);
-      }
+      const updateUser = await handleSave(e, userData);
+      console.log(updateUser);
+      setModalMessage(updateUser.message);
+      setModal(true);
     } catch (error) {
       console.log(error);
     }
@@ -51,10 +31,6 @@ console.log(token)
   const handleChange = (e) => {
     setUserData({ ...userData, [e.target.name]: e.target.value });
   };
-
-  useEffect(() => {
-    console.log(userData);
-  }, [userData]);
 
   return (
     <ProfileNav>
@@ -152,7 +128,7 @@ console.log(token)
         {/* Botão Salvar */}
         <div className="flex justify-end">
           <button
-            onClick={(e) => handleSave(e)}
+            onClick={(e) => handleSubmit(e)}
             className="px-6 py-2 text-white bg-green-500 rounded-md hover:bg-green-600"
           >
             Salvar
