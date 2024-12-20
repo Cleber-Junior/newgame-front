@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { UserContext } from "../../assets/Context/UserContext";
 import ProfileNav from "../../components/Profile/ProfileNav";
 import PlaceholderIcon from "../../assets/img/UserIcon.jpg";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import Modal from "../../components/Projects/Modal/ModalConfirmation";
+import Modal from "../../components/Modal/ModalConfirmation";
 
 const UserPublicProfile = () => {
   const { user, handleSave } = React.useContext(UserContext);
@@ -14,18 +14,19 @@ const UserPublicProfile = () => {
     id: user.id,
     username: user.username,
     about: user.about,
-    image: user.image,
   });
 
   const handleSubmit = async (e) => {
-    try {
-      const updateUser = await handleSave(e, userData);
-      console.log(updateUser);
-      setModalMessage(updateUser.message);
-      setModal(true);
-    } catch (error) {
-      console.log(error);
-    }
+    e.preventDefault();
+
+    // try {
+    //   const updateUser = await handleSave(e, formData);
+    //   console.log(updateUser);
+    //   setModalMessage(updateUser.message);
+    //   setModal(true);
+    // } catch (error) {
+    //   console.log(error);
+    // }
   };
 
   const handleChange = (e) => {
@@ -34,7 +35,7 @@ const UserPublicProfile = () => {
 
   return (
     <ProfileNav>
-      <div className="max-w-2xl mx-auto p-4 space-y-6 bg-gray-100 rounded-lg shadow-md m-5">
+      <form className="max-w-2xl mx-auto p-4 space-y-6 bg-gray-100 rounded-lg shadow-md m-5">
         {modal && (
           <Modal message={modalMessage} onClose={() => setModal(false)} />
         )}
@@ -113,7 +114,13 @@ const UserPublicProfile = () => {
           <div className="flex flex-col items-center space-y-4">
             {/* Imagem de pré-visualização */}
             <div className="w-40 h-40 flex items-center justify-center rounded-md">
-              <img src={PlaceholderIcon} alt="Imagem de Perfil" />
+              <img
+                src={PlaceholderIcon || userData.image}
+                type="file"
+                id="image"
+                name="image"
+                alt="Imagem de Perfil"
+              />
             </div>
 
             {/* Input de arquivo */}
@@ -134,7 +141,7 @@ const UserPublicProfile = () => {
             Salvar
           </button>
         </div>
-      </div>
+      </form>
     </ProfileNav>
   );
 };

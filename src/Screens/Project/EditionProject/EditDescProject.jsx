@@ -1,9 +1,9 @@
-import React, { useEffect } from "react"; 
+import React, { useEffect } from "react";
 import { TokenContext } from "../../../assets/Context/TokenContext";
 import { ProjectContext } from "../../../assets/Context/ProjectContext";
 import { myApi } from "../../../api/api";
 import Loading from "../../../components/Projects/Loading";
-import Modal from "../../../components/Projects/Modal/ModalConfirmation";
+import Modal from "../../../components/Modal/ModalConfirmation";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 

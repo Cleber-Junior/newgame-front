@@ -1,5 +1,6 @@
 import React from "react";
 import ReactQuill from "react-quill";
+import { Link } from "react-router-dom";
 import "react-quill/dist/quill.bubble.css";
 
 const Card = ({ data }) => {
@@ -12,13 +13,20 @@ const Card = ({ data }) => {
 
   return (
     <div className="bg-white shadow-lg rounded-lg overflow-hidden flex flex-col justify-center h-80 m-14">
-      <img
-        src={data.image}
-        alt={data.name}
-        className="w-full max-h-[9rem] object-cover"
-      />
+      <Link>
+        <img
+          src={data.image}
+          alt={data.name}
+          className="w-full max-h-[9rem] object-cover rounded-t-2xl"
+        />
+      </Link>
+
       <div className="p-4">
-        <h2 className="text-base font-bold text-gray-800 mb-2">{data.name}</h2>
+        <Link>
+          <h2 className="text-base font-bold text-gray-800 mb-2">
+            {data.name}
+          </h2>
+        </Link>
         <ReactQuill
           className="text-sm text-gray-600 mb-4 line-clamp-2"
           theme="bubble"

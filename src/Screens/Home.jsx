@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { myApi } from "../api/api";
-import ShowCard from "../components/Projects/ShowCard";
+import ShowCard from "../components/Projects/Cards/ShowCard";
 import Loading from "../components/Projects/Loading";
+import Fuse from "fuse.js";
 
-const Home = () => {
+const Home = ({ search }) => {
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [filterProject, setFilterProject] = useState([]);
+
   const fetchData = async () => {
     try {
       const response = await myApi.get("/projects");
@@ -20,13 +23,32 @@ const Home = () => {
     }
   };
 
-  const filterProject = projects.filter((project) => project.status === 1);
-
-  console.log("projects", projects);
+  useEffect(() => {
+    if (search) {
+      const fuse = new Fuse(projects, {
+        keys: ["name"],
+        threshold: 0.3,
+      });
+      const result = fuse.search(search);
+      setFilterProject(
+        result.map((item) => item.item).filter((item) => item.status === 1)
+      );
+    } else {
+      setFilterProject(
+        projects.map((item) => item).filter((item) => item.status === 1)
+      );
+    }
+  }, [search, projects]);
 
   useEffect(() => {
     fetchData();
   }, []);
+
+  useEffect(() => {
+    setFilterProject(
+      projects.map((item) => item).filter((item) => item.status === 1)
+    );
+  }, [projects]);
 
   if (loading) {
     return <Loading />;
@@ -35,21 +57,25 @@ const Home = () => {
   return (
     <div className="font-outfit">
       <h1 className="text-2xl mt-4 font-semibold text-center">Projetos</h1>
-
-      {/* Grid para exibir os cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {!filterProject || filterProject.length === 0 ? (
-          <p className="col-span-full text-center">
-            Nenhum projeto cadastrado no sistema
-          </p>
-        ) : (
-          filterProject.map((project, index) => (
-            <ShowCard key={index} data={project} />
-          ))
-        )}
+        {filterProject.length > 0
+          ? filterProject.map((project, index) => (
+              <ShowCard key={index} data={project} />
+            ))
+          : "Nenhum projeto encontrado"}
       </div>
     </div>
   );
 };
 
 export default Home;
+
+// {
+//   !filterProject ? (
+//     <p>Nenhum projeto cadastrado no sistema</p>
+//   ) : (
+//     filterProject.map((project, index) => (
+//       <ShowCard key={index} data={project} />
+//     ))
+//   );
+// }

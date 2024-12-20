@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { ProjectContext } from "../../assets/Context/ProjectContext";
+import { ProjectContext } from "../../../assets/Context/ProjectContext";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.bubble.css";
 

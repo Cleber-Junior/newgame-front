@@ -2,10 +2,10 @@ import React, { useState, useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { TokenContext } from "../../assets/Context/TokenContext.jsx";
 import { UserContext } from "../../assets/Context/UserContext.jsx";
-import img from "../../Img/icon_dark.png";
+import img from "../../assets/img/icon_dark.png";
 import { myApi } from "../../api/api.js";
-import Modal from "../../components/Projects/Modal/ModalConfirmation.jsx";
-import ErrorModal from "../../components/Projects/Modal/ErrorModal.jsx";
+import Modal from "../../components/Modal/ModalConfirmation.jsx";
+import ErrorModal from "../../components/Modal/ErrorModal.jsx";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -15,6 +15,7 @@ const Login = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [modal, setModal] = useState(false);
   const [errorModal, setErrorModal] = useState(false);
+  const [isSubmited, setIsSubmited] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -29,7 +30,7 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    setIsSubmited(true);
     try {
       const response = await myApi.post("/login", formData);
       if (response.status === 200) {
@@ -52,6 +53,7 @@ const Login = () => {
       console.error("Erro ao fazer login", error);
       setErrorMessage(error.response.data.message);
       setErrorModal(true);
+      setIsSubmited(false);
     }
   };
 
@@ -97,7 +99,10 @@ const Login = () => {
 
           <button
             type="submit"
-            className="font-outfit w-full py-2 mt-4 bg-green-600 text-white rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500"
+            className={`font-outfit w-full py-2 mt-4 ${
+              isSubmited ? "bg-gray-800 text-white" : "bg-green-600 text-white"
+            } rounded-md focus:outline-none focus:ring-2 focus:ring-green-500`}
+            disabled={isSubmited}
           >
             Conectar-se
           </button>

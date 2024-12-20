@@ -3,7 +3,7 @@ import { TokenContext } from "../../../assets/Context/TokenContext";
 import { ProjectContext } from "../../../assets/Context/ProjectContext";
 import { myApi } from "../../../api/api";
 import Loading from "../../../components/Projects/Loading";
-import Modal from "../../../components/Projects/Modal/ModalConfirmation";
+import Modal from "../../../components/Modal/ModalConfirmation";
 
 const editNameProject = () => {
   const { projectData, saveProject } = React.useContext(ProjectContext);

@@ -2,8 +2,8 @@ import React, { useContext, useEffect, useState } from "react";
 import { TokenContext } from "../../assets/Context/TokenContext";
 import { UserContext } from "../../assets/Context/UserContext";
 import { Link, useNavigate } from "react-router-dom";
-import Modal from "../../components/Projects/Modal/ModalConfirmation";
-import ErrorModal from "../../components/Projects/Modal/ErrorModal";
+import Modal from "../../components/Modal/ModalConfirmation";
+import ErrorModal from "../../components/Modal/ErrorModal";
 import { myApi } from "../../api/api";
 
 const CreateProject = () => {
@@ -47,7 +47,12 @@ const CreateProject = () => {
   return (
     <div className="flex items-center justify-center h-[100%]">
       {modal && <Modal message={message} onClose={() => setModal(false)} />}
-      {errorModal && <ErrorModal message={errorMessage} onClose={() => setErrorModal(false)} /> }
+      {errorModal && (
+        <ErrorModal
+          message={errorMessage}
+          onClose={() => setErrorModal(false)}
+        />
+      )}
       <div className="w-full max-w-md p-8 bg-gray-100 rounded shadow-lg">
         <h1 className="text-2xl font-bold text-center text-green-500 mb-6">
           Cadastrar Novo Projeto

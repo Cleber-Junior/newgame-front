@@ -3,7 +3,7 @@ import { TokenContext } from "../../../assets/Context/TokenContext";
 import { ProjectContext } from "../../../assets/Context/ProjectContext";
 import { myApi } from "../../../api/api";
 import Loading from "../../../components/Projects/Loading";
-import Modal from "../../../components/Projects/Modal/ModalConfirmation";
+import Modal from "../../../components/Modal/ModalConfirmation";
 import Placeholder from "../../../assets/img/placeholder.svg";
 
 const EditVisualProject = () => {
@@ -11,9 +11,7 @@ const EditVisualProject = () => {
   const { token } = React.useContext(TokenContext);
   const [urlImage, setUrlImage] = React.useState("");
   const [loading, setLoading] = React.useState(true);
-  const [formData, setFormData] = React.useState({
-    image: projectData.image,
-  });
+
   const [message, setMessage] = React.useState("");
   const [modal, setModal] = React.useState(false);
 
@@ -56,7 +54,7 @@ const EditVisualProject = () => {
         },
       });
       if (response.status === 200) {
-        console.log("response Img link",response);
+        console.log("response Img link", response);
         setUrlImage(response.data.url);
       }
     } catch (error) {
@@ -95,12 +93,12 @@ const EditVisualProject = () => {
             />
           ) : (
             <>
-            <img
-              src={Placeholder} // Substitua pela URL correta da imagem do projeto
-              alt="Projeto"
-              className="w-full h-full object-cover"
-            />
-          </>
+              <img
+                src={Placeholder} // Substitua pela URL correta da imagem do projeto
+                alt="Projeto"
+                className="w-full h-full object-cover"
+              />
+            </>
           )}
         </div>
 

@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { TokenContext } from "../../assets/Context/TokenContext";
 import { ProjectContext } from "../../assets/Context/ProjectContext";
 import { myApi } from "../../api/api";
-import Modal from "./Modal/ModalConfirmation";
+import Modal from "../Modal/ModalConfirmation";
 import Placeholder from "../../assets/img/placeholder.svg";
 
 const MenuProjects = () => {

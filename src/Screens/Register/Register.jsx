@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { myApi } from "../../api/api";
-import Modal from "../../components/Projects/Modal/ModalConfirmation";
+import Modal from "../../components/Modal/ModalConfirmation";
 import { Timer } from "lucide-react";
 
 const Register = () => {

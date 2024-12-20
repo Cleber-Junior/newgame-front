@@ -1,14 +1,35 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { UserContext } from "../assets/Context/UserContext";
 import { TokenContext } from "../assets/Context/TokenContext";
+import { myApi } from "../api/api";
 import HeaderUser from "../components/ProfileMenu/HeaderUser";
-import logo_header from "../Img/Logo_Header.svg";
+import logo_header from "../assets/img/logo_header.svg";
 
-const Header = () => {
-  const { user, saveUser } = React.useContext(UserContext);
-  const { token, saveToken } = React.useContext(TokenContext);
+const Header = ({ handleSearch }) => {
+  const { user } = React.useContext(UserContext);
+  const { token } = React.useContext(TokenContext);
+  const [projects, setProjects] = React.useState({});
 
+  const handleGetProjects = async () => {
+    try {
+      const response = await myApi.get("/projects", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (response.status === 200) {
+        // console.log(response);
+        setProjects(response.data.data);
+      }
+    } catch (error) {
+      console.error("Erro ao buscar projetos", error);
+    }
+  };
+
+  useEffect(() => {
+    handleGetProjects();
+  }, []);
 
   return (
     <header className="bg-header-bg text-white flex justify-between items-center p-4 text-2xl font-geo">
@@ -27,6 +48,9 @@ const Header = () => {
       <div className="flex flex-1 justify-center">
         <input
           type="text"
+          onChange={(e) => {
+            handleSearch(e.target.value);
+          }}
           placeholder="Barra de Pesquisa"
           className="w-3/5 p-2 rounded-lg text-black"
         />

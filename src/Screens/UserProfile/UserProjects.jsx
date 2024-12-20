@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { myApi } from "../../api/api";
 import { UserContext } from "../../assets/Context/UserContext";
 import { TokenContext } from "../../assets/Context/TokenContext";
-import EditCard from "../../components/Projects/EditCard";
+import EditCard from "../../components/Projects/Cards/EditCard";
 import Placeholder from "../../assets/img/placeholder.svg";
 import Loading from "../../components/Projects/Loading";
 import ProfileNav from "../../components/Profile/ProfileNav";

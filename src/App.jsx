@@ -29,77 +29,75 @@ const ProjectEditLayout = ({ project, children }) => (
 );
 
 const App = () => {
+  const [search, setSearch] = React.useState({});
   const location = useLocation();
   const hideHeader =
     location.pathname === "/login" || location.pathname === "/register";
-
   return (
     <TokenStorage>
       <UserStorage>
-          <ProjectStorage>
-            {!hideHeader && <Header />}
-            <Routes>
-              <Route>
-                <Route path="login" element={<Login />} />
-                <Route path="register" element={<Register />} />
-              </Route>
-            </Routes>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route
-                path="project/*"
-                element={
-                  <ProtectRoute>
-                    <Routes>
-                      <Route path="create" element={<CreateProject />} />
-                      <Route
-                        path="edit/*"
-                        element={
-                          <ProjectEditLayout project={location.state?.project}>
-                            <Routes>
-                              <Route
-                                path="name"
-                                element={<EditNameProject />}
-                              />
-                              <Route
-                                path="finance"
-                                element={<EditFinanceProject />}
-                              />
-                              <Route
-                                path="description"
-                                element={<EditDescProject />}
-                              />
-                              <Route
-                                path="apperance"
-                                element={<EditVisualProject />}
-                              />
-                              <Route
-                                path="rewards"
-                                element={<EditRewardProject />}
-                              />
-                            </Routes>
-                          </ProjectEditLayout>
-                        }
-                      />
-                    </Routes>
-                  </ProtectRoute>
-                }
-              />
-              <Route
-                path="user/*"
-                element={
-                  <ProtectRoute>
-                    <Routes>
-                      <Route path="about" element={<UserAbout />} />
-                      <Route path="projects" element={<UserProjects />} />
-                      <Route path="public" element={<UserPublicProfile />} />
-                      <Route path="supported" element={<UserSupported />} />
-                    </Routes>
-                  </ProtectRoute>
-                }
-              />
-            </Routes>
-          </ProjectStorage>
+        <ProjectStorage>  
+          {!hideHeader && <Header handleSearch={setSearch} />}
+          <Routes>
+            <Route>
+              <Route path="login" element={<Login />} />
+              <Route path="register" element={<Register />} />
+            </Route>
+          </Routes>
+
+          <Routes>
+            <Route path="/" element={<Home search={search}/>} />
+            <Route
+              path="project/*"
+              element={
+                <ProtectRoute>
+                  <Routes>
+                    <Route path="create" element={<CreateProject />} />
+                    <Route
+                      path="edit/*"
+                      element={
+                        <ProjectEditLayout project={location.state?.project}>
+                          <Routes>
+                            <Route path="name" element={<EditNameProject />} />
+                            <Route
+                              path="finance"
+                              element={<EditFinanceProject />}
+                            />
+                            <Route
+                              path="description"
+                              element={<EditDescProject />}
+                            />
+                            <Route
+                              path="apperance"
+                              element={<EditVisualProject />}
+                            />
+                            <Route
+                              path="rewards"
+                              element={<EditRewardProject />}
+                            />
+                          </Routes>
+                        </ProjectEditLayout>
+                      }
+                    />
+                  </Routes>
+                </ProtectRoute>
+              }
+            />
+            <Route
+              path="user/*"
+              element={
+                <ProtectRoute>
+                  <Routes>
+                    <Route path="about" element={<UserAbout />} />
+                    <Route path="projects" element={<UserProjects />} />
+                    <Route path="public" element={<UserPublicProfile />} />
+                    <Route path="supported" element={<UserSupported />} />
+                  </Routes>
+                </ProtectRoute>
+              }
+            />
+          </Routes>
+        </ProjectStorage>
       </UserStorage>
     </TokenStorage>
   );
