@@ -9,6 +9,7 @@ import Login from "./Screens/Login/Login";
 import Register from "./Screens/Register/Register";
 import CreateProject from "./Screens/Project/createProject";
 import EditNameProject from "./Screens/Project/EditionProject/editNameProject";
+import showProject from "./Screens/Project/showProject";
 import ProtectRoute from "./assets/Context/protectContext";
 import UserAbout from "./Screens/UserProfile/UserAbout";
 import UserProjects from "./Screens/UserProfile/UserProjects";
@@ -36,7 +37,7 @@ const App = () => {
   return (
     <TokenStorage>
       <UserStorage>
-        <ProjectStorage>  
+        <ProjectStorage>
           {!hideHeader && <Header handleSearch={setSearch} />}
           <Routes>
             <Route>
@@ -46,7 +47,8 @@ const App = () => {
           </Routes>
 
           <Routes>
-            <Route path="/" element={<Home search={search}/>} />
+            <Route path="/" element={<Home search={search} />} />
+            <Route path="project/:nome" element={<showProject />} />
             <Route
               path="project/*"
               element={

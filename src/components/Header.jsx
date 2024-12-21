@@ -4,7 +4,7 @@ import { UserContext } from "../assets/Context/UserContext";
 import { TokenContext } from "../assets/Context/TokenContext";
 import { myApi } from "../api/api";
 import HeaderUser from "../components/ProfileMenu/HeaderUser";
-import logo_header from "../assets/img/logo_header.svg";
+import logo_header from "../assets/img/Logo_Header.svg";
 
 const Header = ({ handleSearch }) => {
   const { user } = React.useContext(UserContext);
