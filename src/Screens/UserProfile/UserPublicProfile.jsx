@@ -19,18 +19,19 @@ const UserPublicProfile = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // try {
-    //   const updateUser = await handleSave(e, formData);
-    //   console.log(updateUser);
-    //   setModalMessage(updateUser.message);
-    //   setModal(true);
-    // } catch (error) {
-    //   console.log(error);
-    // }
+    try {
+      const updateUser = await handleSave(e, userData);
+      console.log(updateUser);
+      setModalMessage(updateUser.message);
+      setModal(true);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleChange = (e) => {
-    setUserData({ ...userData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setUserData({ ...userData, [name]: value });
   };
 
   return (
@@ -127,7 +128,7 @@ const UserPublicProfile = () => {
             <input
               type="file"
               name="image"
-              className="block w-full text-sm text-gray-500 file:py-2 file:px-4 file:rounded-md file:border file:border-gray-300 file:text-sm file:font-medium file:bg-gray-100 file:text-gray-700 hover:file:bg-gray-200"
+              className="block w-full text-sm text-gray-500 file:py-2 file:px-4 file:rounded-md file:border file:border-gray-300 file:text-sm file:font-medium file:bg-gray-100 file:text-gray-700 hover:file:bg-green-600 hover:file:text-white"
             />
           </div>
         </div>
