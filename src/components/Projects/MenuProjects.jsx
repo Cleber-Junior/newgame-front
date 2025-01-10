@@ -137,7 +137,7 @@ const MenuProjects = () => {
       </Link>
       <Link
         to=""
-        className="py-3 px-4 mb-1 bg-gray-800 hover:bg-gray-700 transition rounded"
+        className="py-3 px-4 mb-1 bg-gray-500 hover:bg-gray-700 transition rounded pointer-events-none text-black"
       >
         Orçamento
       </Link>
@@ -163,7 +163,7 @@ const MenuProjects = () => {
       </Link>
       <Link
         to=""
-        className="py-3 px-4 mb-1 bg-gray-800 hover:bg-gray-700 transition rounded"
+        className="py-3 px-4 mb-1 bg-gray-500 hover:bg-gray-700 transition rounded pointer-events-none text-black"
       >
         Dados e Privacidade
       </Link>
