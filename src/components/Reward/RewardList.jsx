@@ -1,4 +1,5 @@
 import React from "react";
+import { Trash2, Pencil } from "lucide-react";
 
 const RewardList = ({rewards, handleDeleteReward}) => {
   return (
