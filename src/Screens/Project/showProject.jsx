@@ -2,16 +2,19 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { myApi } from "../../api/api";
 import Loading from "../../components/Projects/Loading";
+import RewardCard from "../../components/Reward/RewardCard";
+import { UserContext } from "../../assets/Context/UserContext";
 
 const ShowProject = () => {
-  const { nome } = useParams();
+  const { id } = useParams();
+  const { user } = React.useContext(UserContext);
   const [projectData, setProjectData] = React.useState({});
   const [rewardData, setRewardData] = React.useState({});
   const [loading, setLoading] = React.useState(true);
 
   const fetchProject = async () => {
     try {
-      const response = await myApi.get(`/projects/${nome}`);
+      const response = await myApi.get(`/project/${id}`);
       if (response.status === 200) {
         console.log(response);
         setProjectData(response.data.project[0]);
@@ -54,7 +57,7 @@ const ShowProject = () => {
       {/* Header */}
       <div className="text-center mb-6">
         <h1 className="text-4xl font-bold">{projectData.name}</h1>
-        <p className="text-lg text-gray-600">por Supergiant Games</p>
+        <p className="text-lg text-gray-600">{user.username}</p>
       </div>
 
       {/* Main Content */}
@@ -96,9 +99,7 @@ const ShowProject = () => {
         </div>
       </div>
 
-      {/* Description and Rewards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-        {/* Description */}
+      <div className="grid grid-cols-1 md:grid-cols-[65%_35%] gap-6 mt-6">
         <div>
           <h3 className="text-xl font-semibold mb-2">Descrição do Projeto:</h3>
           <div
@@ -106,11 +107,9 @@ const ShowProject = () => {
             dangerouslySetInnerHTML={{ __html: projectData.description }}
           ></div>
         </div>
-
-        {/* Rewards */}
         <div>
           <h3 className="text-xl font-semibold mb-2">Recompensas</h3>
-          
+          <RewardCard rewards={rewardData} />
         </div>
       </div>
     </div>
