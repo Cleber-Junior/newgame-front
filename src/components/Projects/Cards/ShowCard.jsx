@@ -13,7 +13,7 @@ const Card = ({ data }) => {
 
   return (
     <div className="bg-white shadow-lg rounded-lg overflow-hidden flex flex-col justify-center h-80 m-14">
-      <Link to={"/project/" + data.name}>
+      <Link to={`/project/${data.id}`}>
         <img
           src={data.image}
           alt={data.name}
@@ -22,7 +22,7 @@ const Card = ({ data }) => {
       </Link>
 
       <div className="p-4">
-        <Link to={"/project/" + data.name}>
+        <Link to={`/project/${data.id}`}>
           <h2 className="text-base font-bold text-gray-800 mb-2">
             {data.name}
           </h2>
