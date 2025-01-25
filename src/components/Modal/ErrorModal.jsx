@@ -8,7 +8,7 @@ const Modal = ({ message, onClose }) => {
   }, [onClose]);
 
   return (
-    <div className="fixed top-24 right-8 z-50 flex items-center">
+    <div name="modalError" className="fixed top-24 right-8 z-50 flex items-center">
       <div
         className="bg-white border-4 border-red-600 rounded-lg p-4 text-black font-semibold shadow-md
           transform transition-transform duration-500 ease-out translate-x-0"
