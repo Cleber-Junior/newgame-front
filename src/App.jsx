@@ -48,7 +48,6 @@ const App = () => {
 
           <Routes>
             <Route path="/" element={<Home search={search} />} />
-            <Route path="/:nome" element={<ShowProject />} />
             <Route
               path="project/*"
               element={
@@ -81,6 +80,7 @@ const App = () => {
                         </ProjectEditLayout>
                       }
                     />
+                    <Route path=":id" element={<ShowProject />} />{" "}
                   </Routes>
                 </ProtectRoute>
               }
