@@ -9,7 +9,7 @@ import Login from "./Screens/Login/Login";
 import Register from "./Screens/Register/Register";
 import CreateProject from "./Screens/Project/createProject";
 import EditNameProject from "./Screens/Project/EditionProject/editNameProject";
-import ShowProject from "./Screens/Project/ShowProjects/showProject";
+import ShowProject from "./Screens/Project/ShowProjects/ShowProject";
 import ProtectRoute from "./assets/Context/protectContext";
 import UserAbout from "./Screens/UserProfile/UserAbout";
 import UserProjects from "./Screens/UserProfile/UserProjects";
