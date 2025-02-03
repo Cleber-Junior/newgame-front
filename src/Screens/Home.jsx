@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { myApi } from "../api/api";
 import ShowCard from "../components/Projects/Cards/ShowCard";
 import Loading from "../components/Projects/Loading";
 import Fuse from "fuse.js";
+import { TokenContext } from "../assets/Context/TokenContext";
 
 const Home = ({ search }) => {
   const [projects, setProjects] = useState([]);
@@ -69,13 +70,3 @@ const Home = ({ search }) => {
 };
 
 export default Home;
-
-// {
-//   !filterProject ? (
-//     <p>Nenhum projeto cadastrado no sistema</p>
-//   ) : (
-//     filterProject.map((project, index) => (
-//       <ShowCard key={index} data={project} />
-//     ))
-//   );
-// }
