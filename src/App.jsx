@@ -9,7 +9,7 @@ import Login from "./Screens/Login/Login";
 import Register from "./Screens/Register/Register";
 import CreateProject from "./Screens/Project/createProject";
 import EditNameProject from "./Screens/Project/EditionProject/editNameProject";
-import ShowProject from "./Screens/Project/showProject";
+import ShowProject from "./Screens/Project/ShowProjects/showProject";
 import ProtectRoute from "./assets/Context/protectContext";
 import UserAbout from "./Screens/UserProfile/UserAbout";
 import UserProjects from "./Screens/UserProfile/UserProjects";
@@ -51,38 +51,36 @@ const App = () => {
             <Route
               path="project/*"
               element={
-                <ProtectRoute>
-                  <Routes>
-                    <Route path="create" element={<CreateProject />} />
-                    <Route
-                      path="edit/*"
-                      element={
-                        <ProjectEditLayout project={location.state?.project}>
-                          <Routes>
-                            <Route path="name" element={<EditNameProject />} />
-                            <Route
-                              path="finance"
-                              element={<EditFinanceProject />}
-                            />
-                            <Route
-                              path="description"
-                              element={<EditDescProject />}
-                            />
-                            <Route
-                              path="apperance"
-                              element={<EditVisualProject />}
-                            />
-                            <Route
-                              path="rewards"
-                              element={<EditRewardProject />}
-                            />
-                          </Routes>
-                        </ProjectEditLayout>
-                      }
-                    />
-                    <Route path=":id" element={<ShowProject />} />{" "}
-                  </Routes>
-                </ProtectRoute>
+                <Routes>
+                  <Route path="create" element={<CreateProject />} />
+                  <Route
+                    path="edit/*"
+                    element={
+                      <ProjectEditLayout project={location.state?.project}>
+                        <Routes>
+                          <Route path="name" element={<EditNameProject />} />
+                          <Route
+                            path="finance"
+                            element={<EditFinanceProject />}
+                          />
+                          <Route
+                            path="description"
+                            element={<EditDescProject />}
+                          />
+                          <Route
+                            path="apperance"
+                            element={<EditVisualProject />}
+                          />
+                          <Route
+                            path="rewards"
+                            element={<EditRewardProject />}
+                          />
+                        </Routes>
+                      </ProjectEditLayout>
+                    }
+                  />
+                  <Route path=":id" element={<ShowProject />} />{" "}
+                </Routes>
               }
             />
             <Route
