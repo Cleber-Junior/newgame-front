@@ -2,8 +2,8 @@ import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { TokenContext } from "../../assets/Context/TokenContext";
 import { ProjectContext } from "../../assets/Context/ProjectContext";
-import { myApi } from "../../api/api";
-import Modal from "../Modal/ModalConfirmation";
+import { myApi } from "../../service/api/api";
+import { ToastContainer, toast } from "react-toastify";
 import Placeholder from "../../assets/img/placeholder.svg";
 
 const MenuProjects = () => {
@@ -11,8 +11,6 @@ const MenuProjects = () => {
   const { projectData, saveProject } = React.useContext(ProjectContext);
   const { token } = React.useContext(TokenContext);
   const navigate = useNavigate();
-  const [message, setMessage] = React.useState("");
-  const [modal, setModal] = React.useState(false);
 
   const handleSubmit = async () => {
     console.log("Form Enviado: ", projectData);
@@ -38,8 +36,7 @@ const MenuProjects = () => {
       );
       if (response.status === 201) {
         const data = response.data;
-        setMessage(data.msg);
-        setModal(true);
+        toast.success(data.msg);
         const Timer = setTimeout(() => {
           clearTimeout(Timer);
           navigate("../../user/projects");
@@ -67,7 +64,7 @@ const MenuProjects = () => {
   };
 
   useEffect(() => {
-      fetchImage();
+    fetchImage();
   }, [projectData]);
 
   console.log("ProjectData", projectData);
@@ -78,8 +75,8 @@ const MenuProjects = () => {
 
   return (
     <div className="flex flex-col min-h-screen overflow-hidden w-60 bg-header-bg text-white p-4">
+      <ToastContainer />
       <div className="flex flex-col items-center mb-6">
-        {modal && <Modal message={message} onClose={() => setModal(false)} />}
         {urlImage ? (
           <>
             <img
@@ -136,12 +133,6 @@ const MenuProjects = () => {
         Descrição
       </Link>
       <Link
-        to=""
-        className="py-3 px-4 mb-1 bg-gray-500 hover:bg-gray-700 transition rounded pointer-events-none text-black"
-      >
-        Orçamento
-      </Link>
-      <Link
         to="../edit/apperance"
         className={`py-3 px-4 mb-1 ${
           location.pathname === "/project/edit/apperance"
@@ -160,12 +151,6 @@ const MenuProjects = () => {
         } hover:bg-gray-700 transition rounded`}
       >
         Recompensas
-      </Link>
-      <Link
-        to=""
-        className="py-3 px-4 mb-1 bg-gray-500 hover:bg-gray-700 transition rounded pointer-events-none text-black"
-      >
-        Dados e Privacidade
       </Link>
 
       <button

@@ -12,7 +12,7 @@ const FundingSection = ({ projectData, progressPercentage, daysRemaining }) => {
         />
       </div>
 
-      <div className="bg-gray-200 p-6 rounded-lg shadow-md w-full max-w-sm mx-auto flex flex-col justify-center items-center h-full">
+      <div className="bg-gray-200 p-6 rounded-lg shadow-md w-full max-w-[330px] mx-auto flex flex-col justify-center items-center h-full">
         <div className="text-center">
           <h2 className="text-3xl font-bold text-black">
             R$ {projectData.current_value}
@@ -36,7 +36,7 @@ const FundingSection = ({ projectData, progressPercentage, daysRemaining }) => {
         </div>
 
         <Link
-          to={`/project/${projectData.id}/payment`}
+          to={`../rewards/${projectData.id}`}
           className="mt-6 text-center w-full bg-green-500 text-white py-3 px-6 rounded-lg hover:bg-green-600 transition"
         >
           Apoiar
