@@ -1,45 +1,38 @@
-import React, { useEffect } from "react";
+import { useState, useContext, useEffect } from "react";
 import { UserContext } from "../../assets/Context/UserContext";
-import ProfileNav from "../../components/Profile/ProfileNav";
+import { handleChange, handleSave } from "../../Utils/UtilsUser/UtilsUser";
+import ProfileNav from "../../components/User/Profile/ProfileNav";
 import PlaceholderIcon from "../../assets/img/UserIcon.jpg";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import Modal from "../../components/Modal/ModalConfirmation";
+import { ToastContainer, toast } from "react-toastify";
+import GenericField from "../../components/Common/Forms/GenericField";
+import SaveButton from "../../components/Common/SaveButton";
+import { TokenContext } from "../../assets/Context/TokenContext";
 
 const UserPublicProfile = () => {
-  const { user, handleSave } = React.useContext(UserContext);
-  const [modal, setModal] = React.useState(false);
-  const [modalMessage, setModalMessage] = React.useState("");
-  const [userData, setUserData] = React.useState({
-    id: user.id,
-    username: user.username,
-    about: user.about,
-  });
+  const { user, saveUser } = useContext(UserContext);
+  const { token } = useContext(TokenContext);
+  const [userForm, setUserForm] = useState(user);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const updateUser = await handleSave(e, userData);
+      const updateUser = await handleSave(token, user.id, saveUser, userForm);
       console.log(updateUser);
-      setModalMessage(updateUser.message);
-      setModal(true);
+      toast.success(updateUser.message);
     } catch (error) {
       console.log(error);
     }
   };
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setUserData({ ...userData, [name]: value });
-  };
+  console.log(userForm);
 
   return (
     <ProfileNav>
       <form className="max-w-2xl mx-auto p-4 space-y-6 bg-gray-100 rounded-lg shadow-md m-5">
-        {modal && (
-          <Modal message={modalMessage} onClose={() => setModal(false)} />
-        )}
+        <ToastContainer />
         <div className="space-y-2">
           <label
             htmlFor="email"
@@ -51,13 +44,15 @@ const UserPublicProfile = () => {
             Aqui, caso necessario você pode alterar o e-mail de sua conta.
           </p>
           <div className="flex items-center space-x-4">
-            <input
-              type="email"
-              name="email"
-              value={user.email}
-              onChange={handleChange}
-              className="w-1/2 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="usuario@email.com"
+            <GenericField
+              type={"email"}
+              name={"email"}
+              value={userForm.email}
+              onChange={handleChange(setUserForm)}
+              style={
+                "w-1/2 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+              }
+              placeholder={"usuario@email.com"}
             />
             <p className="text-green-700 cursor-pointer text-xs">
               Alterar Email
@@ -77,13 +72,15 @@ const UserPublicProfile = () => {
             Este será o nome que os usuários verão em seu perfil.
           </p>
           <div className="flex items-center space-x-4">
-            <input
-              type="text"
-              name="username"
-              value={userData.username}
-              onChange={handleChange}
-              className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="Seu nome público"
+            <GenericField
+              type={"text"}
+              name={"username"}
+              value={userForm.username}
+              onChange={handleChange(setUserForm)}
+              style={
+                "w-1/2 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+              }
+              placeholder={"Seu nome público"}
             />
           </div>
         </div>
@@ -96,9 +93,9 @@ const UserPublicProfile = () => {
           <div className="border border-gray-300 rounded-md overflow-hidden">
             <ReactQuill
               theme="snow"
-              value={userData.about}
+              value={userForm.about}
               className="bg-white"
-              onChange={(value) => setUserData({ ...userData, about: value })}
+              onChange={(value) => setUserForm({ ...userForm, about: value })}
               style={{ height: "300px" }}
             />
           </div>
@@ -133,15 +130,7 @@ const UserPublicProfile = () => {
           </div>
         </div>
 
-        {/* Botão Salvar */}
-        <div className="flex justify-end">
-          <button
-            onClick={(e) => handleSubmit(e)}
-            className="px-6 py-2 text-white bg-green-500 rounded-md hover:bg-green-600"
-          >
-            Salvar
-          </button>
-        </div>
+        <SaveButton handleSave={handleSubmit} />
       </form>
     </ProfileNav>
   );

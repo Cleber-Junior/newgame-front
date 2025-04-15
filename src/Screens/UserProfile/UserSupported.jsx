@@ -1,8 +1,8 @@
 import React from "react";
 import { UserContext } from "../../assets/Context/UserContext";
 import { TokenContext } from "../../assets/Context/TokenContext";
-import Loading from "../../components/Projects/Loading";
-import ProfileNav from "../../components/Profile/ProfileNav";
+import Loading from "../../components/Common/Loading";
+import ProfileNav from "../../components/User/Profile/ProfileNav";
 
 const UserSupported = () => {
   const { token } = React.useContext(TokenContext);

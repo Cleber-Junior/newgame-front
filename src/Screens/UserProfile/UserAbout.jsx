@@ -1,6 +1,6 @@
 import React from "react";
 import { UserContext } from "../../assets/Context/UserContext";
-import ProfileNav from "../../components/Profile/ProfileNav";
+import ProfileNav from "../../components/User/Profile/ProfileNav";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.bubble.css";
 

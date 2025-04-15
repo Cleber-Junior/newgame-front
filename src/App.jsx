@@ -15,12 +15,14 @@ import UserAbout from "./Screens/UserProfile/UserAbout";
 import UserProjects from "./Screens/UserProfile/UserProjects";
 import UserPublicProfile from "./Screens/UserProfile/UserPublicProfile";
 import UserSupported from "./Screens/UserProfile/UserSupported";
-import Header from "./components/Header";
+import UserDataPrivacy from "./Screens/UserProfile/UserDataPrivacy";
+import Header from "./components/Common/Header";
 import MenuProjects from "./components/Projects/MenuProjects";
 import EditFinanceProject from "./Screens/Project/EditionProject/EditFinanceProject";
 import EditDescProject from "./Screens/Project/EditionProject/EditDescProject";
 import EditVisualProject from "./Screens/Project/EditionProject/editVisualProject";
 import EditRewardProject from "./Screens/Project/EditionProject/EditRewardProject";
+import SelectReward from "./Screens/Project/ShowProjects/SelectReward";
 
 const ProjectEditLayout = ({ project, children }) => (
   <div className="flex">
@@ -80,6 +82,7 @@ const App = () => {
                     }
                   />
                   <Route path=":id" element={<ShowProject />} />{" "}
+                  <Route path="rewards/:id" element={<SelectReward />} />
                 </Routes>
               }
             />
@@ -92,6 +95,7 @@ const App = () => {
                     <Route path="projects" element={<UserProjects />} />
                     <Route path="public" element={<UserPublicProfile />} />
                     <Route path="supported" element={<UserSupported />} />
+                    <Route path="privacy" element={<UserDataPrivacy />} />
                   </Routes>
                 </ProtectRoute>
               }
