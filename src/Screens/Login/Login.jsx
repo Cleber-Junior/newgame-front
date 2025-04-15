@@ -3,18 +3,13 @@ import { Link, useNavigate } from "react-router-dom";
 import { TokenContext } from "../../assets/Context/TokenContext.jsx";
 import { UserContext } from "../../assets/Context/UserContext.jsx";
 import img from "../../assets/img/icon_dark.png";
-import { myApi } from "../../api/api.js";
-import Modal from "../../components/Modal/ModalConfirmation.jsx";
-import ErrorModal from "../../components/Modal/ErrorModal.jsx";
+import { myApi } from "../../service/api/api.js";
+import { ToastContainer, toast } from "react-toastify";
 
 const Login = () => {
   const navigate = useNavigate();
   const { saveToken } = useContext(TokenContext);
   const { saveUser } = useContext(UserContext);
-  const [message, setMessage] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
-  const [modal, setModal] = useState(false);
-  const [errorModal, setErrorModal] = useState(false);
   const [isSubmited, setIsSubmited] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
@@ -41,18 +36,15 @@ const Login = () => {
         saveToken(response.data.token);
         localStorage.setItem("token", response.data.token);
         localStorage.setItem("user", JSON.stringify(response.data.user));
-        setMessage(response.data.msg);
-        setModal(true);
+        toast.success(response.data.msg)
         const timer = setTimeout(() => {
           clearTimeout(timer);
-          setModal(false);
           navigate("../");
         }, 2000);
       }
     } catch (error) {
       console.error("Erro ao fazer login", error);
-      setErrorMessage(error.response.data.message);
-      setErrorModal(true);
+      toast.error(error.response.data.message);
       setIsSubmited(false);
     }
   };
@@ -63,13 +55,7 @@ const Login = () => {
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-200 relative overflow-hidden bg-transparent bg-fundo ">
-      {modal && <Modal message={message} onClose={() => setModal(false)} />}
-      {errorModal && (
-        <ErrorModal
-          message={errorMessage}
-          onClose={() => setErrorModal(false)}
-        />
-      )}
+      <ToastContainer />
       <div className="flex flex-col items-center mb-6 bg-white border-solid border-black p-6 border-2 rounded-lg">
         <img src={img} alt="Logo" className="w-25 h-24 mb-2" />{" "}
         {/* Substitua com a URL do logo */}

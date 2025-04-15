@@ -1,16 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { myApi } from "../../api/api";
-import Modal from "../../components/Modal/ModalConfirmation";
-import { Timer } from "lucide-react";
+import { myApi } from "../../service/api/api";
+import { ToastContainer, toast } from "react-toastify";
 
 const Register = () => {
-  const [message, setMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState({});
-  const [modal, setModal] = useState(false);
-  const [errorModal, setErrorModal] = useState(false);
   const [formData, setFormData] = useState({
-    name: "",
     username: "",
     email: "",
     password: "",
@@ -24,10 +19,8 @@ const Register = () => {
       const response = await myApi.post("/register", formData);
       if (response.status === 201) {
         console.log("Usuário cadastrado com sucesso", response.data);
-        setMessage(response.data.msg);
-        setModal(true);
+        toast.success(response.data.msg);
         const Timer = setTimeout(() => {
-          setModal(false);
           navigate("../login");
           clearTimeout(Timer);
         }, 3000);
@@ -53,39 +46,20 @@ const Register = () => {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setErrorMessage({});
       clearTimeout(timer);
+      setErrorMessage({});
     }, 4000);
   });
 
   return (
     <div className="flex items-center justify-center min-h-screen relative overflow-hidden bg-fundo">
-      {modal && <Modal message={message} onClose={() => setModal(false)} />}
+      <ToastContainer />
       <div className="flex flex-col items-center p-6 mx-auto w-auto bg-white border-solid border-black border-2 rounded-lg">
         <h1 className="text-green-600 text-5xl font-geo mb-4">Cadastro</h1>
         <form
           onSubmit={handleSubmit}
           className="w-full flex flex-col items-center mb-2 font-geo"
         >
-          <div className="mb-4">
-            <label htmlFor="name" className="block text-black text-xl">
-              Nome:
-            </label>
-            <input
-              type="text"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              placeholder="Digite seu Nome"
-              className="w-96 h-8 px-3 py-4 border border-green-500 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 bg-inside-input"
-            />
-            {errorMessage.name && (
-              <p className="text-red-600 text-xs font-outfit">
-                {errorMessage.name}
-              </p>
-            )}
-          </div>
-
           <div className="mb-4">
             <label htmlFor="username" className="block text-black text-xl">
               Username:
