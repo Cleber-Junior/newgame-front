@@ -1,9 +1,8 @@
-import React, { useEffect, useState, useContext } from "react";
-import { myApi } from "../api/api";
+import { useEffect, useState } from "react";
+import { myApi } from "../service/api/api";
 import ShowCard from "../components/Projects/Cards/ShowCard";
-import Loading from "../components/Projects/Loading";
+import Loading from "../components/Common/Loading";
 import Fuse from "fuse.js";
-import { TokenContext } from "../assets/Context/TokenContext";
 
 const Home = ({ search }) => {
   const [projects, setProjects] = useState([]);
