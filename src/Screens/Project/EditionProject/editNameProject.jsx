@@ -1,17 +1,15 @@
 import React, { useEffect } from "react";
 import { TokenContext } from "../../../assets/Context/TokenContext";
 import { ProjectContext } from "../../../assets/Context/ProjectContext";
-import { myApi } from "../../../api/api";
-import Loading from "../../../components/Projects/Loading";
-import Modal from "../../../components/Modal/ModalConfirmation";
+import { myApi } from "../../../service/api/api";
+import Loading from "../../../components/Common/Loading";
+import { ToastContainer, toast } from "react-toastify";
 
 const editNameProject = () => {
   const { projectData, saveProject } = React.useContext(ProjectContext);
   const { token } = React.useContext(TokenContext);
   const [formData, setFormData] = React.useState({});
-  const [message, setMessage] = React.useState("");
   const [loading, setLoading] = React.useState(true);
-  const [modal, setModal] = React.useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -34,8 +32,7 @@ const editNameProject = () => {
       if (response.status === 200) {
         console.log(response.data);
         const data = response.data;
-        setMessage(data.msg);
-        setModal(true);
+        toast.success(data.msg);
         saveProject(data.project);
       }
     } catch (error) {
@@ -75,7 +72,7 @@ const editNameProject = () => {
 
   return (
     <div className="bg-gray-100 min-h-screen flex flex-col items-center pt-8 gap-14">
-      {modal && <Modal message={message} onClose={() => setModal(false)} />}
+      <ToastContainer />
       <h2 className="text-2xl font-semibold text-center">
         Preencha as informações abaixo
       </h2>

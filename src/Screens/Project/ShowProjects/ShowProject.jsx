@@ -1,7 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { myApi } from "../../../api/api";
-import Loading from "../../../components/Projects/Loading";
+import { myApi } from "../../../service/api/api";
+import Loading from "../../../components/Common/Loading";
 import RewardCard from "../../../components/Reward/RewardCard";
 import FundingSection from "../../../components/Projects/ShowProjects/FundingSection";
 import { UserContext } from "../../../assets/Context/UserContext";

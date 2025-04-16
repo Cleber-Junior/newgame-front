@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { TokenContext } from "../../../assets/Context/TokenContext";
 import { ProjectContext } from "../../../assets/Context/ProjectContext";
-import { myApi } from "../../../api/api";
-import Loading from "../../../components/Projects/Loading";
-import Modal from "../../../components/Modal/ModalConfirmation";
+import { myApi } from "../../../service/api/api";
+import Loading from "../../../components/Common/Loading";
+import { ToastContainer, toast } from "react-toastify";
 import Placeholder from "../../../assets/img/placeholder.svg";
 
 const EditVisualProject = () => {
@@ -11,9 +11,6 @@ const EditVisualProject = () => {
   const { token } = React.useContext(TokenContext);
   const [urlImage, setUrlImage] = React.useState("");
   const [loading, setLoading] = React.useState(true);
-
-  const [message, setMessage] = React.useState("");
-  const [modal, setModal] = React.useState(false);
 
   console.log("Dentro da Vis", projectData);
 
@@ -36,7 +33,7 @@ const EditVisualProject = () => {
       );
       if (response.status === 200) {
         console.log(response);
-        setMessage(response.data.msg);
+        toast.success(response.data.msg);
         setUrlImage(response.data.url);
         console.group(response.data.project);
         saveProject(response.data.project);
@@ -69,13 +66,17 @@ const EditVisualProject = () => {
     }
   }, []);
 
+  useEffect(() => {
+    console.log(projectData);
+  }, projectData);
+
   if (loading) {
     return <Loading />;
   }
 
   return (
     <div className="bg-gray-100 min-h-screen flex flex-col items-center pt-8 gap-8">
-      {modal && <Modal message={message} onClose={() => setModal(false)} />}
+      <ToastContainer />
       <h2 className="text-2xl font-semibold text-center">Visual do Projeto</h2>
       <p className="text-center text-gray-600">
         Aqui você pode alterar a imagem de capa do seu projeto.

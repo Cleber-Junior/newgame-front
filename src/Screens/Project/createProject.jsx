@@ -1,37 +1,36 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { TokenContext } from "../../assets/Context/TokenContext";
 import { UserContext } from "../../assets/Context/UserContext";
-import { Link, useNavigate } from "react-router-dom";
-import Modal from "../../components/Modal/ModalConfirmation";
-import ErrorModal from "../../components/Modal/ErrorModal";
-import { myApi } from "../../api/api";
+import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import { myApi } from "../../service/api/api";
+import ErrorTokenScreen from "../../components/Common/ErrorTokenScreen";
 
 const CreateProject = () => {
   const { token } = useContext(TokenContext);
   const { user } = useContext(UserContext);
-  const [modal, setModal] = React.useState(false);
-  const [errorModal, setErrorModal] = React.useState(false);
-  const [message, setMessage] = React.useState("");
-  const [errorMessage, setErrorMessage] = React.useState("");
   const navigation = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
-    id_creator: user.id,
+    id_creator: "",
   });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const updatedForm = {
+      ...formData,
+      id_creator: user.id,
+    };
 
     try {
-      const response = await myApi.post("/createProject", formData, {
+      const response = await myApi.post("/createProject", updatedForm, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
       if (response.status === 201) {
         console.log("Projeto criado com sucesso", response);
-        setModal(true);
-        setMessage(response.data.msg);
+        toast.success(response.data.msg);
         const Timer = setTimeout(() => {
           clearTimeout(Timer);
           navigation("../../user/projects");
@@ -39,20 +38,17 @@ const CreateProject = () => {
       }
     } catch (error) {
       console.error("Erro ao criar projeto", error);
-      setErrorMessage(error.response.data.message);
-      setErrorModal(true);
+      toast.error(error.response.data.message);
     }
   };
 
+  if (!token) {
+    return <ErrorTokenScreen />;
+  }
+
   return (
     <div className="flex items-center justify-center h-[100%]">
-      {modal && <Modal message={message} onClose={() => setModal(false)} />}
-      {errorModal && (
-        <ErrorModal
-          message={errorMessage}
-          onClose={() => setErrorModal(false)}
-        />
-      )}
+      <ToastContainer />
       <div className="w-full max-w-md p-8 bg-gray-100 rounded shadow-lg">
         <h1 className="text-2xl font-bold text-center text-green-500 mb-6">
           Cadastrar Novo Projeto

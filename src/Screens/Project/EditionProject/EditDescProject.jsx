@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { TokenContext } from "../../../assets/Context/TokenContext";
 import { ProjectContext } from "../../../assets/Context/ProjectContext";
-import { myApi } from "../../../api/api";
-import Loading from "../../../components/Projects/Loading";
-import Modal from "../../../components/Modal/ModalConfirmation";
+import { myApi } from "../../../service/api/api";
+import Loading from "../../../components/Common/Loading";
+import { ToastContainer, toast } from "react-toastify";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
@@ -13,8 +13,6 @@ const EditDescProject = () => {
   const [formData, setFormData] = React.useState({
     description: projectData.description,
   });
-  const [message, setMessage] = React.useState("");
-  const [modal, setModal] = React.useState(false);
   const [loading, setLoading] = React.useState(true);
 
   console.log("Dentro da Desc", projectData);
@@ -39,8 +37,7 @@ const EditDescProject = () => {
       if (response.status === 200) {
         console.log(response);
         const data = response.data;
-        setMessage(data.msg);
-        setModal(true);
+        toast.success(data.msg);
         saveProject(data.project);
       }
     } catch (error) {
@@ -62,7 +59,7 @@ const EditDescProject = () => {
 
   return (
     <div className="bg-gray-100 min-h-screen flex flex-col items-center pt-8 gap-12">
-      {modal && <Modal message={message} onClose={() => setModal(false)} />}
+      <ToastContainer />
       <h2 className="text-2xl font-semibold text-center">
         Descrição do Projeto
       </h2>
