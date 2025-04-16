@@ -4,7 +4,7 @@ import { UserContext } from "../../assets/Context/UserContext";
 import { TokenContext } from "../../assets/Context/TokenContext";
 import { myApi } from "../../service/api/api";
 import HeaderUser from "../User/ProfileMenu/HeaderUser";
-import logo_header from "../../assets/img/logo_header.svg"
+import logo_header from "../../assets/img/Logo_Header.svg";
 
 const Header = ({ handleSearch }) => {
   const { user } = React.useContext(UserContext);
@@ -26,7 +26,7 @@ const Header = ({ handleSearch }) => {
       console.error("Erro ao buscar projetos", error);
     }
   };
-
+  //Could not resolve "../../assets/img/logo_header.svg" from "src/components/Common/Header.jsx"
   useEffect(() => {
     handleGetProjects();
   }, []);
