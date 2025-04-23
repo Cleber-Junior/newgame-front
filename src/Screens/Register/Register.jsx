@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { myApi } from "../../service/api/api";
 import { ToastContainer, toast } from "react-toastify";
+import GenericField from "../../components/Common/Forms/GenericField";
 
 const Register = () => {
   const [errorMessage, setErrorMessage] = useState({});
@@ -64,13 +65,13 @@ const Register = () => {
             <label htmlFor="username" className="block text-black text-xl">
               Username:
             </label>
-            <input
+            <GenericField
               type="text"
               name="username"
               value={formData.username}
               onChange={handleChange}
               placeholder="Digite seu Username"
-              className="w-96 h-8 px-3 py-4 border border-green-500 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 bg-inside-input"
+              style={"w-96 h-8 px-3 py-4 border border-green-500 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 bg-inside-input"}
             />
             {errorMessage.username && (
               <p className="text-red-600 text-xs font-outfit">
@@ -83,13 +84,13 @@ const Register = () => {
             <label htmlFor="email" className="block text-black text-xl">
               Email:
             </label>
-            <input
+            <GenericField
               type="text"
               name="email"
               value={formData.email}
               onChange={handleChange}
               placeholder="Digite seu E-mail"
-              className="w-96 h-8 px-3 py-4 border border-green-500 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 bg-inside-input"
+              style={"w-96 h-8 px-3 py-4 border border-green-500 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 bg-inside-input"}
             />
             {errorMessage.email && (
               <p className="text-red-600 text-xs font-outfit">
@@ -102,13 +103,13 @@ const Register = () => {
             <label htmlFor="password" className="block text-black text-xl">
               Senha:
             </label>
-            <input
+            <GenericField
               type="password"
               name="password"
               value={formData.password}
               onChange={handleChange}
               placeholder="Digite sua Senha"
-              className="w-96 h-8 px-3 py-4 border border-green-500 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 bg-inside-input"
+              style={"w-96 h-8 px-3 py-4 border border-green-500 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 bg-inside-input"}
             />
             {errorMessage.password && (
               <p className="text-red-600 text-xs font-outfit">
