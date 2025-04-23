@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const FundingSection = ({ projectData, progressPercentage, daysRemaining }) => {
+const FundingSection = ({ projectData, progressPercentage, daysRemaining, rewardId}) => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
       <div className="md:col-span-2 flex justify-center">
@@ -37,6 +37,7 @@ const FundingSection = ({ projectData, progressPercentage, daysRemaining }) => {
 
         <Link
           to={`../rewards/${projectData.id}`}
+          state={{ idProject: projectData.id }}
           className="mt-6 text-center w-full bg-green-500 text-white py-3 px-6 rounded-lg hover:bg-green-600 transition"
         >
           Apoiar

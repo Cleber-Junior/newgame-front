@@ -19,8 +19,9 @@ const ShowProject = () => {
       const response = await myApi.get(`/project/${id}`);
       if (response.status === 200) {
         console.log(response);
-        setProjectData(response.data.project[0]);
-        setRewardData(response.data.rewards[0]);
+        const project = response.data.project;
+        setProjectData(project.find((p) => p.id === parseInt(id)));
+        setRewardData(response.data.rewards);
         setLoading(false);
       }
     } catch (error) {

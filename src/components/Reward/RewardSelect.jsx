@@ -1,4 +1,6 @@
-const RewardSelect = ({ reward, selected, onSelect }) => {
+import { Link } from "react-router-dom";
+
+const RewardSelect = ({ reward, projectId, selected, onSelect }) => {
   return (
     <div
       className={`border rounded-lg p-4 w-full cursor-pointer transition ${
@@ -37,12 +39,18 @@ const RewardSelect = ({ reward, selected, onSelect }) => {
         />
       </div>
 
-      {/* Botão de continuar visível apenas quando selecionado */}
-      {selected && (
-        <button className="mt-4 w-full bg-green-500 text-white py-2 rounded-md hover:bg-green-600 transition">
-          Continuar
-        </button>
-      )}
+      <Link
+        to={`../../payment`}
+        state={{ idProject: projectId, rewardData: reward }}
+        className="w-full"
+      >
+        {/* Botão de continuar visível apenas quando selecionado */}
+        {selected && (
+          <button className="mt-4 w-full bg-green-500 text-white py-2 rounded-md hover:bg-green-600 transition">
+            Continuar
+          </button>
+        )}
+      </Link>
     </div>
   );
 };
