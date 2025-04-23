@@ -130,7 +130,7 @@ const UserPublicProfile = () => {
           </div>
         </div>
 
-        <SaveButton handleSave={handleSubmit} />
+        <SaveButton handleSave={handleSubmit} style={"px-6 py-2 text-white bg-green-500 rounded-md hover:bg-green-600"} message={"Salvar"}/>
       </form>
     </ProfileNav>
   );

@@ -85,7 +85,7 @@ const UserDataPrivacy = () => {
               </label>
               <GenericField
                 name={"birth_date"}
-                type={"birth_date"}
+                type={"date"}
                 value={userForm.birth_date}
                 onChange={handleChange(setUserForm)}
                 style="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 w-full"
@@ -206,7 +206,7 @@ const UserDataPrivacy = () => {
             </div>
           </div>
         </div>
-        <SaveButton handleSave={handleSubmit} />
+        <SaveButton handleSave={handleSubmit} style={"px-6 py-2 text-white bg-green-500 rounded-md hover:bg-green-600"} message={"Salvar"}/>
       </form>
     </ProfileNav>
   );

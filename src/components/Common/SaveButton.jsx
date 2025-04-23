@@ -1,13 +1,13 @@
 import React from "react";
 
-const SaveButton = ({handleSave}) => {
+const SaveButton = ({handleSave, style, message}) => {
   return (
     <div className="flex justify-end">
       <button
         onClick={handleSave}
-        className="px-6 py-2 text-white bg-green-500 rounded-md hover:bg-green-600"
+        className={style}
       >
-        Salvar
+        {message}
       </button>
     </div>
   );
