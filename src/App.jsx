@@ -23,6 +23,7 @@ import EditDescProject from "./Screens/Project/EditionProject/EditDescProject";
 import EditVisualProject from "./Screens/Project/EditionProject/editVisualProject";
 import EditRewardProject from "./Screens/Project/EditionProject/EditRewardProject";
 import SelectReward from "./Screens/Project/ShowProjects/SelectReward";
+import ReviewData from "./Screens/Payment/ReviewData";
 
 const ProjectEditLayout = ({ project, children }) => (
   <div className="flex">
@@ -100,6 +101,7 @@ const App = () => {
                 </ProtectRoute>
               }
             />
+            <Route path="payment" element={<ReviewData />} />
           </Routes>
         </ProjectStorage>
       </UserStorage>
