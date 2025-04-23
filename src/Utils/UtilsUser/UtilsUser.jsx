@@ -1,6 +1,6 @@
 import { myApi } from "../../service/api/api";
 
-export async function handleChange (setUserForm) {
+export function handleChange (setUserForm) {
   return (e) => {
     const { name, value } = e.target;
 
@@ -49,4 +49,3 @@ export async function fetchProjectsUser (token, userId)  {
     return response.data.project;
   }
 };
-
