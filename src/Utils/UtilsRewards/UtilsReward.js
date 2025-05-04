@@ -1,4 +1,5 @@
 import { myApi } from "../../service/api/api";
+import { apiCEP } from "../../service/api/apiCep";
 import { handleSave } from "../UtilsUser/UtilsUser";
 
 export async function fetchRewards(token, id) {
@@ -64,37 +65,60 @@ export async function handleSubmitReward(token, formData, id) {
   }
 }
 
-export async function handlePayment(token, idProject, rewardData, userId, saveUser, userData){
+export async function handlePayment(
+  token,
+  idProject,
+  rewardData,
+  userId,
+  saveUser,
+  userData
+) {
   const formUpdate = {
     reward: {
-      ...rewardData
+      ...rewardData,
     },
     user: {
-      ...userData
+      ...userData,
     },
     project: {
-      id: idProject
-    }
-  }
+      id: idProject,
+    },
+  };
 
-  try  {
-    const userSave = await handleSave(token, userId, saveUser,  userData)
-    if(userSave.user){
+  try {
+    const userSave = await handleSave(token, userId, saveUser, userData);
+    if (userSave.user) {
       const responseLink = await myApi.post("/payReward", formUpdate, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
-      })
-      if(responseLink.status === 201){
-        console.log("responseLink", responseLink)
+      });
+      if (responseLink.status === 201) {
+        console.log("responseLink", responseLink);
         return responseLink;
       }
     }
-  } catch (error){
+  } catch (error) {
     console.error("Error during payment:", error);
   }
 }
 
-// Att Usuario -> Chama Função de redirecionar usuario para a tela do Mercado -> 
+export async function getCep(cep) {
+  console.log(cep);
+  const url = `https://viacep.com.br/ws/${cep}/json/`;
+  console.log(url);
+  try {
+    const response = await fetch(url);
+    if(response.status === 200){
+      const data = await response.json();
+      console.log("response", data);
+      return data;
+    }
+  } catch (error) {
+    console.error("Error fetching CEP data:", error);
+  }
+}
+
+// Att Usuario -> Chama Função de redirecionar usuario para a tela do Mercado ->
 // Tabela pagamento
-// Fazer logica pagamento 
+// Fazer logica pagamento

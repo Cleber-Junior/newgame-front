@@ -7,6 +7,7 @@ import GenericField from "../../components/Common/Forms/GenericField";
 import GenericSelect from "../../components/Common/Forms/GenericSelect";
 import SaveButton from "../../components/Common/SaveButton";
 import ProfileNav from "../../components/User/Profile/ProfileNav";
+import { getCep } from "../../Utils/UtilsRewards/UtilsReward";
 
 const UserDataPrivacy = () => {
   const { user, saveUser } = useContext(UserContext);
@@ -32,6 +33,28 @@ const UserDataPrivacy = () => {
       console.log(error);
     }
   };
+
+  useEffect(() => {
+    const fetchCepData = async (cep) => {
+      const response = await getCep(cep);
+      console.log(response);
+      if (response) {
+        setUserForm((prev) => ({
+          ...prev,
+          street: response.logradouro,
+          neighborhood: response.bairro,
+          city: response.localidade,
+          state: response.uf,
+        }));
+      }
+    };
+
+    const cep = userForm.zip_code.replace(/\D/g, "");
+
+    if (cep && cep.length === 8) {
+      fetchCepData(cep);
+    }
+  }, [userForm.zip_code]);
 
   useEffect(() => {
     const fetchState = async () => {
@@ -60,9 +83,9 @@ const UserDataPrivacy = () => {
                 Nome
               </label>
               <GenericField
-                name={"name"}
+                name={"fullname"}
                 type={"text"}
-                value={userForm.name}
+                value={userForm.fullname}
                 onChange={handleChange(setUserForm)}
                 style="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 w-full"
               />
@@ -206,7 +229,13 @@ const UserDataPrivacy = () => {
             </div>
           </div>
         </div>
-        <SaveButton handleSave={handleSubmit} style={"px-6 py-2 text-white bg-green-500 rounded-md hover:bg-green-600"} message={"Salvar"}/>
+        <SaveButton
+          handleSave={handleSubmit}
+          style={
+            "px-6 py-2 text-white bg-green-500 rounded-md hover:bg-green-600"
+          }
+          message={"Salvar"}
+        />
       </form>
     </ProfileNav>
   );

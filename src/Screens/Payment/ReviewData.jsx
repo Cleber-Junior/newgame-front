@@ -5,7 +5,7 @@ import GenericSelect from "../../components/Common/Forms/GenericSelect";
 import { UserContext } from "../../assets/Context/UserContext";
 import { TokenContext } from "../../assets/Context/TokenContext";
 import { handleChange } from "../../Utils/UtilsUser/UtilsUser";
-import { handlePayment } from "../../Utils/UtilsRewards/UtilsReward";
+import { getCep, handlePayment } from "../../Utils/UtilsRewards/UtilsReward";
 import SaveButton from "../../components/Common/SaveButton";
 import { fetchApiState } from "../../service/api/apiState";
 
@@ -35,6 +35,29 @@ const ReviewData = () => {
       console.error("Error during payment:", error);
     }
   };
+
+  useEffect(() => {
+    const fetchCepData = async (cep) => {
+      const response = await getCep(cep);
+      console.log(response);
+      if(response){
+        setUserForm((prev) => ({
+          ...prev,
+          street: response.logradouro,
+          neighborhood: response.bairro,
+          city: response.localidade,
+          state: response.uf,
+        }));
+      }
+    };
+
+    const cep = userForm.zip_code.replace(/\D/g, "");
+
+    if (cep && cep.length === 8) {
+      fetchCepData(cep);
+    }
+
+  }, [userForm.zip_code]);
 
   fetchApiState()
     .then((data) => {
@@ -66,7 +89,7 @@ const ReviewData = () => {
                 Nome completo *
               </label>
               <GenericField
-                name={"name"}
+                name={"fullname"}
                 type={"text"}
                 value={userForm.name}
                 onChange={handleChange(setUserForm)}
