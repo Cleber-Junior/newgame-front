@@ -1,5 +1,4 @@
 import { myApi } from "../../service/api/api";
-import { apiCEP } from "../../service/api/apiCep";
 import { handleSave } from "../UtilsUser/UtilsUser";
 
 export async function fetchRewards(token, id) {
