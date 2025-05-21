@@ -1,18 +1,23 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const FundingSection = ({ projectData, progressPercentage, daysRemaining, rewardId}) => {
+const FundingSection = ({
+  projectData,
+  progressPercentage,
+  daysRemaining,
+  rewardId,
+}) => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
-      <div className="md:col-span-2 flex justify-center">
+      <div className="md:col-span-2 flex justify-center min-w-[100px]">
         <img
           src={projectData.image}
           alt={projectData.name}
-          className="rounded-md w-full max-w-2xl object-cover"
+          className="rounded-md max-w-2xl min-w-[500px] min-h-[200px] max-h-[400px] object-cover"
         />
       </div>
 
-      <div className="bg-gray-200 p-6 rounded-lg shadow-md w-full max-w-[330px] mx-auto flex flex-col justify-center items-center h-full">
+      <div className="bg-gray-200 p-6 rounded-lg shadow-md w-full min-w-[270px] mx-auto flex flex-col justify-center items-center h-full">
         <div className="text-center">
           <h2 className="text-3xl font-bold text-black">
             R$ {projectData.current_value}

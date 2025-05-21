@@ -3,6 +3,7 @@ import { handleChange, handleSave } from "../../Utils/UtilsUser/UtilsUser";
 import { ToastContainer, toast } from "react-toastify";
 import { UserContext } from "../../assets/Context/UserContext";
 import { TokenContext } from "../../assets/Context/TokenContext";
+import ReactInputMask from "react-input-mask";
 import GenericField from "../../components/Common/Forms/GenericField";
 import GenericSelect from "../../components/Common/Forms/GenericSelect";
 import SaveButton from "../../components/Common/SaveButton";
@@ -28,9 +29,15 @@ const UserDataPrivacy = () => {
         userForm
       );
       console.log(updateUser);
-      toast.success(updateUser.message);
+      if(updateUser.status === 200){
+        toast.success(updateUser.message);
+      }
+      if(updateUser.status === 400){
+        toast.error(updateUser.response.data.message);
+      }
     } catch (error) {
-      console.log(error);
+      console.log(updateUser);
+      toast.error(updateUser.response.data.error);
     }
   };
 
@@ -49,10 +56,11 @@ const UserDataPrivacy = () => {
       }
     };
 
-    const cep = userForm.zip_code.replace(/\D/g, "");
-
-    if (cep && cep.length === 8) {
-      fetchCepData(cep);
+    if (userForm.zip_code) {
+      const cep = userForm.zip_code.replace(/\D/g, "");
+      if (cep && cep.length === 8) {
+        fetchCepData(cep);
+      }
     }
   }, [userForm.zip_code]);
 
@@ -94,13 +102,15 @@ const UserDataPrivacy = () => {
               <label className="block text-lg font-medium text-gray-700">
                 CPF
               </label>
-              <GenericField
-                name={"cpf"}
-                type={"text"}
-                value={userForm.cpf}
-                onChange={handleChange(setUserForm)}
-                style="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 w-full"
-              />
+
+                <GenericField
+                  name={"cpf"}
+                  type={"text"}
+                  value={userForm.cpf}
+                  onChange={handleChange(setUserForm)}
+                  style="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 w-full"
+                  mask="999.999.999-99"
+                />
             </div>
             <div className="flex flex-col w-full">
               <label className="block text-lg font-medium text-gray-700">
@@ -138,6 +148,7 @@ const UserDataPrivacy = () => {
               "w-1/2 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
             }
             placeholder={"Digite apenas números"}
+            mask={"99999-999"}
           />
           <label
             htmlFor="street"
@@ -225,6 +236,7 @@ const UserDataPrivacy = () => {
                 value={userForm.cellphone}
                 onChange={handleChange(setUserForm)}
                 style="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 w-full"
+                mask={"(99) 99999-9999"}
               />
             </div>
           </div>

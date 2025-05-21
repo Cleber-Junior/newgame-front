@@ -8,6 +8,7 @@ import { handleChange } from "../../Utils/UtilsUser/UtilsUser";
 import { getCep, handlePayment } from "../../Utils/UtilsRewards/UtilsReward";
 import SaveButton from "../../components/Common/SaveButton";
 import { fetchApiState } from "../../service/api/apiState";
+import { use } from "react";
 
 const ReviewData = () => {
   const location = useLocation();
@@ -30,6 +31,10 @@ const ReviewData = () => {
       console.log("response", response);
       if (response.status === 201) {
         window.open(response.data.reference, "_blank");
+        const Timer = setTimeout(() => {
+          window.location.href = "../user/supported";
+          clearTimeout(Timer);
+        }, 5000);
       }
     } catch (error) {
       console.error("Error during payment:", error);
@@ -40,36 +45,43 @@ const ReviewData = () => {
     const fetchCepData = async (cep) => {
       const response = await getCep(cep);
       console.log(response);
-      if(response){
+      if (response) {
         setUserForm((prev) => ({
           ...prev,
-          street: response.logradouro,
-          neighborhood: response.bairro,
-          city: response.localidade,
-          state: response.uf,
+          // Apenas atualiza os campos se estiverem vazios
+          street: prev.street || response.logradouro,
+          neighborhood: prev.neighborhood || response.bairro,
+          city: prev.city || response.localidade,
+          state: prev.state || response.uf,
         }));
       }
     };
 
-    const cep = userForm.zip_code.replace(/\D/g, "");
-
-    if (cep && cep.length === 8) {
-      fetchCepData(cep);
+    if (userForm.zip_code) {
+      const cep = userForm.zip_code.replace(/\D/g, "");
+      if (cep && cep.length === 8) {
+        fetchCepData(cep);
+      }
     }
-
   }, [userForm.zip_code]);
 
-  fetchApiState()
-    .then((data) => {
-      if (data) {
-        setState(data);
-      } else {
-        console.error("Failed to fetch state data.");
-      }
-    })
-    .catch((error) => {
-      console.error("Error fetching state data:", error);
-    });
+  useEffect(() => {
+    fetchApiState()
+      .then((data) => {
+        if (data) {
+          setState(data);
+        } else {
+          console.error("Failed to fetch state data.");
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching state data:", error);
+      });
+  }, []);
+
+  useEffect(() => {
+    console.log("userForm", userForm);
+  }, [userForm]);
 
   return (
     <div className="max-w-screen-lg mx-auto p-6">
@@ -91,7 +103,7 @@ const ReviewData = () => {
               <GenericField
                 name={"fullname"}
                 type={"text"}
-                value={userForm.name}
+                value={userForm.fullname}
                 onChange={handleChange(setUserForm)}
                 style="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 w-full"
               />
@@ -108,6 +120,7 @@ const ReviewData = () => {
                 value={userForm.cpf}
                 onChange={handleChange(setUserForm)}
                 style="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 w-full"
+                mask={"999.999.999-99"}
               />
             </div>
             <div>
@@ -138,6 +151,7 @@ const ReviewData = () => {
                   value={userForm.zip_code}
                   onChange={handleChange(setUserForm)}
                   style="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 w-full"
+                  mask={"99999-999"}
                   placeholder="Digite apenas números"
                 />
               </div>
@@ -226,6 +240,7 @@ const ReviewData = () => {
                   value={userForm.cellphone}
                   onChange={handleChange(setUserForm)}
                   style="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 w-full"
+                  mask={"(99) 99999-9999"}
                 />
               </div>
             </div>

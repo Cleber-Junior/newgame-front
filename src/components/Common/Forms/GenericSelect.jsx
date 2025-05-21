@@ -6,7 +6,7 @@ const GenericSelect = ({ options, onSelect }) => {
       <div class="relative">
         <select
           name="state"
-          onChange={onSelect}
+          onChange={(e) => onSelect(e.target.value)}
           class="w-full text-slate-700 text-sm border border-gray-300 rounded pl-3 pr-8 py-2  duration-300  focus:border-green-500 hover:border-green-600 shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 appearance-none cursor-pointer"
         >
           {options.map((option, index) => (

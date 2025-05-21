@@ -73,21 +73,15 @@ export async function handlePayment(
   userData
 ) {
   const formUpdate = {
-    reward: {
-      ...rewardData,
-    },
-    user: {
-      ...userData,
-    },
-    project: {
-      id: idProject,
-    },
+    reward_id: rewardData.id,
+    user: userData.id,
+    project_id: idProject,
   };
 
   try {
     const userSave = await handleSave(token, userId, saveUser, userData);
     if (userSave.user) {
-      const responseLink = await myApi.post("/payReward", formUpdate, {
+      const responseLink = await myApi.post("/payreward", formUpdate, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

@@ -49,10 +49,6 @@ const Login = () => {
     }
   };
 
-  useEffect(() => {
-    console.log(formData);
-  });
-
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-200 relative overflow-hidden bg-transparent bg-fundo ">
       <ToastContainer />
