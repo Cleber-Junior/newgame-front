@@ -24,6 +24,7 @@ import EditVisualProject from "./Screens/Project/EditionProject/editVisualProjec
 import EditRewardProject from "./Screens/Project/EditionProject/EditRewardProject";
 import SelectReward from "./Screens/Project/ShowProjects/SelectReward";
 import ReviewData from "./Screens/Payment/ReviewData";
+import { ToastContainer } from "react-toastify";
 
 const ProjectEditLayout = ({ project, children }) => (
   <div className="flex">
@@ -39,6 +40,7 @@ const App = () => {
     location.pathname === "/login" || location.pathname === "/register";
   return (
     <TokenStorage>
+      <ToastContainer />
       <UserStorage>
         <ProjectStorage>
           {!hideHeader && <Header handleSearch={setSearch} />}

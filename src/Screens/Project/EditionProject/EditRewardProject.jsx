@@ -67,7 +67,6 @@ const EditRewardProject = () => {
 
   return (
     <div className="bg-gray-100 min-h-screen flex flex-col items-center py-8 px-4 gap-6">
-      <ToastContainer />
       <h2 className="text-2xl font-semibold text-center">Recompensas</h2>
       <p className="text-center text-gray-600 max-w-lg">
         Aqui você pode adicionar e editar as recompensas para o seu projeto.

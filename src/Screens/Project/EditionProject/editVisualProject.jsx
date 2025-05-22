@@ -76,7 +76,6 @@ const EditVisualProject = () => {
 
   return (
     <div className="bg-gray-100 min-h-screen flex flex-col items-center pt-8 gap-8">
-      <ToastContainer />
       <h2 className="text-2xl font-semibold text-center">Visual do Projeto</h2>
       <p className="text-center text-gray-600">
         Aqui você pode alterar a imagem de capa do seu projeto.
