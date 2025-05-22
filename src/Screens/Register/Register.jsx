@@ -54,7 +54,7 @@ const Register = () => {
 
   return (
     <div className="flex items-center justify-center min-h-screen relative overflow-hidden bg-fundo">
-      <ToastContainer />
+      <ToastContainer autoClose={1000} />
       <div className="flex flex-col items-center p-6 mx-auto w-auto bg-white border-solid border-black border-2 rounded-lg">
         <h1 className="text-green-600 text-5xl font-geo mb-4">Cadastro</h1>
         <form
@@ -71,7 +71,9 @@ const Register = () => {
               value={formData.username}
               onChange={handleChange}
               placeholder="Digite seu Username"
-              style={"w-96 h-8 px-3 py-4 border border-green-500 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 bg-inside-input"}
+              style={
+                "w-96 h-8 px-3 py-4 border border-green-500 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 bg-inside-input"
+              }
             />
             {errorMessage.username && (
               <p className="text-red-600 text-xs font-outfit">
@@ -90,7 +92,9 @@ const Register = () => {
               value={formData.email}
               onChange={handleChange}
               placeholder="Digite seu E-mail"
-              style={"w-96 h-8 px-3 py-4 border border-green-500 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 bg-inside-input"}
+              style={
+                "w-96 h-8 px-3 py-4 border border-green-500 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 bg-inside-input"
+              }
             />
             {errorMessage.email && (
               <p className="text-red-600 text-xs font-outfit">
@@ -109,7 +113,9 @@ const Register = () => {
               value={formData.password}
               onChange={handleChange}
               placeholder="Digite sua Senha"
-              style={"w-96 h-8 px-3 py-4 border border-green-500 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 bg-inside-input"}
+              style={
+                "w-96 h-8 px-3 py-4 border border-green-500 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 bg-inside-input"
+              }
             />
             {errorMessage.password && (
               <p className="text-red-600 text-xs font-outfit">

@@ -40,7 +40,7 @@ const App = () => {
     location.pathname === "/login" || location.pathname === "/register";
   return (
     <TokenStorage>
-      <ToastContainer autoClose={500} />
+      <ToastContainer autoClose={1000} />
       <UserStorage>
         <ProjectStorage>
           {!hideHeader && <Header handleSearch={setSearch} />}

@@ -36,7 +36,7 @@ const Login = () => {
         saveToken(response.data.token);
         localStorage.setItem("token", response.data.token);
         localStorage.setItem("user", JSON.stringify(response.data.user));
-        toast.success(response.data.msg)
+        toast.success(response.data.msg);
         const timer = setTimeout(() => {
           clearTimeout(timer);
           navigate("../");
@@ -51,7 +51,7 @@ const Login = () => {
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-200 relative overflow-hidden bg-transparent bg-fundo ">
-      <ToastContainer />
+      <ToastContainer autoClose={1000} />
       <div className="flex flex-col items-center mb-6 bg-white border-solid border-black p-6 border-2 rounded-lg">
         <img src={img} alt="Logo" className="w-25 h-24 mb-2" />{" "}
         {/* Substitua com a URL do logo */}

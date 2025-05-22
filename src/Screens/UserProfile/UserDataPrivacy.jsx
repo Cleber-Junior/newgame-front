@@ -29,10 +29,10 @@ const UserDataPrivacy = () => {
         userForm
       );
       console.log(updateUser);
-      if(updateUser.status === 200){
+      if (updateUser.status === 200) {
         toast.success(updateUser.message);
       }
-      if(updateUser.status === 400){
+      if (updateUser.status === 400) {
         toast.error(updateUser.response.data.message);
       }
     } catch (error) {
@@ -79,7 +79,7 @@ const UserDataPrivacy = () => {
   return (
     <ProfileNav>
       <form className="max-w-4xl mx-auto p-4 space-y-6">
-        <ToastContainer />
+        <ToastContainer autoClose={1000} />
         <div className="max-w-4xl mx-auto p-4 space-y-6 bg-gray-100 rounded-lg shadow-md m-5">
           <h2 className="text-xl font-bold mb-4">Dados Pessoais</h2>
           <p className="text-sm text-gray-500">
@@ -103,14 +103,14 @@ const UserDataPrivacy = () => {
                 CPF
               </label>
 
-                <GenericField
-                  name={"cpf"}
-                  type={"text"}
-                  value={userForm.cpf}
-                  onChange={handleChange(setUserForm)}
-                  style="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 w-full"
-                  mask="999.999.999-99"
-                />
+              <GenericField
+                name={"cpf"}
+                type={"text"}
+                value={userForm.cpf}
+                onChange={handleChange(setUserForm)}
+                style="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 w-full"
+                mask="999.999.999-99"
+              />
             </div>
             <div className="flex flex-col w-full">
               <label className="block text-lg font-medium text-gray-700">

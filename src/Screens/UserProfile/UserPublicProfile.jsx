@@ -42,7 +42,7 @@ const UserPublicProfile = () => {
         className="max-w-2xl mx-auto p-4 space-y-6 bg-gray-100 rounded-lg shadow-md m-5"
         onSubmit={handleSubmit}
       >
-        <ToastContainer />
+        <ToastContainer autoClose={1000} />
         <div className="space-y-2">
           <label
             htmlFor="email"

@@ -75,7 +75,7 @@ const MenuProjects = () => {
 
   return (
     <div className="flex flex-col min-h-screen overflow-hidden w-60 bg-header-bg text-white p-4">
-      <ToastContainer />
+      <ToastContainer autoClose={1000} />
       <div className="flex flex-col items-center mb-6">
         {urlImage ? (
           <>

@@ -48,7 +48,7 @@ const CreateProject = () => {
 
   return (
     <div className="flex items-center justify-center h-[100%]">
-      <ToastContainer />
+      <ToastContainer autoClose={1000} />
       <div className="w-full max-w-md p-8 bg-gray-100 rounded shadow-lg">
         <h1 className="text-2xl font-bold text-center text-green-500 mb-6">
           Cadastrar Novo Projeto
