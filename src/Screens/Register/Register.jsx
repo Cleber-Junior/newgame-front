@@ -11,11 +11,12 @@ const Register = () => {
     email: "",
     password: "",
   });
+  const [isSubmited, setIsSubmited] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    setIsSubmited(true);
     try {
       const response = await myApi.post("/register", formData);
       if (response.status === 201) {
@@ -35,6 +36,8 @@ const Register = () => {
         email: errors.email ? errors.email[0] : "",
         password: errors.password ? errors.password[0] : "",
       });
+      toast.error(error.response.data.errors);
+      setIsSubmited(false);
     }
   };
 
@@ -47,10 +50,10 @@ const Register = () => {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      clearTimeout(timer);
       setErrorMessage({});
     }, 4000);
-  });
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <div className="flex items-center justify-center min-h-screen relative overflow-hidden bg-fundo">
@@ -126,7 +129,10 @@ const Register = () => {
 
           <button
             type="submit"
-            className="font-geo text-xl w-3/4 h-10 bg-green-600 text-white rounded-md mt-4 mb-2 hover:bg-green-800"
+            className={`font-outfit w-full py-2 mt-4 ${
+              isSubmited ? "bg-gray-800 text-white" : "bg-green-600 text-white"
+            } rounded-md focus:outline-none focus:ring-2 focus:ring-green-500`}
+            disabled={isSubmited}
           >
             Cadastrar-se
           </button>
