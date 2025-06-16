@@ -28,7 +28,7 @@ const ReviewData = () => {
         saveUser,
         userForm
       );
-      console.log("response", response);
+
       if (response.status === 201) {
         window.open(response.data.reference, "_blank");
         const Timer = setTimeout(() => {
