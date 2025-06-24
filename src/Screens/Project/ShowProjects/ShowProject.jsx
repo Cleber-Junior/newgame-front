@@ -66,6 +66,7 @@ const ShowProject = () => {
         projectData={projectData}
         progressPercentage={progressPercentage}
         daysRemaining={daysRemaining}
+        userId={user.id}
       />
 
       <DescriptionSection projectData={projectData} rewardData={rewardData} />

@@ -5,8 +5,9 @@ const FundingSection = ({
   projectData,
   progressPercentage,
   daysRemaining,
-  rewardId,
+  userId,
 }) => {
+  console.log("FundingSection projectData:", projectData, userId);
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
       <div className="md:col-span-2 flex justify-center min-w-[100px]">
@@ -40,13 +41,15 @@ const FundingSection = ({
           </div>
         </div>
 
-        <Link
-          to={`../rewards/${projectData.id}`}
-          state={{ idProject: projectData.id }}
-          className="mt-6 text-center w-full bg-green-500 text-white py-3 px-6 rounded-lg hover:bg-green-600 transition"
-        >
-          Apoiar
-        </Link>
+        {projectData.id_creator !== userId ? (
+          <Link
+            to={`../rewards/${projectData.id}`}
+            state={{ idProject: projectData.id }}
+            className="mt-6 text-center w-full bg-green-500 text-white py-3 px-6 rounded-lg hover:bg-green-600 transition"
+          >
+            Apoiar
+          </Link>
+        ) : null}
       </div>
     </div>
   );
