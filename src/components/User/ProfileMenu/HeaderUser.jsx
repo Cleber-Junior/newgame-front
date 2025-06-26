@@ -50,6 +50,17 @@ const HeaderUser = ({ dataUser }) => {
           className="absolute right-0 mt-2 w-60 px-5 py-3 bg-white text-black rounded-lg shadow border border-transparent z-50"
         >
           <ul className="space-y-3">
+            <Link to={"/project/create"}>
+              <li className="font-medium sm:hidden">
+                <a
+                  href=""
+                  className="flex items-center transition-colors duration-200 border-r-4 border-transparent hover:border-green-500"
+                >
+                  {" "}
+                  Criar Projeto
+                </a>
+              </li>
+            </Link>
             <Link to={"./user/supported"}>
               <li className="font-medium">
                 <a
