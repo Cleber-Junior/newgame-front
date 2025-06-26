@@ -15,10 +15,14 @@ const EditDescProject = () => {
   });
   const [loading, setLoading] = React.useState(true);
 
-  console.log("Dentro da Desc", projectData);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!formData.description) {
+      toast.error("Por favor, preencha a descrição do projeto.");
+      return;
+    }
+
     const updateForm = {
       ...formData,
       _method: "patch",

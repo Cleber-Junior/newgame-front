@@ -17,6 +17,11 @@ const EditVisualProject = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (!e.target.image.files[0]) {
+      toast.error("Por favor, selecione uma imagem.");
+      return;
+    }
+
     const updateForm = new FormData();
     updateForm.append("image", e.target.image.files[0]);
     updateForm.append("_method", "patch");

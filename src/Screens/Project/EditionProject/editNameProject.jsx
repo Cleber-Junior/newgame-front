@@ -14,6 +14,11 @@ const editNameProject = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (!formData.name) {
+      toast.error("O projeto deve ter um Nome.");
+      return;
+    }
+
     const updateForm = {
       ...formData,
       _method: "patch",

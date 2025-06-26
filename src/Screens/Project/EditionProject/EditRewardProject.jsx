@@ -32,6 +32,12 @@ const EditRewardProject = () => {
 
   const submitReward = async (e) => {
     e.preventDefault();
+
+    if (!formData.name || !formData.value || !formData.description) {
+      toast.error("Os Dados da recompensa devem ser inseridos.");
+      return;
+    }
+
     const response = await handleSubmitReward(token, formData, projectData.id);
     if (response.status === 201) {
       setRewards((prevRewards) => [...prevRewards, response.data.reward]);

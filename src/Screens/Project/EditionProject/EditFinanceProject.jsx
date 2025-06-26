@@ -17,6 +17,11 @@ const EditFinanceProject = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (!formData.meta_value || !formData.end_date) {
+      toast.error("Preencha todos os campos.");
+      return;
+    }
+
     const updateForm = {
       ...formData,
       _method: "patch",

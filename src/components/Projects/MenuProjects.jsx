@@ -13,8 +13,6 @@ const MenuProjects = () => {
   const navigate = useNavigate();
 
   const handleSubmit = async () => {
-    console.log("Form Enviado: ", projectData);
-
     const currentDate = new Date();
     const formattedDate = currentDate.toISOString().split("T")[0];
 
@@ -23,6 +21,13 @@ const MenuProjects = () => {
       status: 1,
       start_date: formattedDate,
     };
+
+    // Validação: verifica se algum campo do updateForm é null
+    const hasNull = Object.values(updateForm).some((value) => value === null);
+    if (hasNull) {
+      toast.error("Preencha todos os campos antes de finalizar o projeto.");
+      return;
+    }
 
     try {
       const response = await myApi.post(
