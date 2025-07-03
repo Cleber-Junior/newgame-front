@@ -61,6 +61,15 @@ const EditRewardProject = () => {
     }
   };
 
+  const handleRewardUpdated = (updatedReward) => {
+    setRewards((prevRewards) =>
+      prevRewards.map((reward) =>
+        reward.id === updatedReward.id ? updatedReward : reward
+      )
+    );
+    toast.success("Recompensa atualizada com sucesso!");
+  };
+
   useEffect(() => {
     getRewards();
   }, [token]);
@@ -131,7 +140,11 @@ const EditRewardProject = () => {
             Adicionar Recompensa
           </button>
         </form>
-        <RewardList rewards={rewards} handleDeleteReward={deleteReward} />
+        <RewardList
+          rewards={rewards}
+          handleDeleteReward={deleteReward}
+          onRewardUpdated={handleRewardUpdated}
+        />
       </div>
     </div>
   );

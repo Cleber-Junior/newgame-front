@@ -44,6 +44,24 @@ export async function handleDeleteReward(id, token) {
   }
 }
 
+export async function handleSaveReward(id, token, formData) {
+  try {
+    const response = await myApi.put(`/rewards/${id}`, formData, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (response.status === 200) {
+      console.log("Recompensa atualizada com sucesso!", response.data);
+      return response;
+    }
+  } catch (error) {
+    console.error("Erro ao atualizar a recompensa:", error);
+    return error.response;
+  }
+}
+
 export async function handleSubmitReward(token, formData, id) {
   const updateForm = {
     ...formData,
@@ -102,7 +120,7 @@ export async function getCep(cep) {
   console.log(url);
   try {
     const response = await fetch(url);
-    if(response.status === 200){
+    if (response.status === 200) {
       const data = await response.json();
       console.log("response", data);
       return data;

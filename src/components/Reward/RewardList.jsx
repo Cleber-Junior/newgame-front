@@ -1,24 +1,42 @@
 import { useState } from "react";
 import { Trash2, Pencil } from "lucide-react";
 import RewardModalDelete from "./RewardModalDelete";
+import RewardModalEdit from "./RewardModalEdit";
 
-const RewardList = ({ rewards, handleDeleteReward }) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+const RewardList = ({ rewards, handleDeleteReward, onRewardUpdated }) => {
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [selectedReward, setSelectedReward] = useState(null);
 
-  function openModal(rewardId) {
-    setSelectedReward(rewardId);
-    setIsModalOpen(true);
+  function openEditModal(reward) {
+    setSelectedReward(reward);
+    setIsEditModalOpen(true);
   }
 
-  function closeModal() {
-    setIsModalOpen(false);
+  function closeEditModal() {
+    setIsEditModalOpen(false);
     setSelectedReward(null);
   }
 
-  async function handleConfirmDelete(rewardId) {
-    await handleDeleteReward(rewardId); // Chama a função de exclusão
-    closeModal(); // Fecha o modal
+  function openDeleteModal(reward) {
+    setSelectedReward(reward);
+    setIsDeleteModalOpen(true);
+  }
+
+  function closeDeleteModal() {
+    setIsDeleteModalOpen(false);
+    setSelectedReward(null);
+  }
+
+  async function handleConfirmDelete() {
+    if (!selectedReward) return;
+    await handleDeleteReward(selectedReward.id);
+    closeDeleteModal();
+  }
+
+  async function handleConfirmSave(updatedReward) {
+    onRewardUpdated(updatedReward); // Informa o componente pai sobre a atualização
+    closeEditModal();
   }
 
   return (
@@ -27,10 +45,10 @@ const RewardList = ({ rewards, handleDeleteReward }) => {
         Recompensas Criadas
       </h3>
       <ul className="space-y-4 max-h-96 overflow-y-auto scrollbar-custom">
-        {rewards.map((reward) => (
+        {rewards.map((reward, index) => (
           <li
             className="flex justify-between items-center border-b pb-2"
-            key={reward.id}
+            key={index}
           >
             <div>
               <h4 className="font-semibold">{reward.name}</h4>
@@ -42,20 +60,26 @@ const RewardList = ({ rewards, handleDeleteReward }) => {
 
             <div className="flex space-x-3 m-3">
               <div className="hover:text-blue-500 transition duration-200 cursor-pointer">
-                <Pencil size={20} />
+                <Pencil size={20} onClick={() => openEditModal(reward)} />
               </div>
               <div className="hover:text-red-500 transition duration-200 cursor-pointer">
-                <Trash2 size={20} onClick={() => openModal(reward.id)} />
+                <Trash2 size={20} onClick={() => openDeleteModal(reward)} />
               </div>
             </div>
           </li>
         ))}
       </ul>
       <RewardModalDelete
-        isOpen={isModalOpen}
-        onClose={closeModal}
+        isOpen={isDeleteModalOpen}
+        onClose={closeDeleteModal}
         Reward={selectedReward}
         onConfirm={handleConfirmDelete}
+      />
+      <RewardModalEdit
+        isOpen={isEditModalOpen}
+        onClose={closeEditModal}
+        Reward={selectedReward}
+        onConfirm={handleConfirmSave}
       />
     </div>
   );
