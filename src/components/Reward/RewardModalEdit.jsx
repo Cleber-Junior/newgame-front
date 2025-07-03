@@ -37,7 +37,6 @@ const RewardModalEdit = ({ isOpen, onConfirm, onClose, Reward }) => {
 
     const response = await handleSaveReward(Reward.id, token, formData);
     if (response && response.status === 200) {
-      console.log(response.data.reward, "AQUI")
       onConfirm(response.data.reward);
       onClose();
     } else {

@@ -1,7 +1,6 @@
 import React from "react";
 
 const RewardModalDelete = ({ isOpen, onConfirm, onClose, Reward }) => {
-  console.log(Reward);
   if (!isOpen) return null;
 
   return (

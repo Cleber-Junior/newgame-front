@@ -20,7 +20,7 @@ const DescriptionSection = ({ rewardData, projectData }) => {
       </div>
       <div>
         <h3 className="text-xl font-semibold mb-4">Recompensas</h3>
-        <RewardCard rewards={rewardData} idProject={projectData.id} />
+        <RewardCard rewards={rewardData} idProject={projectData.id} creatorId={projectData.id_creator}/>
       </div>
     </div>
   );
